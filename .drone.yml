@@ -75,8 +75,6 @@ pipeline:
   docker:
     image: plugins/docker
     repo: tboerger/redirects
-    username: ${DOCKER_USERNAME}
-    password: ${DOCKER_PASSWORD}
     tags: [ '${DRONE_TAG##v}' ]
     when:
       event: [ tag ]
@@ -85,8 +83,6 @@ pipeline:
   docker:
     image: plugins/docker
     repo: tboerger/redirects
-    username: ${DOCKER_USERNAME}
-    password: ${DOCKER_PASSWORD}
     tags: [ '${DRONE_BRANCH##release/v}' ]
     when:
       event: [ push ]
@@ -94,8 +90,6 @@ pipeline:
 
   docker:
     image: plugins/docker
-    username: ${DOCKER_USERNAME}
-    password: ${DOCKER_PASSWORD}
     repo: tboerger/redirects
     tags: [ 'latest' ]
     when:
