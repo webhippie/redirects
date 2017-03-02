@@ -7,7 +7,7 @@ pipeline:
     image: webhippie/golang:edge
     pull: true
     environment:
-      CGO_ENABLED: 1
+      CGO_ENABLED: 0
       TAGS:
       GOPATH: /srv/app
     commands:
@@ -23,71 +23,71 @@ pipeline:
       - make test
       - make build
 
-  test-yaml:
-    image: webhippie/golang:edge
-    pull: true
-    environment:
-      CGO_ENABLED: 1
-      TAGS:
-      GOPATH: /srv/app
-    commands:
-      - make test-yaml
-    when:
-      event: [ push ]
+  # test-yaml:
+  #   image: webhippie/golang:edge
+  #   pull: true
+  #   environment:
+  #     CGO_ENABLED: 0
+  #     TAGS:
+  #     GOPATH: /srv/app
+  #   commands:
+  #     - make test-yaml
+  #   when:
+  #     event: [ push ]
 
-  test-json:
-    image: webhippie/golang:edge
-    pull: true
-    environment:
-      CGO_ENABLED: 1
-      TAGS:
-      GOPATH: /srv/app
-    commands:
-      - make test-json
-    when:
-      event: [ push ]
+  # test-json:
+  #   image: webhippie/golang:edge
+  #   pull: true
+  #   environment:
+  #     CGO_ENABLED: 0
+  #     TAGS:
+  #     GOPATH: /srv/app
+  #   commands:
+  #     - make test-json
+  #   when:
+  #     event: [ push ]
 
-  test-etcd:
-    image: webhippie/golang:edge
-    pull: true
-    environment:
-      CGO_ENABLED: 1
-      TAGS:
-      GOPATH: /srv/app
-    commands:
-      - make test-etcd
-    when:
-      event: [ push ]
+  # test-etcd:
+  #   image: webhippie/golang:edge
+  #   pull: true
+  #   environment:
+  #     CGO_ENABLED: 0
+  #     TAGS:
+  #     GOPATH: /srv/app
+  #   commands:
+  #     - make test-etcd
+  #   when:
+  #     event: [ push ]
 
-  test-consul:
-    image: webhippie/golang:edge
-    pull: true
-    environment:
-      CGO_ENABLED: 1
-      TAGS:
-      GOPATH: /srv/app
-    commands:
-      - make test-consul
-    when:
-      event: [ push ]
+  # test-consul:
+  #   image: webhippie/golang:edge
+  #   pull: true
+  #   environment:
+  #     CGO_ENABLED: 0
+  #     TAGS:
+  #     GOPATH: /srv/app
+  #   commands:
+  #     - make test-consul
+  #   when:
+  #     event: [ push ]
 
-  test-zookeeper:
-    image: webhippie/golang:edge
-    pull: true
-    environment:
-      CGO_ENABLED: 1
-      TAGS:
-      GOPATH: /srv/app
-    commands:
-      - make test-zookeeper
-    when:
-      event: [ push ]
+  # test-zookeeper:
+  #   image: webhippie/golang:edge
+  #   pull: true
+  #   environment:
+  #     CGO_ENABLED: 0
+  #     TAGS:
+  #     GOPATH: /srv/app
+  #   commands:
+  #     - make test-zookeeper
+  #   when:
+  #     event: [ push ]
 
   updater:
     image: karalabe/xgo-latest:latest
     pull: true
     environment:
-      CGO_ENABLED: 1
+      CGO_ENABLED: 0
       TAGS:
       GOPATH: /srv/app
     commands:
@@ -99,6 +99,8 @@ pipeline:
   docker:
     image: plugins/docker
     repo: tboerger/redirects
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
     tags: [ '${DRONE_TAG##v}' ]
     when:
       event: [ tag ]
@@ -107,6 +109,8 @@ pipeline:
   docker:
     image: plugins/docker
     repo: tboerger/redirects
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
     tags: [ '${DRONE_BRANCH##release/v}' ]
     when:
       event: [ push ]
@@ -115,6 +119,8 @@ pipeline:
   docker:
     image: plugins/docker
     repo: tboerger/redirects
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
     tags: [ 'latest' ]
     when:
       event: [ push ]
