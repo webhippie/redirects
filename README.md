@@ -1,6 +1,6 @@
 # Redirects
 
-[![Build Status](http://github.dronehippie.de/api/badges/tboerger/redirects/status.svg)](http://github.dronehippie.de/tboerger/redirects)
+[![Build Status](https://drone.gitea.io/api/badges/tboerger/redirects/status.svg)](https://drone.gitea.io/tboerger/redirects)
 [![Go Doc](https://godoc.org/github.com/tboerger/redirects?status.svg)](http://godoc.org/github.com/tboerger/redirects)
 [![Go Report](https://goreportcard.com/badge/github.com/tboerger/redirects)](https://goreportcard.com/report/github.com/tboerger/redirects)
 [![](https://images.microbadger.com/badges/image/tboerger/redirects.svg)](http://microbadger.com/images/tboerger/redirects "Get your own image badge on microbadger.com")
