@@ -157,18 +157,26 @@ test-json:
 test-etcd:
 	@echo "Not integrated yet!"
 
+.PHONY: test-consul
+test-consul:
+	@echo "Not integrated yet!"
+
+.PHONY: test-zookeeper
+test-zookeeper:
+	@echo "Not integrated yet!"
+
 .PHONY: check
 check: test
 
 .PHONY: install
 install: $(SOURCES)
-	go install -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)'
+	go install -v -tags '$(TAGS)' -ldflags '-extldflags "-static" $(LDFLAGS)'
 
 .PHONY: build
 build: $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCES)
-	go build -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@
+	go build -v -tags '$(TAGS)' -ldflags '-extldflags "-static" $(LDFLAGS)' -o $@
 
 .PHONY: release
 release: release-dirs release-build release-copy release-check
@@ -182,7 +190,7 @@ release-build:
 	@which xgo > /dev/null; if [ $$? -ne 0 ]; then \
 		go get -u github.com/karalabe/xgo; \
 	fi
-	xgo -dest $(DIST)/binaries -tags '$(TAGS)' -ldflags '-s -w $(LDFLAGS)' -targets '$(TARGETS)' -out $(EXECUTABLE)-$(VERSION) $(IMPORT)
+	xgo -dest $(DIST)/binaries -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -targets '$(TARGETS)' -out $(EXECUTABLE)-$(VERSION) $(IMPORT)
 ifeq ($(CI),drone)
 	mv /build/* $(DIST)/binaries
 endif

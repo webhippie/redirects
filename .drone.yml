@@ -59,6 +59,30 @@ pipeline:
     when:
       event: [ push ]
 
+  test-consul:
+    image: webhippie/golang:edge
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make test-consul
+    when:
+      event: [ push ]
+
+  test-zookeeper:
+    image: webhippie/golang:edge
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make test-zookeeper
+    when:
+      event: [ push ]
+
   updater:
     image: karalabe/xgo-latest:latest
     pull: true
