@@ -1,0 +1,150 @@
+workspace:
+  base: /srv/app
+  path: src/github.com/tboerger/redirects
+
+pipeline:
+  testing:
+    image: webhippie/golang:edge
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make clean
+      - make vet
+      - make varcheck
+      - make structcheck
+      - make unused
+      - make gosimple
+      - make unconvert
+      - make ineffassign
+      - make lint
+      - make test
+      - make build
+
+  test-yaml:
+    image: webhippie/golang:edge
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make test-yaml
+    when:
+      event: [ push ]
+
+  test-json:
+    image: webhippie/golang:edge
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make test-json
+    when:
+      event: [ push ]
+
+  test-etcd:
+    image: webhippie/golang:edge
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make test-etcd
+    when:
+      event: [ push ]
+
+  updater:
+    image: karalabe/xgo-latest:latest
+    pull: true
+    environment:
+      CGO_ENABLED: 1
+      TAGS:
+      GOPATH: /srv/app
+    commands:
+      - make release
+    when:
+      event: [ push, tag ]
+      branch: [ master, release/*, refs/tags/* ]
+
+  docker:
+    image: plugins/docker
+    repo: tboerger/redirects
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
+    tags: [ '${DRONE_TAG##v}' ]
+    when:
+      event: [ tag ]
+      branch: [ refs/tags/* ]
+
+  docker:
+    image: plugins/docker
+    repo: tboerger/redirects
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
+    tags: [ '${DRONE_BRANCH##release/v}' ]
+    when:
+      event: [ push ]
+      branch: [ release/* ]
+
+  docker:
+    image: plugins/docker
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
+    repo: tboerger/redirects
+    tags: [ 'latest' ]
+    when:
+      event: [ push ]
+      branch: [ master ]
+
+  # rsync:
+  #   image: plugins/rsync
+  #   user: deploy
+  #   host: dl.boerger.ws
+  #   source: dist/release/
+  #   target: dl/redirects/${DRONE_TAG##v}
+  #   recursive: true
+  #   delete: true
+  #   when:
+  #     event: [ tag ]
+  #     branch: [ refs/tags/* ]
+
+  # rsync:
+  #   image: plugins/rsync
+  #   user: deploy
+  #   host: dl.boerger.ws
+  #   source: dist/release/
+  #   target: dl/redirects/${DRONE_TAG##release/v}
+  #   recursive: true
+  #   delete: true
+  #   when:
+  #     event: [ push ]
+  #     branch: [ release/* ]
+
+  # rsync:
+  #   image: plugins/rsync
+  #   user: deploy
+  #   host: dl.boerger.ws
+  #   source: dist/release/
+  #   target: dl/redirects/master
+  #   recursive: true
+  #   delete: true
+  #   when:
+  #     event: [ push ]
+  #     branch: [ master ]
+
+  github:
+    image: plugins/github-release
+    files:
+      - dist/release/*
+    when:
+      event: [ tag ]
+      branch: [ refs/tags/* ]
+
+  gitter:
+    image: plugins/gitter
