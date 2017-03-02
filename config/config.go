@@ -2,15 +2,15 @@ package config
 
 type storage struct {
 	Driver string
-	DSN  string
+	DSN    string
 }
 
 type server struct {
-  Addr        string
-  Cert        string
-  Key         string
-  LetsEncrypt bool
-  Pprof       bool
+	Addr        string
+	Cert        string
+	Key         string
+	LetsEncrypt bool
+	Pprof       bool
 }
 
 var (
@@ -20,6 +20,6 @@ var (
 	// Storage represents the current storage configuration details.
 	Storage = &storage{}
 
-  // Server represents the informations about the server bindings.
-  Server = &server{}
+	// Server represents the informations about the server bindings.
+	Server = &server{}
 )

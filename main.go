@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/Sirupsen/logrus"
 	"github.com/joho/godotenv"
-	"github.com/urfave/cli"
 	"github.com/tboerger/redirects/cmd"
 	"github.com/tboerger/redirects/config"
+	"github.com/urfave/cli"
 	"os"
 	"runtime"
 )

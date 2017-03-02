@@ -1,9 +1,9 @@
 package logger
 
 import (
-	"time"
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 // SetLogger initializes the logging middleware.

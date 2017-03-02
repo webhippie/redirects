@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/urfave/cli"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/router"
+	"github.com/urfave/cli"
 	"golang.org/x/crypto/acme/autocert"
 
 	// Import pprof for optional debugging
