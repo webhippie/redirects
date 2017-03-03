@@ -6,7 +6,7 @@ import (
 )
 
 // GetRedirects retrieves all redirects from the store.
-func GetRedirects(c context.Context) (*model.Redirects, error) {
+func GetRedirects(c context.Context) ([]*model.Redirect, error) {
 	return FromContext(c).GetRedirects()
 }
 
@@ -26,6 +26,6 @@ func DeleteRedirect(c context.Context, record *model.Redirect) error {
 }
 
 // GetRedirect retrieves a specific redirect from the store.
-func GetRedirect(c context.Context, id string) (*model.Redirect, error) {
+func GetRedirect(c context.Context, id int) (*model.Redirect, error) {
 	return FromContext(c).GetRedirect(id)
 }

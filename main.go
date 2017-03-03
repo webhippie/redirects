@@ -39,7 +39,7 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:        "dsn",
-			Value:       "file://redirects.yml",
+			Value:       "file://redirects.yaml",
 			Usage:       "Define the storage DSN",
 			EnvVar:      "REDIRECTS_DSN",
 			Destination: &config.Storage.DSN,

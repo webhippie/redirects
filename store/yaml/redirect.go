@@ -5,8 +5,8 @@ import (
 )
 
 // GetRedirects retrieves all redirects from the YAML store.
-func (db *data) GetRedirects() (*model.Redirects, error) {
-	return &model.Redirects{}, nil
+func (db *data) GetRedirects() ([]*model.Redirect, error) {
+	return make([]*model.Redirect, 0), nil
 }
 
 // CreateRedirect creates a redirect on the YAML store.
@@ -25,6 +25,6 @@ func (db *data) DeleteRedirect(record *model.Redirect) error {
 }
 
 // GetRedirect retrieves a specific redirect from the YAML store.
-func (db *data) GetRedirect(id string) (*model.Redirect, error) {
+func (db *data) GetRedirect(id int) (*model.Redirect, error) {
 	return &model.Redirect{}, nil
 }
