@@ -60,6 +60,8 @@ func main() {
 
 	app.Commands = []cli.Command{
 		cmd.Server(),
+		cmd.List(),
+		cmd.Show(),
 		cmd.Create(),
 		cmd.Update(),
 		cmd.Remove(),
