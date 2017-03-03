@@ -1,7 +1,6 @@
 package json
 
 import (
-	"github.com/Sirupsen/logrus"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
 	"path/filepath"
@@ -25,11 +24,7 @@ func New(config string) store.Store {
 
 // Load initializes the JSON storage.
 func Load() store.Store {
-	driver := config.Storage.Driver
 	connect := filepath.Clean(strings.TrimPrefix(config.Storage.DSN, "file://"))
-
-	logrus.Infof("Using storage driver %s", driver)
-	logrus.Infof("Using storage DSN %s", connect)
 
 	return New(
 		connect,
