@@ -26,12 +26,12 @@ func Create() cli.Command {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			return Handle(c, create)
+			return Handle(c, handleCreate)
 		},
 	}
 }
 
-func create(c *cli.Context, s store.Store) error {
+func handleCreate(c *cli.Context, s store.Store) error {
 	record := &model.Redirect{}
 
 	if val := c.String("source"); c.IsSet("source") && val != "" {
