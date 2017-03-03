@@ -1,17 +1,85 @@
 package cmd
 
 import (
-	"github.com/Sirupsen/logrus"
+	"encoding/json"
+	"fmt"
+	"github.com/tboerger/redirects/store"
 	"github.com/urfave/cli"
+	"os"
+	"strconv"
+	"text/template"
 )
+
+// tmplShow represents a specific redirect detail view.
+var tmplShow = "ID: \x1b[33m{{ .ID }}\x1b[0m" + `
+Source: {{ .Source }}
+Destination: {{ .Destination }}
+`
 
 // Show provides the sub-command to show redirect patterns.
 func Show() cli.Command {
 	return cli.Command{
-		Name:  "show",
-		Usage: "Show a redirect pattern",
-		Action: func(c *cli.Context) {
-			logrus.Info("Show")
+		Name:      "show",
+		Usage:     "Show a redirect pattern",
+		ArgsUsage: "<id>",
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "format",
+				Value: tmplShow,
+				Usage: "Custom output format",
+			},
+			cli.BoolFlag{
+				Name:  "json",
+				Usage: "Print in JSON format",
+			},
+		},
+		Action: func(c *cli.Context) error {
+			return Handle(c, handleShow)
 		},
 	}
+}
+
+func handleShow(c *cli.Context, s store.Store) error {
+	if c.NArg() != 1 {
+		return cli.ShowSubcommandHelp(c)
+	}
+
+	id, err := strconv.Atoi(c.Args().First())
+
+	if err != nil {
+		return fmt.Errorf("Failed to parse the ID")
+	}
+
+	record, err := s.GetRedirect(
+		id,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	if c.Bool("json") {
+		res, err := json.MarshalIndent(record, "", "  ")
+
+		if err != nil {
+			return err
+		}
+
+		fmt.Fprintf(os.Stdout, "%s\n", res)
+		return nil
+	}
+
+	tmpl, err := template.New(
+		"_",
+	).Funcs(
+		globalFuncMap,
+	).Parse(
+		fmt.Sprintf("%s\n", c.String("format")),
+	)
+
+	if err != nil {
+		return err
+	}
+
+	return tmpl.Execute(os.Stdout, record)
 }
