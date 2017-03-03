@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	// ErrRedirectNotFound gets returned if a redirect can't be found on the store.
 	ErrRedirectNotFound = fmt.Errorf("Failed to find a redirect")
 )
 
