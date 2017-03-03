@@ -125,6 +125,7 @@ func loadRedirects(dsn string) (*redirectCollection, error) {
 	return res, nil
 }
 
+// writeRedirects writes the YAML content back to the storage.
 func writeRedirects(dsn string, content *redirectCollection) error {
 	for _, record := range content.Redirects {
 		record.ID = 0
