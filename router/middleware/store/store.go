@@ -1,6 +1,7 @@
 package store
 
 import (
+	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
@@ -20,6 +21,9 @@ func SetStore() gin.HandlerFunc {
 	case "json":
 		db = json.Load()
 	}
+
+	logrus.Infof("Using storage driver %s", config.Storage.Driver)
+	logrus.Infof("Using storage DSN %s", config.Storage.DSN)
 
 	return func(c *gin.Context) {
 		store.ToContext(c, db)
