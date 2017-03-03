@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
+	"text/template"
 
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
@@ -10,6 +12,16 @@ import (
 	"github.com/tboerger/redirects/store/yaml"
 	"github.com/urfave/cli"
 )
+
+// globalFuncMap provides global template helper functions.
+var globalFuncMap = template.FuncMap{
+	"split":    strings.Split,
+	"join":     strings.Join,
+	"toUpper":  strings.ToUpper,
+	"toLower":  strings.ToLower,
+	"contains": strings.Contains,
+	"replace":  strings.Replace,
+}
 
 // HandleFunc is the real handle implementation.
 type HandleFunc func(c *cli.Context, s store.Store) error
