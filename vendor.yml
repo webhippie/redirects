@@ -26,7 +26,7 @@ vendors:
 - path: golang.org/x/net
   rev: 906cda9512f77671ab44f8c8563b13a8e707b230
 - path: golang.org/x/sys
-  rev: 76cc09b634294339fa19ec41b5f2a0b3932cea8b
+  rev: e48874b42435b4347fc52bdee0424a52abc974d7
 - path: gopkg.in/go-playground/validator.v8
   rev: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - path: gopkg.in/yaml.v2
