@@ -6,6 +6,7 @@ import (
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
 	"github.com/tboerger/redirects/store/json"
+	"github.com/tboerger/redirects/store/toml"
 	"github.com/tboerger/redirects/store/yaml"
 )
 
@@ -24,6 +25,10 @@ func SetStore() gin.HandlerFunc {
 		logrus.Infof("Using storage driver: JSON")
 		logrus.Infof("Using storage file: %s", config.JSON.File)
 		db = json.Load()
+	case config.TOML.Enabled:
+		logrus.Infof("Using storage driver: TOML")
+		logrus.Infof("Using storage file: %s", config.TOML.File)
+		db = toml.Load()
 	}
 
 	return func(c *gin.Context) {
