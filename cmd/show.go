@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tboerger/redirects/store"
-	"github.com/urfave/cli"
+	"gopkg.in/urfave/cli.v2"
 	"os"
 	"text/template"
 )
@@ -16,18 +16,18 @@ Destination: {{ .Destination }}
 `
 
 // Show provides the sub-command to show redirect patterns.
-func Show() cli.Command {
-	return cli.Command{
+func Show() *cli.Command {
+	return &cli.Command{
 		Name:      "show",
 		Usage:     "Show a redirect pattern",
 		ArgsUsage: "<id>",
 		Flags: []cli.Flag{
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "format",
 				Value: tmplShow,
 				Usage: "Custom output format",
 			},
-			cli.BoolFlag{
+			&cli.BoolFlag{
 				Name:  "json",
 				Usage: "Print in JSON format",
 			},

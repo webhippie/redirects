@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tboerger/redirects/store"
-	"github.com/urfave/cli"
+	"gopkg.in/urfave/cli.v2"
 	"os"
 	"text/template"
 )
@@ -16,23 +16,23 @@ Destination: {{ .Destination }}
 `
 
 // List provides the sub-command to list redirect patterns.
-func List() cli.Command {
-	return cli.Command{
+func List() *cli.Command {
+	return &cli.Command{
 		Name:      "list",
 		Usage:     "List available redirect patterns",
 		ArgsUsage: " ",
 		Flags: []cli.Flag{
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "format",
 				Value: tmplList,
 				Usage: "Custom output format",
 			},
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "filter",
 				Value: "",
 				Usage: "Filter output by needle",
 			},
-			cli.BoolFlag{
+			&cli.BoolFlag{
 				Name:  "json",
 				Usage: "Print in JSON format",
 			},

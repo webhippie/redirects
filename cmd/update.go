@@ -3,23 +3,23 @@ package cmd
 import (
 	"fmt"
 	"github.com/tboerger/redirects/store"
-	"github.com/urfave/cli"
+	"gopkg.in/urfave/cli.v2"
 	"os"
 )
 
 // Update provides the sub-command to update redirect patterns.
-func Update() cli.Command {
-	return cli.Command{
+func Update() *cli.Command {
+	return &cli.Command{
 		Name:      "update",
 		Usage:     "Update a redirect pattern",
 		ArgsUsage: "<id>",
 		Flags: []cli.Flag{
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "source",
 				Value: "",
 				Usage: "Source for the redirect",
 			},
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "destination",
 				Value: "",
 				Usage: "Destination for the redirect",

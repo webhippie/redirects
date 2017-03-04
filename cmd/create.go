@@ -4,22 +4,22 @@ import (
 	"fmt"
 	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
-	"github.com/urfave/cli"
+	"gopkg.in/urfave/cli.v2"
 )
 
 // Create provides the sub-command to create redirect patterns.
-func Create() cli.Command {
-	return cli.Command{
+func Create() *cli.Command {
+	return &cli.Command{
 		Name:      "create",
 		Usage:     "Create a redirect pattern",
 		ArgsUsage: " ",
 		Flags: []cli.Flag{
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "source",
 				Value: "",
 				Usage: "Source for the redirect",
 			},
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:  "destination",
 				Value: "",
 				Usage: "Destination for the redirect",
