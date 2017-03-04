@@ -9,6 +9,9 @@ import (
 var (
 	// ErrRedirectNotFound gets returned if a redirect can't be found on the store.
 	ErrRedirectNotFound = fmt.Errorf("Failed to find a redirect")
+
+	// ErrRedirectSourceExists gets returned if a redirect s source already exists.
+	ErrRedirectSourceExists = fmt.Errorf("Source already exists")
 )
 
 // Store implements all required data-layer functions for Redirects.
@@ -17,10 +20,10 @@ type Store interface {
 	GetRedirects() ([]*model.Redirect, error)
 
 	// GetRedirect retrieves a specific redirect from the store.
-	GetRedirect(int) (*model.Redirect, error)
+	GetRedirect(string) (*model.Redirect, error)
 
 	// DeleteRedirect deletes a redirect from the store.
-	DeleteRedirect(int) error
+	DeleteRedirect(string) error
 
 	// CreateRedirect creates a redirect on the store.
 	CreateRedirect(*model.Redirect) error

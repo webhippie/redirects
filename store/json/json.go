@@ -10,21 +10,21 @@ import (
 
 // data is a basic struct that iplements the Store interface.
 type data struct {
-	dsn   string
+	file  string
 	mutex sync.Mutex
 }
 
 // New initializes a new JSON store.
-func New(config string) store.Store {
+func New(f string) store.Store {
 	return &data{
-		dsn:   config,
+		file:  f,
 		mutex: sync.Mutex{},
 	}
 }
 
 // Load initializes the JSON storage.
 func Load() store.Store {
-	connect := filepath.Clean(
+	f := filepath.Clean(
 		strings.TrimPrefix(
 			config.JSON.File,
 			"file://",
@@ -32,6 +32,6 @@ func Load() store.Store {
 	)
 
 	return New(
-		connect,
+		f,
 	)
 }

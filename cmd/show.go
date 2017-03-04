@@ -6,7 +6,6 @@ import (
 	"github.com/tboerger/redirects/store"
 	"github.com/urfave/cli"
 	"os"
-	"strconv"
 	"text/template"
 )
 
@@ -44,14 +43,8 @@ func handleShow(c *cli.Context, s store.Store) error {
 		return cli.ShowSubcommandHelp(c)
 	}
 
-	id, err := strconv.Atoi(c.Args().First())
-
-	if err != nil {
-		return fmt.Errorf("Failed to parse the ID")
-	}
-
 	record, err := s.GetRedirect(
-		id,
+		c.Args().First(),
 	)
 
 	if err != nil {

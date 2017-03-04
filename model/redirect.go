@@ -6,7 +6,7 @@ import (
 
 // Redirect represents a redirect model definition.
 type Redirect struct {
-	ID          int    `yaml:"id,omitempty" json:"id,omitempty" toml:"id,omitempty"`
+	ID          string `yaml:"id" json:"id" toml:"id"`
 	Source      string `yaml:"source" json:"source" toml:"source"`
 	Destination string `yaml:"destination" json:"destination" toml:"destination"`
 }
