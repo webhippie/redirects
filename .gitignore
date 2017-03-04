@@ -28,3 +28,8 @@ coverage.out
 .env
 /dist
 /redirects
+
+/redirects.json
+/redirects.yaml
+/redirects.toml
+/redirects.db
