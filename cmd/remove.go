@@ -1,10 +1,8 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/tboerger/redirects/store"
 	"github.com/urfave/cli"
-	"strconv"
 )
 
 // Remove provides the sub-command to reove redirect patterns.
@@ -24,11 +22,5 @@ func handleRemove(c *cli.Context, s store.Store) error {
 		return cli.ShowSubcommandHelp(c)
 	}
 
-	id, err := strconv.Atoi(c.Args().First())
-
-	if err != nil {
-		return fmt.Errorf("Failed to parse the ID")
-	}
-
-	return s.DeleteRedirect(id)
+	return s.DeleteRedirect(c.Args().First())
 }

@@ -11,12 +11,12 @@ func GetRedirects(c context.Context) ([]*model.Redirect, error) {
 }
 
 // GetRedirect retrieves a specific redirect from the store.
-func GetRedirect(c context.Context, id int) (*model.Redirect, error) {
+func GetRedirect(c context.Context, id string) (*model.Redirect, error) {
 	return FromContext(c).GetRedirect(id)
 }
 
 // DeleteRedirect deletes a redirect from the store.
-func DeleteRedirect(c context.Context, id int) error {
+func DeleteRedirect(c context.Context, id string) error {
 	return FromContext(c).DeleteRedirect(id)
 }
 

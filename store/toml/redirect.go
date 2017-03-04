@@ -2,10 +2,13 @@ package toml
 
 import (
 	"bytes"
+	"crypto/md5"
+	"fmt"
 	"github.com/BurntSushi/toml"
 	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
 	"io/ioutil"
+	"time"
 )
 
 // redirectCollection represents the internal storage collection.
@@ -15,7 +18,7 @@ type redirectCollection struct {
 
 // GetRedirects retrieves all redirects from the TOML store.
 func (db *data) GetRedirects() ([]*model.Redirect, error) {
-	root, err := loadRedirects(db.dsn)
+	root, err := db.load()
 
 	if err != nil {
 		return nil, err
@@ -25,91 +28,105 @@ func (db *data) GetRedirects() ([]*model.Redirect, error) {
 }
 
 // GetRedirect retrieves a specific redirect from the TOML store.
-func (db *data) GetRedirect(id int) (*model.Redirect, error) {
-	root, err := loadRedirects(db.dsn)
+func (db *data) GetRedirect(id string) (*model.Redirect, error) {
+	root, err := db.load()
 
 	if err != nil {
 		return nil, err
 	}
 
-	if id >= len(root.Redirects) || root.Redirects[id] == nil {
-		return nil, store.ErrRedirectNotFound
+	for _, record := range root.Redirects {
+		if record.ID == id {
+			return record, nil
+		}
 	}
 
-	return root.Redirects[id], nil
+	return nil, store.ErrRedirectNotFound
 }
 
 // DeleteRedirect deletes a redirect from the TOML store.
-func (db *data) DeleteRedirect(id int) error {
+func (db *data) DeleteRedirect(id string) error {
 	db.mutex.Lock()
 	defer db.mutex.Unlock()
 
-	root, err := loadRedirects(db.dsn)
+	root, err := db.load()
 
 	if err != nil {
 		return err
 	}
 
-	if id >= len(root.Redirects) || root.Redirects[id] == nil {
-		return store.ErrRedirectNotFound
+	for row, record := range root.Redirects {
+		if record.ID == id {
+			root.Redirects = append(
+				root.Redirects[:row],
+				root.Redirects[row+1:]...,
+			)
+
+			return db.write(root)
+		}
 	}
 
-	root.Redirects = append(
-		root.Redirects[:id],
-		root.Redirects[id+1:]...,
-	)
-
-	return writeRedirects(db.dsn, root)
-}
-
-// CreateRedirect creates a redirect on the TOML store.
-func (db *data) CreateRedirect(record *model.Redirect) error {
-	db.mutex.Lock()
-	defer db.mutex.Unlock()
-
-	root, err := loadRedirects(db.dsn)
-
-	if err != nil {
-		return err
-	}
-
-	record.ID = len(root.Redirects)
-
-	root.Redirects = append(
-		root.Redirects,
-		record,
-	)
-
-	return writeRedirects(db.dsn, root)
+	return store.ErrRedirectNotFound
 }
 
 // UpdateRedirect updates a redirect on the TOML store.
-func (db *data) UpdateRedirect(record *model.Redirect) error {
+func (db *data) UpdateRedirect(update *model.Redirect) error {
 	db.mutex.Lock()
 	defer db.mutex.Unlock()
 
-	root, err := loadRedirects(db.dsn)
+	root, err := db.load()
 
 	if err != nil {
 		return err
 	}
 
-	if record.ID >= len(root.Redirects) || root.Redirects[record.ID] == nil {
-		return store.ErrRedirectNotFound
+	for row, record := range root.Redirects {
+		if record.ID == update.ID {
+			root.Redirects[row] = update
+			return db.write(root)
+		}
 	}
 
-	root.Redirects[record.ID] = record
-
-	return writeRedirects(db.dsn, root)
+	return store.ErrRedirectNotFound
 }
 
-// loadRedirects parses all available records from the storage.
-func loadRedirects(dsn string) (*redirectCollection, error) {
+// CreateRedirect creates a redirect on the TOML store.
+func (db *data) CreateRedirect(create *model.Redirect) error {
+	db.mutex.Lock()
+	defer db.mutex.Unlock()
+
+	root, err := db.load()
+
+	if err != nil {
+		return err
+	}
+
+	for _, record := range root.Redirects {
+		if record.Source == create.Source {
+			return store.ErrRedirectSourceExists
+		}
+	}
+
+	create.ID = fmt.Sprintf(
+		"%x",
+		md5.Sum([]byte(string(time.Now().Unix()))),
+	)
+
+	root.Redirects = append(
+		root.Redirects,
+		create,
+	)
+
+	return db.write(root)
+}
+
+// load parses all available records from the storage.
+func (db *data) load() (*redirectCollection, error) {
 	res := &redirectCollection{
 		Redirects: make([]*model.Redirect, 0),
 	}
 
-	content, err := ioutil.ReadFile(dsn)
+	content, err := ioutil.ReadFile(db.file)
 
 	if err != nil {
 		return nil, err
@@ -119,26 +136,18 @@ func loadRedirects(dsn string) (*redirectCollection, error) {
 		return nil, err
 	}
 
-	for id, record := range res.Redirects {
-		record.ID = id
-	}
-
 	return res, nil
 }
 
-// writeRedirects writes the TOML content back to the storage.
-func writeRedirects(dsn string, content *redirectCollection) error {
-	for _, record := range content.Redirects {
-		record.ID = 0
-	}
-
+// write writes the TOML content back to the storage.
+func (db *data) write(content *redirectCollection) error {
 	buf := new(bytes.Buffer)
 
 	if err := toml.NewEncoder(buf).Encode(content); err != nil {
 		return err
 	}
 
-	if err := ioutil.WriteFile(dsn, buf.Bytes(), 0640); err != nil {
+	if err := ioutil.WriteFile(db.file, buf.Bytes(), 0640); err != nil {
 		return err
 	}
 
