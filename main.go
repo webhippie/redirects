@@ -30,19 +30,31 @@ func main() {
 			EnvVar:      "REDIRECTS_DEBUG",
 			Destination: &config.Debug,
 		},
-		cli.StringFlag{
-			Name:        "driver",
-			Value:       "yaml",
-			Usage:       "Define the storage driver",
-			EnvVar:      "REDIRECTS_DRIVER",
-			Destination: &config.Storage.Driver,
+		cli.BoolFlag{
+			Name:        "yaml",
+			Usage:       "Enable YAML storage",
+			EnvVar:      "REDIRECTS_YAML",
+			Destination: &config.YAML.Enabled,
 		},
 		cli.StringFlag{
-			Name:        "dsn",
+			Name:        "yaml-file",
 			Value:       "file://redirects.yaml",
-			Usage:       "Define the storage DSN",
-			EnvVar:      "REDIRECTS_DSN",
-			Destination: &config.Storage.DSN,
+			Usage:       "Define YAML storage file",
+			EnvVar:      "REDIRECTS_YAML_FILE",
+			Destination: &config.YAML.File,
+		},
+		cli.BoolFlag{
+			Name:        "json",
+			Usage:       "Enable JSON storage",
+			EnvVar:      "REDIRECTS_JSON",
+			Destination: &config.JSON.Enabled,
+		},
+		cli.StringFlag{
+			Name:        "json-file",
+			Value:       "file://redirects.json",
+			Usage:       "Define JSON storage file",
+			EnvVar:      "REDIRECTS_JSON_FILE",
+			Destination: &config.JSON.File,
 		},
 	}
 

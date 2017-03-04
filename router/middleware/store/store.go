@@ -15,15 +15,16 @@ func SetStore() gin.HandlerFunc {
 		db store.Store
 	)
 
-	switch config.Storage.Driver {
-	case "yaml":
+	switch {
+	case config.YAML.Enabled:
+		logrus.Infof("Using storage driver: YAML")
+		logrus.Infof("Using storage file: %s", config.YAML.File)
 		db = yaml.Load()
-	case "json":
+	case config.JSON.Enabled:
+		logrus.Infof("Using storage driver: JSON")
+		logrus.Infof("Using storage file: %s", config.JSON.File)
 		db = json.Load()
 	}
-
-	logrus.Infof("Using storage driver %s", config.Storage.Driver)
-	logrus.Infof("Using storage DSN %s", config.Storage.DSN)
 
 	return func(c *gin.Context) {
 		store.ToContext(c, db)
