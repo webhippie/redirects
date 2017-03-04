@@ -56,6 +56,19 @@ func main() {
 			EnvVar:      "REDIRECTS_JSON_FILE",
 			Destination: &config.JSON.File,
 		},
+		cli.BoolFlag{
+			Name:        "toml",
+			Usage:       "Enable TOML storage",
+			EnvVar:      "REDIRECTS_TOML",
+			Destination: &config.TOML.Enabled,
+		},
+		cli.StringFlag{
+			Name:        "toml-file",
+			Value:       "file://redirects.toml",
+			Usage:       "Define TOML storage file",
+			EnvVar:      "REDIRECTS_TOML_FILE",
+			Destination: &config.TOML.File,
+		},
 	}
 
 	app.Before = func(c *cli.Context) error {

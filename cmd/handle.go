@@ -9,6 +9,7 @@ import (
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
 	"github.com/tboerger/redirects/store/json"
+	"github.com/tboerger/redirects/store/toml"
 	"github.com/tboerger/redirects/store/yaml"
 	"github.com/urfave/cli"
 )
@@ -45,6 +46,8 @@ func initStore() store.Store {
 		return yaml.Load()
 	case config.JSON.Enabled:
 		return json.Load()
+	case config.TOML.Enabled:
+		return toml.Load()
 	}
 
 	return nil

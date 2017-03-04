@@ -10,6 +10,11 @@ type json struct {
 	File    string
 }
 
+type toml struct {
+	Enabled bool
+	File    string
+}
+
 type server struct {
 	Addr        string
 	Cert        string
@@ -27,6 +32,9 @@ var (
 
 	// JSON represents the JSON storage configuration details.
 	JSON = &json{}
+
+	// TOML represents the TOML storage configuration details.
+	TOML = &toml{}
 
 	// Server represents the informations about the server bindings.
 	Server = &server{}
