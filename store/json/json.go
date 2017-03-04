@@ -24,7 +24,12 @@ func New(config string) store.Store {
 
 // Load initializes the JSON storage.
 func Load() store.Store {
-	connect := filepath.Clean(strings.TrimPrefix(config.Storage.DSN, "file://"))
+	connect := filepath.Clean(
+		strings.TrimPrefix(
+			config.JSON.File,
+			"file://",
+		),
+	)
 
 	return New(
 		connect,

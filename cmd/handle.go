@@ -40,10 +40,10 @@ func Handle(c *cli.Context, fn HandleFunc) error {
 
 // initStore initializes the store for CLI usage.
 func initStore() store.Store {
-	switch config.Storage.Driver {
-	case "yaml":
+	switch {
+	case config.YAML.Enabled:
 		return yaml.Load()
-	case "json":
+	case config.JSON.Enabled:
 		return json.Load()
 	}
 

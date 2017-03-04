@@ -24,7 +24,12 @@ func New(config string) store.Store {
 
 // Load initializes the YAML storage.
 func Load() store.Store {
-	connect := filepath.Clean(strings.TrimPrefix(config.Storage.DSN, "file://"))
+	connect := filepath.Clean(
+		strings.TrimPrefix(
+			config.YAML.File,
+			"file://",
+		),
+	)
 
 	return New(
 		connect,
