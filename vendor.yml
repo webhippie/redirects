@@ -3,6 +3,12 @@ vendors:
   rev: 99064174e013895bbd9b025c31100bd1d9b590ca
 - path: github.com/Sirupsen/logrus
   rev: 0208149b40d863d2c1a2f8fe5753096a9cf2cc8b
+- path: github.com/coreos/etcd
+  rev: 8a57b90e7fca743cd892c00740fa118e10440b0f
+- path: github.com/coreos/go-semver
+  rev: 5e3acbb5668c4c3deb4842615c4098eb61fb6b1e
+- path: github.com/docker/libkv
+  rev: 1d8431073ae03cdaedb198a89722f3aab6d418ef
 - path: github.com/facebookgo/clock
   rev: 600d898af40aa09a7a93ecb9265d87b0504b6f03
 - path: github.com/facebookgo/grace
@@ -15,14 +21,22 @@ vendors:
   rev: e2212d40c62a98b388a5eb48ecbdcf88534688ba
 - path: github.com/golang/protobuf
   rev: 69b215d01a5606c843240eab4937eab3acee6530
+- path: github.com/hashicorp/consul
+  rev: ed2e700ab9ebad383a024162d85c9d45eb51b3fc
+- path: github.com/hashicorp/go-cleanhttp
+  rev: 3573b8b52aa7b37b9358d966a898feb387f62437
+- path: github.com/hashicorp/serf
+  rev: d787b2e8f72b5da48c43b84c2617234401084050
 - path: github.com/joho/godotenv
   rev: d10b3fbe007de7a25e086524ad17597afa3d238b
 - path: github.com/manucorporat/sse
   rev: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
 - path: github.com/mattn/go-isatty
-  rev: dda3de49cbfcec471bd7a70e6cc01fcc3ff90109
-- path: github.com/urfave/cli
-  rev: 2526b57c56f30b50466c96c4133b1a4ad0f0191f
+  rev: 9622e0cc9d8f9be434ca605520ff9a16808fee47
+- path: github.com/samuel/go-zookeeper
+  rev: 1d7be4effb13d2d908342d349d71a284a7542693
+- path: github.com/ugorji/go
+  rev: c88ee250d0221a57af388746f5cf03768c21d6e2
 - path: golang.org/x/crypto
   rev: 40541ccb1c6e64c947ed6f606b8a6cb4b67d7436
 - path: golang.org/x/net
@@ -31,5 +45,7 @@ vendors:
   rev: e48874b42435b4347fc52bdee0424a52abc974d7
 - path: gopkg.in/go-playground/validator.v8
   rev: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
+- path: gopkg.in/urfave/cli.v2
+  rev: 04b2f4ff79cf1fd71e138bafc67df8bbdb5b81c2
 - path: gopkg.in/yaml.v2
   rev: a3f3340b5840cee44f372bddb5880fcbc419b46a
