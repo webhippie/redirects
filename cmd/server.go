@@ -55,7 +55,7 @@ func Server() cli.Command {
 				Destination: &config.Server.LetsEncrypt,
 			},
 		},
-		Action: func(c *cli.Context) {
+		Action: func(c *cli.Context) error {
 			logrus.Infof("Starting the server on %s", config.Server.Addr)
 
 			var (
@@ -134,6 +134,8 @@ func Server() cli.Command {
 			if err := startServer(server); err != nil {
 				logrus.Fatal(err)
 			}
+
+			return nil
 		},
 	}
 }

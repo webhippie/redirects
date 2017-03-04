@@ -38,6 +38,29 @@ func (db *data) GetRedirect(id int) (*model.Redirect, error) {
 	return root.Redirects[id], nil
 }
 
+// DeleteRedirect deletes a redirect from the YAML store.
+func (db *data) DeleteRedirect(id int) error {
+	db.mutex.Lock()
+	defer db.mutex.Unlock()
+
+	root, err := loadRedirects(db.dsn)
+
+	if err != nil {
+		return err
+	}
+
+	if id >= len(root.Redirects) || root.Redirects[id] == nil {
+		return store.ErrRedirectNotFound
+	}
+
+	root.Redirects = append(
+		root.Redirects[:id],
+		root.Redirects[id+1:]...,
+	)
+
+	return writeRedirects(db.dsn, root)
+}
+
 // CreateRedirect creates a redirect on the YAML store.
 func (db *data) CreateRedirect(record *model.Redirect) error {
 	db.mutex.Lock()
@@ -75,29 +98,6 @@ func (db *data) UpdateRedirect(record *model.Redirect) error {
 	}
 
 	root.Redirects[record.ID] = record
-
-	return writeRedirects(db.dsn, root)
-}
-
-// DeleteRedirect deletes a redirect from the YAML store.
-func (db *data) DeleteRedirect(record *model.Redirect) error {
-	db.mutex.Lock()
-	defer db.mutex.Unlock()
-
-	root, err := loadRedirects(db.dsn)
-
-	if err != nil {
-		return err
-	}
-
-	if record.ID >= len(root.Redirects) || root.Redirects[record.ID] == nil {
-		return store.ErrRedirectNotFound
-	}
-
-	root.Redirects = append(
-		root.Redirects[:record.ID],
-		root.Redirects[record.ID+1:]...,
-	)
 
 	return writeRedirects(db.dsn, root)
 }

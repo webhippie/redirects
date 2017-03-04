@@ -10,6 +10,16 @@ func GetRedirects(c context.Context) ([]*model.Redirect, error) {
 	return FromContext(c).GetRedirects()
 }
 
+// GetRedirect retrieves a specific redirect from the store.
+func GetRedirect(c context.Context, id int) (*model.Redirect, error) {
+	return FromContext(c).GetRedirect(id)
+}
+
+// DeleteRedirect deletes a redirect from the store.
+func DeleteRedirect(c context.Context, id int) error {
+	return FromContext(c).DeleteRedirect(id)
+}
+
 // CreateRedirect creates a redirect on the store.
 func CreateRedirect(c context.Context, record *model.Redirect) error {
 	return FromContext(c).CreateRedirect(record)
@@ -18,14 +28,4 @@ func CreateRedirect(c context.Context, record *model.Redirect) error {
 // UpdateRedirect updates a redirect on the store.
 func UpdateRedirect(c context.Context, record *model.Redirect) error {
 	return FromContext(c).UpdateRedirect(record)
-}
-
-// DeleteRedirect deletes a redirect from the store.
-func DeleteRedirect(c context.Context, record *model.Redirect) error {
-	return FromContext(c).DeleteRedirect(record)
-}
-
-// GetRedirect retrieves a specific redirect from the store.
-func GetRedirect(c context.Context, id int) (*model.Redirect, error) {
-	return FromContext(c).GetRedirect(id)
 }
