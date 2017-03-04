@@ -1,4 +1,6 @@
 vendors:
+- path: github.com/BurntSushi/toml
+  rev: 99064174e013895bbd9b025c31100bd1d9b590ca
 - path: github.com/Sirupsen/logrus
   rev: 0208149b40d863d2c1a2f8fe5753096a9cf2cc8b
 - path: github.com/facebookgo/clock
@@ -24,7 +26,7 @@ vendors:
 - path: golang.org/x/crypto
   rev: 40541ccb1c6e64c947ed6f606b8a6cb4b67d7436
 - path: golang.org/x/net
-  rev: 906cda9512f77671ab44f8c8563b13a8e707b230
+  rev: d379faa25cbdc04d653984913a2ceb43b0bc46d7
 - path: golang.org/x/sys
   rev: e48874b42435b4347fc52bdee0424a52abc974d7
 - path: gopkg.in/go-playground/validator.v8
