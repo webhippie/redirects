@@ -27,17 +27,27 @@ type zookeeper struct {
 }
 
 type etcd struct {
-	Enabled   bool
-	Endpoints []string
-	Timeout   time.Duration
-	Prefix    string
+	Enabled    bool
+	Endpoints  []string
+	Timeout    time.Duration
+	Prefix     string
+	Username   string
+	Password   string
+	CA         string
+	Cert       string
+	Key        string
+	SkipVerify bool
 }
 
 type consul struct {
-	Enabled   bool
-	Endpoints []string
-	Timeout   time.Duration
-	Prefix    string
+	Enabled    bool
+	Endpoints  []string
+	Timeout    time.Duration
+	Prefix     string
+	CA         string
+	Cert       string
+	Key        string
+	SkipVerify bool
 }
 
 type server struct {
