@@ -27,6 +27,8 @@ vendors:
   rev: 3573b8b52aa7b37b9358d966a898feb387f62437
 - path: github.com/hashicorp/serf
   rev: d787b2e8f72b5da48c43b84c2617234401084050
+- path: github.com/jackspirou/syscerts
+  rev: b68f5469dff16e102bd6a2d5b3e79341c938d736
 - path: github.com/joho/godotenv
   rev: d10b3fbe007de7a25e086524ad17597afa3d238b
 - path: github.com/manucorporat/sse
