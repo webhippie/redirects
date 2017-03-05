@@ -5,9 +5,10 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/tboerger/redirects/cmd"
 	"github.com/tboerger/redirects/config"
-	"github.com/urfave/cli"
+	"gopkg.in/urfave/cli.v2"
 	"os"
 	"runtime"
+	"time"
 )
 
 func main() {
@@ -17,89 +18,193 @@ func main() {
 		godotenv.Load(env)
 	}
 
-	app := cli.NewApp()
-	app.Name = "redirects"
-	app.Version = config.Version
-	app.Author = "Thomas Boerger <thomas@tboerger.de>"
-	app.Usage = "Simple pattern-based redirect server"
+	app := &cli.App{
+		Name:     "redirects",
+		Version:  config.Version,
+		Usage:    "Simple pattern-based redirect server",
+		Compiled: time.Now(),
 
-	app.Flags = []cli.Flag{
-		cli.BoolFlag{
-			Name:        "debug",
-			Usage:       "Activate debug information",
-			EnvVar:      "REDIRECTS_DEBUG",
-			Destination: &config.Debug,
+		Authors: []*cli.Author{
+			{
+				Name:  "Thomas Boerger",
+				Email: "thomas@webhippie.de",
+			},
 		},
-		cli.BoolFlag{
-			Name:        "yaml",
-			Usage:       "Enable YAML storage",
-			EnvVar:      "REDIRECTS_YAML",
-			Destination: &config.YAML.Enabled,
+
+		Flags: []cli.Flag{
+			&cli.BoolFlag{
+				Name:        "debug",
+				Usage:       "Activate debug information",
+				EnvVars:     []string{"REDIRECTS_DEBUG"},
+				Destination: &config.Debug,
+				Hidden:      true,
+			},
+			&cli.BoolFlag{
+				Name:        "yaml",
+				Usage:       "Enable YAML storage",
+				EnvVars:     []string{"REDIRECTS_YAML"},
+				Destination: &config.YAML.Enabled,
+			},
+			&cli.StringFlag{
+				Name:        "yaml-file",
+				Value:       "file://storage/redirects.yaml",
+				Usage:       "Define YAML storage file",
+				EnvVars:     []string{"REDIRECTS_YAML_FILE"},
+				Destination: &config.YAML.File,
+			},
+			&cli.BoolFlag{
+				Name:        "json",
+				Usage:       "Enable JSON storage",
+				EnvVars:     []string{"REDIRECTS_JSON"},
+				Destination: &config.JSON.Enabled,
+			},
+			&cli.StringFlag{
+				Name:        "json-file",
+				Value:       "file://storage/redirects.json",
+				Usage:       "Define JSON storage file",
+				EnvVars:     []string{"REDIRECTS_JSON_FILE"},
+				Destination: &config.JSON.File,
+			},
+			&cli.BoolFlag{
+				Name:        "toml",
+				Usage:       "Enable TOML storage",
+				EnvVars:     []string{"REDIRECTS_TOML"},
+				Destination: &config.TOML.Enabled,
+			},
+			&cli.StringFlag{
+				Name:        "toml-file",
+				Value:       "file://storage/redirects.toml",
+				Usage:       "Define TOML storage file",
+				EnvVars:     []string{"REDIRECTS_TOML_FILE"},
+				Destination: &config.TOML.File,
+			},
+			&cli.BoolFlag{
+				Name:        "zk",
+				Usage:       "Enable Zookeeper storage",
+				EnvVars:     []string{"REDIRECTS_ZK"},
+				Destination: &config.Zookeeper.Enabled,
+			},
+			&cli.StringSliceFlag{
+				Name:    "zk-endpoint",
+				Value:   cli.NewStringSlice("127.0.0.1:2181"),
+				Usage:   "Used Zookeeper endpoints",
+				EnvVars: []string{"REDIRECTS_ZK_ENDPOINTS"},
+			},
+			&cli.DurationFlag{
+				Name:        "zk-timeout",
+				Value:       10 * time.Second,
+				Usage:       "Connection timeout for Zookeeper storage",
+				EnvVars:     []string{"REDIRECTS_ZK_TIMEOUT"},
+				Destination: &config.Zookeeper.Timeout,
+			},
+			&cli.StringFlag{
+				Name:        "zk-prefix",
+				Value:       "/redirects",
+				Usage:       "Define Zookeeper storage prefix",
+				EnvVars:     []string{"REDIRECTS_ZK_PREFIX"},
+				Destination: &config.Zookeeper.Prefix,
+			},
+			&cli.BoolFlag{
+				Name:        "etcd",
+				Usage:       "Enable Etcd storage",
+				EnvVars:     []string{"REDIRECTS_ETCD"},
+				Destination: &config.Etcd.Enabled,
+			},
+			&cli.StringSliceFlag{
+				Name:    "etcd-endpoint",
+				Value:   cli.NewStringSlice("127.0.0.1:2379"),
+				Usage:   "Used Etcd endpoints",
+				EnvVars: []string{"REDIRECTS_ETCD_ENDPOINTS"},
+			},
+			&cli.DurationFlag{
+				Name:        "etcd-timeout",
+				Value:       10 * time.Second,
+				Usage:       "Connection timeout for Etcd storage",
+				EnvVars:     []string{"REDIRECTS_ETCD_TIMEOUT"},
+				Destination: &config.Etcd.Timeout,
+			},
+			&cli.StringFlag{
+				Name:        "etcd-prefix",
+				Value:       "/redirects",
+				Usage:       "Define Etcd storage prefix",
+				EnvVars:     []string{"REDIRECTS_ETCD_PREFIX"},
+				Destination: &config.Etcd.Prefix,
+			},
+			&cli.BoolFlag{
+				Name:        "consul",
+				Usage:       "Enable Consul storage",
+				EnvVars:     []string{"REDIRECTS_CONSUL"},
+				Destination: &config.Consul.Enabled,
+			},
+			&cli.StringSliceFlag{
+				Name:    "consul-endpoint",
+				Value:   cli.NewStringSlice("127.0.0.1:8500"),
+				Usage:   "Used Consul endpoints",
+				EnvVars: []string{"REDIRECTS_CONSUL_ENDPOINTS"},
+			},
+			&cli.DurationFlag{
+				Name:        "consul-timeout",
+				Value:       10 * time.Second,
+				Usage:       "Connection timeout for Consul storage",
+				EnvVars:     []string{"REDIRECTS_CONSUL_TIMEOUT"},
+				Destination: &config.Consul.Timeout,
+			},
+			&cli.StringFlag{
+				Name:        "consul-prefix",
+				Value:       "/redirects",
+				Usage:       "Define Consul storage prefix",
+				EnvVars:     []string{"REDIRECTS_CONSUL_PREFIX"},
+				Destination: &config.Consul.Prefix,
+			},
 		},
-		cli.StringFlag{
-			Name:        "yaml-file",
-			Value:       "file://redirects.yaml",
-			Usage:       "Define YAML storage file",
-			EnvVar:      "REDIRECTS_YAML_FILE",
-			Destination: &config.YAML.File,
+
+		Before: func(c *cli.Context) error {
+			logrus.SetOutput(os.Stdout)
+
+			if config.Debug {
+				logrus.SetLevel(logrus.DebugLevel)
+			} else {
+				logrus.SetLevel(logrus.InfoLevel)
+			}
+
+			if len(c.StringSlice("zk-endpoint")) > 0 {
+				// StringSliceFlag doesn't support Destination
+				config.Zookeeper.Endpoints = c.StringSlice("zk-endpoint")
+			}
+
+			if len(c.StringSlice("etcd-endpoint")) > 0 {
+				// StringSliceFlag doesn't support Destination
+				config.Etcd.Endpoints = c.StringSlice("etcd-endpoint")
+			}
+
+			if len(c.StringSlice("consul-endpoint")) > 0 {
+				// StringSliceFlag doesn't support Destination
+				config.Consul.Endpoints = c.StringSlice("consul-endpoint")
+			}
+
+			return nil
 		},
-		cli.BoolFlag{
-			Name:        "json",
-			Usage:       "Enable JSON storage",
-			EnvVar:      "REDIRECTS_JSON",
-			Destination: &config.JSON.Enabled,
-		},
-		cli.StringFlag{
-			Name:        "json-file",
-			Value:       "file://redirects.json",
-			Usage:       "Define JSON storage file",
-			EnvVar:      "REDIRECTS_JSON_FILE",
-			Destination: &config.JSON.File,
-		},
-		cli.BoolFlag{
-			Name:        "toml",
-			Usage:       "Enable TOML storage",
-			EnvVar:      "REDIRECTS_TOML",
-			Destination: &config.TOML.Enabled,
-		},
-		cli.StringFlag{
-			Name:        "toml-file",
-			Value:       "file://redirects.toml",
-			Usage:       "Define TOML storage file",
-			EnvVar:      "REDIRECTS_TOML_FILE",
-			Destination: &config.TOML.File,
+
+		Commands: []*cli.Command{
+			cmd.Server(),
+			cmd.List(),
+			cmd.Show(),
+			cmd.Create(),
+			cmd.Update(),
+			cmd.Remove(),
 		},
 	}
 
-	app.Before = func(c *cli.Context) error {
-		logrus.SetOutput(os.Stdout)
-
-		if config.Debug {
-			logrus.SetLevel(logrus.DebugLevel)
-		} else {
-			logrus.SetLevel(logrus.InfoLevel)
-		}
-
-		return nil
+	cli.HelpFlag = &cli.BoolFlag{
+		Name:    "help",
+		Aliases: []string{"h"},
+		Usage:   "Show the help, so what you see now",
 	}
 
-	app.Commands = []cli.Command{
-		cmd.Server(),
-		cmd.List(),
-		cmd.Show(),
-		cmd.Create(),
-		cmd.Update(),
-		cmd.Remove(),
-	}
-
-	cli.HelpFlag = cli.BoolFlag{
-		Name:  "help, h",
-		Usage: "Show the help, so what you see now",
-	}
-
-	cli.VersionFlag = cli.BoolFlag{
-		Name:  "version, v",
-		Usage: "Print the current version of that tool",
+	cli.VersionFlag = &cli.BoolFlag{
+		Name:    "version",
+		Aliases: []string{"v"},
+		Usage:   "Print the current version of that tool",
 	}
 
 	if err := app.Run(os.Args); err != nil {

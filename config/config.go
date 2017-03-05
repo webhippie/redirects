@@ -1,5 +1,9 @@
 package config
 
+import (
+	"time"
+)
+
 type yaml struct {
 	Enabled bool
 	File    string
@@ -13,6 +17,27 @@ type json struct {
 type toml struct {
 	Enabled bool
 	File    string
+}
+
+type zookeeper struct {
+	Enabled   bool
+	Endpoints []string
+	Timeout   time.Duration
+	Prefix    string
+}
+
+type etcd struct {
+	Enabled   bool
+	Endpoints []string
+	Timeout   time.Duration
+	Prefix    string
+}
+
+type consul struct {
+	Enabled   bool
+	Endpoints []string
+	Timeout   time.Duration
+	Prefix    string
 }
 
 type server struct {
@@ -35,6 +60,15 @@ var (
 
 	// TOML represents the TOML storage configuration details.
 	TOML = &toml{}
+
+	// Zookeeper represents the Zookeeper storage configuration details.
+	Zookeeper = &zookeeper{}
+
+	// Etcd represents the Etcd storage configuration details.
+	Etcd = &etcd{}
+
+	// Consul represents the Consul storage configuration details.
+	Consul = &consul{}
 
 	// Server represents the informations about the server bindings.
 	Server = &server{}
