@@ -43,8 +43,8 @@ func Load() store.Store {
 		cfg,
 	)
 
-	// TODO: Handle this error properly
 	if err != nil {
+		// TODO: Handle this error properly
 		panic(fmt.Sprintf("TODO: Failed to init store. %s", err))
 	}
 
@@ -57,8 +57,8 @@ func Load() store.Store {
 			},
 		)
 
-		// TODO: Handle this error properly
 		if err != nil {
+			// TODO: Handle this error properly
 			panic(fmt.Sprintf("TODO: Failed to create prefix. %s", err))
 		}
 	}
