@@ -1,8 +1,11 @@
 package toml
 
 import (
+	"fmt"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
+	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -30,6 +33,22 @@ func Load() store.Store {
 			"file://",
 		),
 	)
+
+	if _, err := os.Stat(f); err != nil {
+		dir := filepath.Dir(f)
+
+		if _, dirErr := os.Stat(f); dir != "" && dirErr != nil {
+			if err := os.MkdirAll(dir, 0750); err != nil {
+				// TODO: Handle this error properly
+				panic(fmt.Sprintf("TODO: Failed to create storage folder"))
+			}
+		}
+
+		if err := ioutil.WriteFile(f, []byte(""), 0640); err != nil {
+			// TODO: Handle this error properly
+			panic(fmt.Sprintf("TODO: Failed to create storage file"))
+		}
+	}
 
 	return New(
 		f,
