@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// init simply registers Zookeeper on the libkv library.
 func init() {
 	zookeeper.Register()
 }
@@ -32,12 +33,14 @@ func New(s libkvStore.Store, prefix string) store.Store {
 func Load() store.Store {
 	prefix := config.Zookeeper.Prefix
 
+	cfg := &libkvStore.Config{
+		ConnectionTimeout: config.Zookeeper.Timeout * time.Second,
+	}
+
 	s, err := libkv.NewStore(
 		libkvStore.ZK,
 		config.Zookeeper.Endpoints,
-		&libkvStore.Config{
-			ConnectionTimeout: config.Zookeeper.Timeout * time.Second,
-		},
+		cfg,
 	)
 
 	// TODO: Handle this error properly
