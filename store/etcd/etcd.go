@@ -48,24 +48,28 @@ func Load() store.Store {
 		pool, err := pool()
 
 		if err != nil {
+			// TODO: Handle this error properly
 			panic(fmt.Sprintf("TODO: Failed to init cert pool. %s", err))
 		}
 
 		cert, err := cert()
 
 		if err != nil {
+			// TODO: Handle this error properly
 			panic(fmt.Sprintf("TODO: Failed to init SSL cert. %s", err))
 		}
 
 		key, err := key()
 
 		if err != nil {
+			// TODO: Handle this error properly
 			panic(fmt.Sprintf("TODO: Failed to init SSL key. %s", err))
 		}
 
 		keypair, err := tls.X509KeyPair(cert, key)
 
 		if err != nil {
+			// TODO: Handle this error properly
 			panic(fmt.Sprintf("TODO: Failed to parse keypair. %s", err))
 		}
 
@@ -82,8 +86,8 @@ func Load() store.Store {
 		cfg,
 	)
 
-	// TODO: Handle this error properly
 	if err != nil {
+		// TODO: Handle this error properly
 		panic(fmt.Sprintf("TODO: Failed to init store. %s", err))
 	}
 
@@ -96,8 +100,8 @@ func Load() store.Store {
 			},
 		)
 
-		// TODO: Handle this error properly
 		if err != nil {
+			// TODO: Handle this error properly
 			panic(fmt.Sprintf("TODO: Failed to create prefix. %s", err))
 		}
 	}
