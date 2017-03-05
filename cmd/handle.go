@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
-	"github.com/tboerger/redirects/store/boltdb"
 	"github.com/tboerger/redirects/store/consul"
 	"github.com/tboerger/redirects/store/etcd"
 	"github.com/tboerger/redirects/store/json"
@@ -57,8 +56,6 @@ func initStore() store.Store {
 		return etcd.Load()
 	case config.Consul.Enabled:
 		return consul.Load()
-	case config.BoltDB.Enabled:
-		return boltdb.Load()
 	}
 
 	return nil
