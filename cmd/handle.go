@@ -58,5 +58,5 @@ func initStore() store.Store {
 		return consul.Load()
 	}
 
-	return nil
+	panic("No storage method specified")
 }
