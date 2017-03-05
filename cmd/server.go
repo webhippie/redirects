@@ -2,56 +2,55 @@ package cmd
 
 import (
 	"crypto/tls"
-	"net/http"
-	"time"
-
 	"github.com/Sirupsen/logrus"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/router"
-	"github.com/urfave/cli"
 	"golang.org/x/crypto/acme/autocert"
+	"gopkg.in/urfave/cli.v2"
+	"net/http"
+	"time"
 
 	// Import pprof for optional debugging
 	_ "net/http/pprof"
 )
 
 // Server provides the sub-command to start the server.
-func Server() cli.Command {
-	return cli.Command{
+func Server() *cli.Command {
+	return &cli.Command{
 		Name:  "server",
 		Usage: "Start the integrated server",
 		Flags: []cli.Flag{
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:        "addr",
 				Value:       "0.0.0.0:8080",
 				Usage:       "Address to bind the server",
-				EnvVar:      "KLEISTER_SERVER_ADDR",
+				EnvVars:     []string{"KLEISTER_SERVER_ADDR"},
 				Destination: &config.Server.Addr,
 			},
-			cli.BoolFlag{
+			&cli.BoolFlag{
 				Name:        "pprof",
 				Usage:       "Enable pprof debugging server",
-				EnvVar:      "KLEISTER_SERVER_PPROF",
+				EnvVars:     []string{"KLEISTER_SERVER_PPROF"},
 				Destination: &config.Server.Pprof,
 			},
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:        "cert",
 				Value:       "",
 				Usage:       "Path to SSL cert",
-				EnvVar:      "KLEISTER_SERVER_CERT",
+				EnvVars:     []string{"KLEISTER_SERVER_CERT"},
 				Destination: &config.Server.Cert,
 			},
-			cli.StringFlag{
+			&cli.StringFlag{
 				Name:        "key",
 				Value:       "",
 				Usage:       "Path to SSL key",
-				EnvVar:      "KLEISTER_SERVER_KEY",
+				EnvVars:     []string{"KLEISTER_SERVER_KEY"},
 				Destination: &config.Server.Key,
 			},
-			cli.BoolFlag{
+			&cli.BoolFlag{
 				Name:        "letsencrypt",
 				Usage:       "Enable Let's Encrypt SSL",
-				EnvVar:      "KLEISTER_SERVER_LETSENCRYPT",
+				EnvVars:     []string{"KLEISTER_SERVER_LETSENCRYPT"},
 				Destination: &config.Server.LetsEncrypt,
 			},
 		},

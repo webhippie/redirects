@@ -28,3 +28,4 @@ coverage.out
 .env
 /dist
 /redirects
+/storage

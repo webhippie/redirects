@@ -2,16 +2,18 @@ package cmd
 
 import (
 	"fmt"
-	"os"
-	"strings"
-	"text/template"
-
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/store"
+	"github.com/tboerger/redirects/store/consul"
+	"github.com/tboerger/redirects/store/etcd"
 	"github.com/tboerger/redirects/store/json"
 	"github.com/tboerger/redirects/store/toml"
 	"github.com/tboerger/redirects/store/yaml"
-	"github.com/urfave/cli"
+	"github.com/tboerger/redirects/store/zookeeper"
+	"gopkg.in/urfave/cli.v2"
+	"os"
+	"strings"
+	"text/template"
 )
 
 // globalFuncMap provides global template helper functions.
@@ -48,6 +50,12 @@ func initStore() store.Store {
 		return json.Load()
 	case config.TOML.Enabled:
 		return toml.Load()
+	case config.Zookeeper.Enabled:
+		return zookeeper.Load()
+	case config.Etcd.Enabled:
+		return etcd.Load()
+	case config.Consul.Enabled:
+		return consul.Load()
 	}
 
 	return nil

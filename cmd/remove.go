@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"github.com/tboerger/redirects/store"
-	"github.com/urfave/cli"
+	"gopkg.in/urfave/cli.v2"
 )
 
 // Remove provides the sub-command to reove redirect patterns.
-func Remove() cli.Command {
-	return cli.Command{
+func Remove() *cli.Command {
+	return &cli.Command{
 		Name:      "remove",
 		Usage:     "Remove a redirect pattern",
 		ArgsUsage: "<id>",
