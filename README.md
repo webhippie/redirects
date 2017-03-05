@@ -10,9 +10,9 @@
 **This project is under heavy development, it's not in a working state yet!**
 
 Redirects is a pretty simple pattern-based redirect server. It supports
-different kinds of backends to store the patterns like JSON, YAML, Etcd, Consul
-and Zookeeper. We are using it mostly as a default route for our reverse proxy
-like [Træfɪk](https://traefik.io/).
+different kinds of backends to store the patterns like JSON, YAML, TOML, Etcd,
+Consul and Zookeeper. We are using it mostly as a default route for our reverse
+proxy like [Træfɪk](https://traefik.io/).
 
 
 ## Install
