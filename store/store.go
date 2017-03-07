@@ -16,6 +16,12 @@ var (
 
 // Store implements all required data-layer functions for Redirects.
 type Store interface {
+	// Name simply returns the name of the store implementation.
+	Name() string
+
+	// Config just returns a simple configuration explanation.
+	Config() string
+
 	// GetRedirects retrieves all redirects from the store.
 	GetRedirects() ([]*model.Redirect, error)
 

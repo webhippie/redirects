@@ -17,6 +17,16 @@ type data struct {
 	mutex sync.Mutex
 }
 
+// Name simply returns the name of the store implementation.
+func (db *data) Name() string {
+	return "JSON"
+}
+
+// Config just returns a simple configuration explanation.
+func (db *data) Config() string {
+	return fmt.Sprintf("file:%s", db.file)
+}
+
 // New initializes a new JSON store.
 func New(f string) store.Store {
 	return &data{
@@ -26,7 +36,7 @@ func New(f string) store.Store {
 }
 
 // Load initializes the JSON storage.
-func Load() store.Store {
+func Load() (store.Store, error) {
 	f := filepath.Clean(
 		strings.TrimPrefix(
 			config.JSON.File,
@@ -39,18 +49,16 @@ func Load() store.Store {
 
 		if _, dirErr := os.Stat(f); dir != "" && dirErr != nil {
 			if err := os.MkdirAll(dir, 0750); err != nil {
-				// TODO: Handle this error properly
-				panic(fmt.Sprintf("TODO: Failed to create storage folder"))
+				return nil, fmt.Errorf("Failed to create storage folder")
 			}
 		}
 
 		if err := ioutil.WriteFile(f, []byte("{}"), 0640); err != nil {
-			// TODO: Handle this error properly
-			panic(fmt.Sprintf("TODO: Failed to create storage file"))
+			return nil, fmt.Errorf("Failed to create storage file")
 		}
 	}
 
 	return New(
 		f,
-	)
+	), nil
 }
