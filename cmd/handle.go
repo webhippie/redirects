@@ -31,18 +31,23 @@ type HandleFunc func(c *cli.Context, s store.Store) error
 
 // Handle wraps the command function handler.
 func Handle(c *cli.Context, fn HandleFunc) error {
-	s := initStore()
+	s, err := initStore()
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
+		os.Exit(2)
+	}
 
 	if err := fn(c, s); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
-		os.Exit(2)
+		os.Exit(3)
 	}
 
 	return nil
 }
 
 // initStore initializes the store for CLI usage.
-func initStore() store.Store {
+func initStore() (store.Store, error) {
 	switch {
 	case config.YAML.Enabled:
 		return yaml.Load()
@@ -58,5 +63,5 @@ func initStore() store.Store {
 		return consul.Load()
 	}
 
-	panic("No storage method specified")
+	return nil, fmt.Errorf("No storage method specified")
 }
