@@ -2,13 +2,11 @@ package toml
 
 import (
 	"bytes"
-	"crypto/md5"
-	"fmt"
 	"github.com/BurntSushi/toml"
+	"github.com/satori/go.uuid"
 	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
 	"io/ioutil"
-	"time"
 )
 
 // redirectCollection represents the internal storage collection.
@@ -107,10 +105,7 @@ func (db *data) CreateRedirect(create *model.Redirect) error {
 		}
 	}
 
-	create.ID = fmt.Sprintf(
-		"%x",
-		md5.Sum([]byte(string(time.Now().Unix()))),
-	)
+	create.ID = uuid.NewV4().String()
 
 	root.Redirects = append(
 		root.Redirects,

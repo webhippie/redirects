@@ -1,13 +1,12 @@
 package zookeeper
 
 import (
-	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"github.com/satori/go.uuid"
 	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
 	"path"
-	"time"
 )
 
 // GetRedirects retrieves all redirects from the Zookeeper store.
@@ -78,7 +77,7 @@ func (db *data) UpdateRedirect(update *model.Redirect) error {
 
 // CreateRedirect creates a redirect on the Zookeeper store.
 func (db *data) CreateRedirect(create *model.Redirect) error {
-	id := db.nextID()
+	id := uuid.NewV4().String()
 	redirects, err := db.load()
 
 	if err != nil {
@@ -102,16 +101,6 @@ func (db *data) CreateRedirect(create *model.Redirect) error {
 		db.key(id),
 		bytes,
 		nil,
-	)
-}
-
-// nextID tries to generate a new unique ID.
-func (db *data) nextID() string {
-	return fmt.Sprintf(
-		"%x",
-		md5.Sum([]byte(
-			fmt.Sprintf("%v", time.Now().Unix()),
-		)),
 	)
 }
 
