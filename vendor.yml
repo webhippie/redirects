@@ -1,10 +1,10 @@
 vendors:
 - path: github.com/BurntSushi/toml
-  rev: 99064174e013895bbd9b025c31100bd1d9b590ca
+  rev: e643e9ef00b049d75de26e61109c5ea01885cd21
 - path: github.com/Sirupsen/logrus
-  rev: 0208149b40d863d2c1a2f8fe5753096a9cf2cc8b
+  rev: 1deb2db2a6fff8a35532079061b903c3a25eed52
 - path: github.com/coreos/etcd
-  rev: 8a57b90e7fca743cd892c00740fa118e10440b0f
+  rev: 0c38f1ff8def465328b5c7103ae0f0eb4c8b9550
 - path: github.com/coreos/go-semver
   rev: 5e3acbb5668c4c3deb4842615c4098eb61fb6b1e
 - path: github.com/docker/libkv
@@ -20,13 +20,13 @@ vendors:
 - path: github.com/gin-gonic/gin
   rev: e2212d40c62a98b388a5eb48ecbdcf88534688ba
 - path: github.com/golang/protobuf
-  rev: 69b215d01a5606c843240eab4937eab3acee6530
+  rev: c9c7427a2a70d2eb3bafa0ab2dc163e45f143317
 - path: github.com/hashicorp/consul
-  rev: ed2e700ab9ebad383a024162d85c9d45eb51b3fc
+  rev: 22986fbfe899698b534861a012c50ce128c2b713
 - path: github.com/hashicorp/go-cleanhttp
   rev: 3573b8b52aa7b37b9358d966a898feb387f62437
 - path: github.com/hashicorp/serf
-  rev: d787b2e8f72b5da48c43b84c2617234401084050
+  rev: 19f2c401e122352c047a84d6584dd51e2fb8fcc4
 - path: github.com/jackspirou/syscerts
   rev: b68f5469dff16e102bd6a2d5b3e79341c938d736
 - path: github.com/joho/godotenv
@@ -34,17 +34,19 @@ vendors:
 - path: github.com/manucorporat/sse
   rev: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
 - path: github.com/mattn/go-isatty
-  rev: 9622e0cc9d8f9be434ca605520ff9a16808fee47
+  rev: 57fdcb988a5c543893cc61bce354a6e24ab70022
 - path: github.com/samuel/go-zookeeper
   rev: 1d7be4effb13d2d908342d349d71a284a7542693
+- path: github.com/satori/go.uuid
+  rev: b061729afc07e77a8aa4fad0a2fd840958f1942a
 - path: github.com/ugorji/go
   rev: c88ee250d0221a57af388746f5cf03768c21d6e2
 - path: golang.org/x/crypto
-  rev: 40541ccb1c6e64c947ed6f606b8a6cb4b67d7436
+  rev: 728b753d0135da6801d45a38e6f43ff55779c5c2
 - path: golang.org/x/net
-  rev: d379faa25cbdc04d653984913a2ceb43b0bc46d7
+  rev: a6577fac2d73be281a500b310739095313165611
 - path: golang.org/x/sys
-  rev: e48874b42435b4347fc52bdee0424a52abc974d7
+  rev: 99f16d856c9836c42d24e7ab64ea72916925fa97
 - path: gopkg.in/go-playground/validator.v8
   rev: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - path: gopkg.in/urfave/cli.v2
