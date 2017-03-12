@@ -1,14 +1,14 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/router/middleware/header"
 	"github.com/tboerger/redirects/router/middleware/logger"
 	"github.com/tboerger/redirects/router/middleware/recovery"
 	"github.com/tboerger/redirects/router/middleware/store"
+	"github.com/tboerger/redirects/templates"
+	"net/http"
 )
 
 // Load initializes the routing of the application.
@@ -20,6 +20,10 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	}
 
 	e := gin.New()
+
+	e.SetHTMLTemplate(
+		templates.Load(),
+	)
 
 	e.Use(middleware...)
 	e.Use(logger.SetLogger())
@@ -33,10 +37,9 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 }
 
 func handler(c *gin.Context) {
-	c.JSON(
-		http.StatusOK,
-		gin.H{
-			"version": config.Version,
-		},
+	c.HTML(
+		http.StatusNotFound,
+		"404.html",
+		gin.H{},
 	)
 }
