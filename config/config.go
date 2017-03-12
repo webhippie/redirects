@@ -54,6 +54,7 @@ type server struct {
 	Addr        string
 	Cert        string
 	Key         string
+	Templates   string
 	LetsEncrypt bool
 	Pprof       bool
 }

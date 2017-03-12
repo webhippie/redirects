@@ -67,7 +67,7 @@ generate:
 .PHONY: staticcheck
 staticcheck:
 	@which staticcheck > /dev/null; if [ $$? -ne 0 ]; then \
-		go get honnef.co/go/staticcheck/cmd/staticcheck; \
+		go get honnef.co/go/tools/cmd/staticcheck; \
 	fi
 	staticcheck $(PACKAGES)
 
@@ -95,14 +95,14 @@ structcheck:
 .PHONY: unused
 unused:
 	@which unused > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u honnef.co/go/unused/cmd/unused; \
+		go get -u honnef.co/go/tools/cmd/unused; \
 	fi
 	unused $(PACKAGES)
 
 .PHONY: gosimple
 gosimple:
 	@which gosimple > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u honnef.co/go/simple/cmd/gosimple; \
+		go get -u honnef.co/go/tools/cmd/gosimple; \
 	fi
 	gosimple $(PACKAGES)
 

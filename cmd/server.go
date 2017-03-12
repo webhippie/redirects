@@ -47,6 +47,13 @@ func Server() *cli.Command {
 				EnvVars:     []string{"KLEISTER_SERVER_KEY"},
 				Destination: &config.Server.Key,
 			},
+			&cli.StringFlag{
+				Name:        "templates",
+				Value:       "",
+				Usage:       "Path to custom templates",
+				EnvVars:     []string{"KLEISTER_SERVER_TEMPLATES"},
+				Destination: &config.Server.Templates,
+			},
 			&cli.BoolFlag{
 				Name:        "letsencrypt",
 				Usage:       "Enable Let's Encrypt SSL",

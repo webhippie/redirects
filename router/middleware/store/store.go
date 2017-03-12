@@ -12,6 +12,7 @@ import (
 	"github.com/tboerger/redirects/store/toml"
 	"github.com/tboerger/redirects/store/yaml"
 	"github.com/tboerger/redirects/store/zookeeper"
+	"net/http"
 )
 
 // SetStore injects the storage into the context.
@@ -46,7 +47,17 @@ func SetStore() gin.HandlerFunc {
 	}
 
 	return func(c *gin.Context) {
-		store.ToContext(c, db)
-		c.Next()
+		if err != nil {
+			c.HTML(
+				http.StatusInternalServerError,
+				"500.html",
+				gin.H{},
+			)
+
+			c.Abort()
+		} else {
+			store.ToContext(c, db)
+			c.Next()
+		}
 	}
 }

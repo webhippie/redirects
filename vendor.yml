@@ -3,8 +3,10 @@ vendors:
   rev: e643e9ef00b049d75de26e61109c5ea01885cd21
 - path: github.com/Sirupsen/logrus
   rev: 1deb2db2a6fff8a35532079061b903c3a25eed52
+- path: github.com/Unknwon/com
+  rev: 0db4a625e949e956314d7d1adea9bf82384cc10c
 - path: github.com/coreos/etcd
-  rev: 0c38f1ff8def465328b5c7103ae0f0eb4c8b9550
+  rev: 76aa7f69357420f1802d4d959ade999e63269942
 - path: github.com/coreos/go-semver
   rev: 5e3acbb5668c4c3deb4842615c4098eb61fb6b1e
 - path: github.com/docker/libkv
@@ -22,7 +24,7 @@ vendors:
 - path: github.com/golang/protobuf
   rev: c9c7427a2a70d2eb3bafa0ab2dc163e45f143317
 - path: github.com/hashicorp/consul
-  rev: 22986fbfe899698b534861a012c50ce128c2b713
+  rev: 144a5e5340893a5e726e831c648f26dc19fef1e7
 - path: github.com/hashicorp/go-cleanhttp
   rev: 3573b8b52aa7b37b9358d966a898feb387f62437
 - path: github.com/hashicorp/serf
@@ -40,7 +42,7 @@ vendors:
 - path: github.com/satori/go.uuid
   rev: b061729afc07e77a8aa4fad0a2fd840958f1942a
 - path: github.com/ugorji/go
-  rev: c88ee250d0221a57af388746f5cf03768c21d6e2
+  rev: 708a42d246822952f38190a8d8c4e6b16a0e600c
 - path: golang.org/x/crypto
   rev: 728b753d0135da6801d45a38e6f43ff55779c5c2
 - path: golang.org/x/net
