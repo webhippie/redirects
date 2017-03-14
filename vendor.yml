@@ -2,11 +2,11 @@ vendors:
 - path: github.com/BurntSushi/toml
   rev: e643e9ef00b049d75de26e61109c5ea01885cd21
 - path: github.com/Sirupsen/logrus
-  rev: 1deb2db2a6fff8a35532079061b903c3a25eed52
+  rev: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
 - path: github.com/Unknwon/com
   rev: 0db4a625e949e956314d7d1adea9bf82384cc10c
 - path: github.com/coreos/etcd
-  rev: 76aa7f69357420f1802d4d959ade999e63269942
+  rev: ace3a217b00c537c059df066f7f262669f900faa
 - path: github.com/coreos/go-semver
   rev: 5e3acbb5668c4c3deb4842615c4098eb61fb6b1e
 - path: github.com/docker/libkv
@@ -43,8 +43,6 @@ vendors:
   rev: b061729afc07e77a8aa4fad0a2fd840958f1942a
 - path: github.com/ugorji/go
   rev: 708a42d246822952f38190a8d8c4e6b16a0e600c
-- path: golang.org/x/crypto
-  rev: 728b753d0135da6801d45a38e6f43ff55779c5c2
 - path: golang.org/x/net
   rev: a6577fac2d73be281a500b310739095313165611
 - path: golang.org/x/sys

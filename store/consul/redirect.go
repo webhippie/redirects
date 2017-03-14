@@ -6,7 +6,6 @@ import (
 	"github.com/satori/go.uuid"
 	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
-	"path"
 )
 
 // GetRedirects retrieves all redirects from the Consul store.
@@ -102,31 +101,4 @@ func (db *data) CreateRedirect(create *model.Redirect) error {
 		bytes,
 		nil,
 	)
-}
-
-// key generates the new key including the prefix.
-func (db *data) key(id string) string {
-	return path.Join(db.prefix, id)
-}
-
-// load parses all available records from the storage.
-func (db *data) load() ([]*model.Redirect, error) {
-	res := make([]*model.Redirect, 0)
-	records, err := db.store.List(db.prefix)
-
-	if err != nil {
-		return nil, err
-	}
-
-	for _, pair := range records {
-		row := &model.Redirect{}
-
-		if err := json.Unmarshal(pair.Value, row); err != nil {
-			return nil, fmt.Errorf("Failed to unmarshal record. %s", err)
-		}
-
-		res = append(res, row)
-	}
-
-	return res, nil
 }

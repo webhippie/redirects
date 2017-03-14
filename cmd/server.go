@@ -5,7 +5,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/tboerger/redirects/config"
 	"github.com/tboerger/redirects/router"
-	"golang.org/x/crypto/acme/autocert"
 	"gopkg.in/urfave/cli.v2"
 	"net/http"
 	"time"
@@ -54,12 +53,6 @@ func Server() *cli.Command {
 				EnvVars:     []string{"KLEISTER_SERVER_TEMPLATES"},
 				Destination: &config.Server.Templates,
 			},
-			&cli.BoolFlag{
-				Name:        "letsencrypt",
-				Usage:       "Enable Let's Encrypt SSL",
-				EnvVars:     []string{"KLEISTER_SERVER_LETSENCRYPT"},
-				Destination: &config.Server.LetsEncrypt,
-			},
 		},
 		Action: func(c *cli.Context) error {
 			logrus.Infof("Starting the server on %s", config.Server.Addr)
@@ -78,7 +71,16 @@ func Server() *cli.Command {
 				}()
 			}
 
-			if config.Server.LetsEncrypt || (config.Server.Cert != "" && config.Server.Key != "") {
+			if config.Server.Cert != "" && config.Server.Key != "" {
+				cert, err := tls.LoadX509KeyPair(
+					config.Server.Cert,
+					config.Server.Key,
+				)
+
+				if err != nil {
+					logrus.Fatal("Failed to load SSL certificates. %s", err)
+				}
+
 				curves := []tls.CurveID{
 					tls.CurveP521,
 					tls.CurveP384,
@@ -97,28 +99,7 @@ func Server() *cli.Command {
 					MinVersion:               tls.VersionTLS12,
 					CurvePreferences:         curves,
 					CipherSuites:             ciphers,
-				}
-
-				if config.Server.LetsEncrypt {
-					certManager := autocert.Manager{
-						Prompt: autocert.AcceptTOS,
-						Cache:  autocert.DirCache("certs"), // TODO: Implement the interface matching the storage type
-					}
-
-					cfg.GetCertificate = certManager.GetCertificate
-				} else {
-					cert, err := tls.LoadX509KeyPair(
-						config.Server.Cert,
-						config.Server.Key,
-					)
-
-					if err != nil {
-						logrus.Fatal("Failed to load SSL certificates. %s", err)
-					}
-
-					cfg.Certificates = []tls.Certificate{
-						cert,
-					}
+					Certificates:             []tls.Certificate{cert},
 				}
 
 				server = &http.Server{

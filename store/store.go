@@ -3,7 +3,6 @@ package store
 import (
 	"fmt"
 	"github.com/tboerger/redirects/model"
-	// "golang.org/x/crypto/acme/autocert"
 )
 
 var (
@@ -36,7 +35,4 @@ type Store interface {
 
 	// UpdateRedirect updates a redirect on the store.
 	UpdateRedirect(*model.Redirect) error
-
-	// CertCache returns the cert cache implementation.
-	// CertCache() autocert.Cache
 }

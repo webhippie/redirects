@@ -9,7 +9,7 @@ var (
 	VersionMajor = 0
 
 	// VersionMinor is the current minor version
-	VersionMinor = 0
+	VersionMinor = 1
 
 	// VersionPatch is the current patch version
 	VersionPatch = 0
