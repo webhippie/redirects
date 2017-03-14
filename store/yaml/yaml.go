@@ -3,13 +3,20 @@ package yaml
 import (
 	"fmt"
 	"github.com/tboerger/redirects/config"
+	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
 )
+
+// collection represents the internal storage collection.
+type collection struct {
+	Redirects []*model.Redirect `yaml:"redirects"`
+}
 
 // data is a basic struct that iplements the Store interface.
 type data struct {
@@ -25,6 +32,40 @@ func (db *data) Name() string {
 // Config just returns a simple configuration explanation.
 func (db *data) Config() string {
 	return fmt.Sprintf("file:%s", db.file)
+}
+
+// load parses all available records from the storage.
+func (db *data) load() (*collection, error) {
+	res := &collection{
+		Redirects: make([]*model.Redirect, 0),
+	}
+
+	content, err := ioutil.ReadFile(db.file)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := yaml.Unmarshal(content, res); err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// write writes the YAML content back to the storage.
+func (db *data) write(content *collection) error {
+	bytes, err := yaml.Marshal(content)
+
+	if err != nil {
+		return err
+	}
+
+	if err := ioutil.WriteFile(db.file, bytes, 0640); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // New initializes a new YAML store.

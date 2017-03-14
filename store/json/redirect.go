@@ -1,17 +1,10 @@
 package json
 
 import (
-	"encoding/json"
 	"github.com/satori/go.uuid"
 	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
-	"io/ioutil"
 )
-
-// redirectCollection represents the internal storage collection.
-type redirectCollection struct {
-	Redirects []*model.Redirect `json:"redirects"`
-}
 
 // GetRedirects retrieves all redirects from the JSON store.
 func (db *data) GetRedirects() ([]*model.Redirect, error) {
@@ -112,38 +105,4 @@ func (db *data) CreateRedirect(create *model.Redirect) error {
 	)
 
 	return db.write(root)
-}
-
-// load parses all available records from the storage.
-func (db *data) load() (*redirectCollection, error) {
-	res := &redirectCollection{
-		Redirects: make([]*model.Redirect, 0),
-	}
-
-	content, err := ioutil.ReadFile(db.file)
-
-	if err != nil {
-		return nil, err
-	}
-
-	if err := json.Unmarshal(content, res); err != nil {
-		return nil, err
-	}
-
-	return res, nil
-}
-
-// write writes the JSON content back to the storage.
-func (db *data) write(content *redirectCollection) error {
-	bytes, err := json.MarshalIndent(content, "", "  ")
-
-	if err != nil {
-		return err
-	}
-
-	if err := ioutil.WriteFile(db.file, bytes, 0640); err != nil {
-		return err
-	}
-
-	return nil
 }

@@ -1,12 +1,15 @@
 package zookeeper
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/docker/libkv"
 	libkvStore "github.com/docker/libkv/store"
 	"github.com/docker/libkv/store/zookeeper"
 	"github.com/tboerger/redirects/config"
+	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/store"
+	"path"
 	"strings"
 	"time"
 )
@@ -31,6 +34,33 @@ func (db *data) Name() string {
 // Config just returns a simple configuration explanation.
 func (db *data) Config() string {
 	return fmt.Sprintf("endpoints:%s", strings.Join(db.endpoints, ","))
+}
+
+// key generates the new key including the prefix.
+func (db *data) key(id string) string {
+	return path.Join(db.prefix, "records", id)
+}
+
+// load parses all available records from the storage.
+func (db *data) load() ([]*model.Redirect, error) {
+	res := make([]*model.Redirect, 0)
+	records, err := db.store.List(db.prefix)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for _, pair := range records {
+		row := &model.Redirect{}
+
+		if err := json.Unmarshal(pair.Value, row); err != nil {
+			return nil, fmt.Errorf("Failed to unmarshal record. %s", err)
+		}
+
+		res = append(res, row)
+	}
+
+	return res, nil
 }
 
 // New initializes a new Zookeeper store.
