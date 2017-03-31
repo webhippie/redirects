@@ -6,6 +6,7 @@ import (
 	"github.com/tboerger/redirects/router/middleware/header"
 	"github.com/tboerger/redirects/router/middleware/logger"
 	"github.com/tboerger/redirects/router/middleware/recovery"
+	"github.com/tboerger/redirects/router/middleware/source"
 	"github.com/tboerger/redirects/router/middleware/store"
 	"github.com/tboerger/redirects/templates"
 	"net/http"
@@ -30,16 +31,9 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	e.Use(recovery.SetRecovery())
 	e.Use(store.SetStore())
 	e.Use(header.SetVersion())
+	e.Use(source.SetSource())
 
 	e.NoRoute(handler)
 
 	return e
-}
-
-func handler(c *gin.Context) {
-	c.HTML(
-		http.StatusNotFound,
-		"404.html",
-		gin.H{},
-	)
 }
