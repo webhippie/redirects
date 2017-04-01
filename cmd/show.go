@@ -13,6 +13,7 @@ import (
 var tmplShow = "ID: \x1b[33m{{ .ID }}\x1b[0m" + `
 Source: {{ .Source }}
 Destination: {{ .Destination }}
+Priority: {{ .Priority }}
 `
 
 // Show provides the sub-command to show redirect patterns.

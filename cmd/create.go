@@ -24,6 +24,11 @@ func Create() *cli.Command {
 				Value: "",
 				Usage: "Destination for the redirect",
 			},
+			&cli.IntFlag{
+				Name:  "priority",
+				Value: 0,
+				Usage: "Priority for the redirect",
+			},
 		},
 		Action: func(c *cli.Context) error {
 			return Handle(c, handleCreate)
@@ -44,6 +49,10 @@ func handleCreate(c *cli.Context, s store.Store) error {
 		record.Destination = val
 	} else {
 		return fmt.Errorf("You must provide a destination")
+	}
+
+	if val := c.Int("priority"); c.IsSet("priority") {
+		record.Priority = val
 	}
 
 	return s.CreateRedirect(record)

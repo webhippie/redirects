@@ -9,6 +9,7 @@ type Redirect struct {
 	ID          string `yaml:"id" json:"id" toml:"id"`
 	Source      string `yaml:"source" json:"source" toml:"source"`
 	Destination string `yaml:"destination" json:"destination" toml:"destination"`
+	Priority    int    `yaml:"priority" json:"priority" toml:"priority"`
 }
 
 // Contains checks if a needle is part of the redirect.

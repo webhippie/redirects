@@ -4,10 +4,12 @@ import (
 	"bytes"
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
+	"github.com/tboerger/redirects/model"
 	"github.com/tboerger/redirects/router/middleware/source"
 	"github.com/tboerger/redirects/store"
 	"net/http"
 	"regexp"
+	"sort"
 	"strings"
 	"text/template"
 )
@@ -27,6 +29,10 @@ func handler(c *gin.Context) {
 
 		return
 	}
+
+	sort.Sort(
+		model.RedirectsByPriority(redirects),
+	)
 
 	for _, redirect := range redirects {
 		if matched, _ := regexp.MatchString(redirect.Source, s.String()); matched {
