@@ -24,6 +24,11 @@ func Update() *cli.Command {
 				Value: "",
 				Usage: "Destination for the redirect",
 			},
+			&cli.IntFlag{
+				Name:  "priority",
+				Value: 0,
+				Usage: "Priority for the redirect",
+			},
 		},
 		Action: func(c *cli.Context) error {
 			return Handle(c, handleUpdate)
@@ -53,6 +58,11 @@ func handleUpdate(c *cli.Context, s store.Store) error {
 
 	if val := c.String("destination"); c.IsSet("destination") && val != record.Destination {
 		record.Destination = val
+		changed = true
+	}
+
+	if val := c.Int("priority"); c.IsSet("priority") && val != record.Priority {
+		record.Priority = val
 		changed = true
 	}
 
