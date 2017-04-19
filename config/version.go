@@ -18,10 +18,8 @@ var (
 	VersionDev = "dev"
 
 	// VersionDate indicates the build date
-	VersionDate = "00000000"
-)
+	VersionDate = "20170101"
 
-var (
 	// Version is the version of the current implementation.
 	Version = fmt.Sprintf(
 		"%d.%d.%d+git%s.%s",

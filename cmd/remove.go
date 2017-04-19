@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/tboerger/redirects/store"
+	"github.com/webhippie/redirects/store"
 	"gopkg.in/urfave/cli.v2"
 )
 

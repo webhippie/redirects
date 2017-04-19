@@ -3,15 +3,16 @@ package zookeeper
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/docker/libkv"
-	libkvStore "github.com/docker/libkv/store"
-	"github.com/docker/libkv/store/zookeeper"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/store"
 	"path"
 	"strings"
 	"time"
+
+	"github.com/docker/libkv"
+	libkvStore "github.com/docker/libkv/store"
+	"github.com/docker/libkv/store/zookeeper"
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/store"
 )
 
 // init simply registers Zookeeper on the libkv library.

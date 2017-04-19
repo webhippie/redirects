@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/tboerger/redirects/store"
-	"gopkg.in/urfave/cli.v2"
 	"os"
+
+	"github.com/webhippie/redirects/store"
+	"gopkg.in/urfave/cli.v2"
 )
 
 // Update provides the sub-command to update redirect patterns.

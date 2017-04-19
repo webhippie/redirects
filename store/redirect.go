@@ -1,7 +1,7 @@
 package store
 
 import (
-	"github.com/tboerger/redirects/model"
+	"github.com/webhippie/redirects/model"
 	"golang.org/x/net/context"
 )
 

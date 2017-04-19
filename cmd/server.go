@@ -2,12 +2,13 @@ package cmd
 
 import (
 	"crypto/tls"
-	"github.com/Sirupsen/logrus"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/router"
-	"gopkg.in/urfave/cli.v2"
 	"net/http"
 	"time"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/router"
+	"gopkg.in/urfave/cli.v2"
 
 	// Import pprof for optional debugging
 	_ "net/http/pprof"

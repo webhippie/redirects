@@ -1,14 +1,15 @@
 package main
 
 import (
-	"github.com/Sirupsen/logrus"
-	"github.com/joho/godotenv"
-	"github.com/tboerger/redirects/cmd"
-	"github.com/tboerger/redirects/config"
-	"gopkg.in/urfave/cli.v2"
 	"os"
 	"runtime"
 	"time"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/joho/godotenv"
+	"github.com/webhippie/redirects/cmd"
+	"github.com/webhippie/redirects/config"
+	"gopkg.in/urfave/cli.v2"
 )
 
 func main() {

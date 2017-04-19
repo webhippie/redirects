@@ -1,10 +1,11 @@
 package source
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 // SetSource initializes the source URL.

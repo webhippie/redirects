@@ -1,15 +1,16 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/router/middleware/header"
-	"github.com/tboerger/redirects/router/middleware/logger"
-	"github.com/tboerger/redirects/router/middleware/recovery"
-	"github.com/tboerger/redirects/router/middleware/source"
-	"github.com/tboerger/redirects/router/middleware/store"
-	"github.com/tboerger/redirects/templates"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/router/middleware/header"
+	"github.com/webhippie/redirects/router/middleware/logger"
+	"github.com/webhippie/redirects/router/middleware/recovery"
+	"github.com/webhippie/redirects/router/middleware/source"
+	"github.com/webhippie/redirects/router/middleware/store"
+	"github.com/webhippie/redirects/templates"
 )
 
 // Load initializes the routing of the application.

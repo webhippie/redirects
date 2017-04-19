@@ -2,8 +2,8 @@ package yaml
 
 import (
 	"github.com/satori/go.uuid"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/store"
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/store"
 )
 
 // GetRedirects retrieves all redirects from the YAML store.
