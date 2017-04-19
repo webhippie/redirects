@@ -4,24 +4,6 @@
     "tboerger"
   ]
 
-[org.api]
-
-  people = [
-    "tboerger"
-  ]
-
-[org.cli]
-
-  people = [
-    "tboerger"
-  ]
-
-[org.ui]
-
-  people = [
-    "tboerger"
-  ]
-
 [people]
 
   [people.tboerger]
