@@ -122,6 +122,16 @@ pipeline:
       event: [ push ]
       branch: [ master ]
 
+  microbadger:
+    image: zyclonite/drone-webhook
+    secrets:
+      - source: microbadger_token
+        target: plugin_webhook
+    when:
+      event: [ push, tag ]
+      branch: [ master, release/*, refs/tags/* ]
+      status: [ success ]
+
   archive:
     image: plugins/s3
     secrets: [ s3_endpoint, aws_access_key_id, aws_secret_access_key, s3_bucket ]
