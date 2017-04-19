@@ -3,14 +3,15 @@ package json
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/store"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
+
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/store"
 )
 
 // collection represents the internal storage collection.

@@ -3,8 +3,9 @@
 package cmd
 
 import (
-	"github.com/facebookgo/grace/gracehttp"
 	"net/http"
+
+	"github.com/facebookgo/grace/gracehttp"
 )
 
 func startServer(s *http.Server) error {

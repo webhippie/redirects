@@ -2,7 +2,7 @@ package header
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/tboerger/redirects/config"
+	"github.com/webhippie/redirects/config"
 )
 
 // SetVersion writes the current API version to the headers.

@@ -2,16 +2,17 @@ package router
 
 import (
 	"bytes"
-	"github.com/Sirupsen/logrus"
-	"github.com/gin-gonic/gin"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/router/middleware/source"
-	"github.com/tboerger/redirects/store"
 	"net/http"
 	"regexp"
 	"sort"
 	"strings"
 	"text/template"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/gin-gonic/gin"
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/router/middleware/source"
+	"github.com/webhippie/redirects/store"
 )
 
 func handler(c *gin.Context) {

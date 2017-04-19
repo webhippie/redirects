@@ -2,15 +2,16 @@ package yaml
 
 import (
 	"fmt"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/store"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
+
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/store"
+	"gopkg.in/yaml.v2"
 )
 
 // collection represents the internal storage collection.

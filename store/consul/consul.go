@@ -5,18 +5,19 @@ import (
 	"crypto/x509"
 	"encoding/json"
 	"fmt"
-	"github.com/docker/libkv"
-	libkvStore "github.com/docker/libkv/store"
-	"github.com/docker/libkv/store/consul"
-	"github.com/jackspirou/syscerts"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/store"
 	"io/ioutil"
 	"os"
 	"path"
 	"strings"
 	"time"
+
+	"github.com/docker/libkv"
+	libkvStore "github.com/docker/libkv/store"
+	"github.com/docker/libkv/store/consul"
+	"github.com/jackspirou/syscerts"
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/store"
 )
 
 // init simply registers Consul on the libkv library.

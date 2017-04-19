@@ -3,10 +3,11 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tboerger/redirects/store"
-	"gopkg.in/urfave/cli.v2"
 	"os"
 	"text/template"
+
+	"github.com/webhippie/redirects/store"
+	"gopkg.in/urfave/cli.v2"
 )
 
 // tmplShow represents a specific redirect detail view.

@@ -2,17 +2,18 @@ package store
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/store"
-	"github.com/tboerger/redirects/store/consul"
-	"github.com/tboerger/redirects/store/etcd"
-	"github.com/tboerger/redirects/store/json"
-	"github.com/tboerger/redirects/store/toml"
-	"github.com/tboerger/redirects/store/yaml"
-	"github.com/tboerger/redirects/store/zookeeper"
-	"net/http"
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/store"
+	"github.com/webhippie/redirects/store/consul"
+	"github.com/webhippie/redirects/store/etcd"
+	"github.com/webhippie/redirects/store/json"
+	"github.com/webhippie/redirects/store/toml"
+	"github.com/webhippie/redirects/store/yaml"
+	"github.com/webhippie/redirects/store/zookeeper"
 )
 
 // SetStore injects the storage into the context.

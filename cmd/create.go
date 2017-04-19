@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/tboerger/redirects/model"
-	"github.com/tboerger/redirects/store"
+
+	"github.com/webhippie/redirects/model"
+	"github.com/webhippie/redirects/store"
 	"gopkg.in/urfave/cli.v2"
 )
 

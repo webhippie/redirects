@@ -1,5 +1,5 @@
 DIST := dist
-IMPORT := github.com/tboerger/redirects
+IMPORT := github.com/webhippie/redirects
 
 ifeq ($(OS), Windows_NT)
 	EXECUTABLE := redirects.exe
@@ -9,7 +9,7 @@ endif
 
 SHA := $(shell git rev-parse --short HEAD)
 DATE := $(shell date -u '+%Y%m%d')
-LDFLAGS += -s -w -X "$(IMPORT)/config.VersionDev=$(SHA)" -X "$(IMPORT)/config.VersionDate=$(DATE)"
+LDFLAGS += -s -w -extldflags "-static" -X "$(IMPORT)/config.VersionDev=$(SHA)" -X "$(IMPORT)/config.VersionDate=$(DATE)"
 
 TARGETS ?= linux/*,darwin/*,windows/*
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
@@ -67,7 +67,7 @@ generate:
 .PHONY: staticcheck
 staticcheck:
 	@which staticcheck > /dev/null; if [ $$? -ne 0 ]; then \
-		go get honnef.co/go/tools/cmd/staticcheck; \
+		go get honnef.co/go/staticcheck/cmd/staticcheck; \
 	fi
 	staticcheck $(PACKAGES)
 
@@ -91,20 +91,6 @@ structcheck:
 		go get -u github.com/opennota/check/cmd/structcheck; \
 	fi
 	structcheck $(PACKAGES)
-
-.PHONY: unused
-unused:
-	@which unused > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u honnef.co/go/tools/cmd/unused; \
-	fi
-	unused $(PACKAGES)
-
-.PHONY: gosimple
-gosimple:
-	@which gosimple > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u honnef.co/go/tools/cmd/gosimple; \
-	fi
-	gosimple $(PACKAGES)
 
 .PHONY: unconvert
 unconvert:
@@ -170,13 +156,13 @@ check: test
 
 .PHONY: install
 install: $(SOURCES)
-	go install -v -tags '$(TAGS)' -ldflags '-extldflags "-static" $(LDFLAGS)'
+	go install -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)'
 
 .PHONY: build
 build: $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCES)
-	go build -v -tags '$(TAGS)' -ldflags '-extldflags "-static" $(LDFLAGS)' -o $@
+	go build -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@
 
 .PHONY: release
 release: release-dirs release-build release-copy release-check
@@ -190,7 +176,7 @@ release-build:
 	@which xgo > /dev/null; if [ $$? -ne 0 ]; then \
 		go get -u github.com/karalabe/xgo; \
 	fi
-	xgo -dest $(DIST)/binaries -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -targets '$(TARGETS)' -out $(EXECUTABLE)-$(VERSION) $(IMPORT)
+	xgo -dest $(DIST)/binaries -tags '$(TAGS)' -ldflags '-s -w $(LDFLAGS)' -targets '$(TARGETS)' -out $(EXECUTABLE)-$(VERSION) $(IMPORT)
 ifeq ($(CI),drone)
 	mv /build/* $(DIST)/binaries
 endif

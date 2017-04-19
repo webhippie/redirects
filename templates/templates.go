@@ -1,12 +1,13 @@
 package templates
 
 import (
-	"github.com/Sirupsen/logrus"
-	"github.com/Unknwon/com"
-	"github.com/tboerger/redirects/config"
 	"html/template"
 	"io/ioutil"
 	"path"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/Unknwon/com"
+	"github.com/webhippie/redirects/config"
 )
 
 //go:generate fileb0x ab0x.yaml

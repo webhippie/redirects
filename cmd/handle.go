@@ -2,18 +2,19 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/tboerger/redirects/config"
-	"github.com/tboerger/redirects/store"
-	"github.com/tboerger/redirects/store/consul"
-	"github.com/tboerger/redirects/store/etcd"
-	"github.com/tboerger/redirects/store/json"
-	"github.com/tboerger/redirects/store/toml"
-	"github.com/tboerger/redirects/store/yaml"
-	"github.com/tboerger/redirects/store/zookeeper"
-	"gopkg.in/urfave/cli.v2"
 	"os"
 	"strings"
 	"text/template"
+
+	"github.com/webhippie/redirects/config"
+	"github.com/webhippie/redirects/store"
+	"github.com/webhippie/redirects/store/consul"
+	"github.com/webhippie/redirects/store/etcd"
+	"github.com/webhippie/redirects/store/json"
+	"github.com/webhippie/redirects/store/toml"
+	"github.com/webhippie/redirects/store/yaml"
+	"github.com/webhippie/redirects/store/zookeeper"
+	"gopkg.in/urfave/cli.v2"
 )
 
 // globalFuncMap provides global template helper functions.
