@@ -29,6 +29,7 @@ pipeline:
       - TAGS=
       - GOPATH=/srv/app
     commands:
+      - export PATH=/srv/app/bin:$PATH
       - make test-yaml
     when:
       event: [ push ]
