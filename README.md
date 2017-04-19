@@ -3,7 +3,7 @@
 [![Build Status](http://github.dronehippie.de/api/badges/webhippie/redirects/status.svg)](http://github.dronehippie.de/webhippie/redirects)
 [![Go Doc](https://godoc.org/github.com/webhippie/redirects?status.svg)](http://godoc.org/github.com/webhippie/redirects)
 [![Go Report](http://goreportcard.com/badge/github.com/webhippie/redirects)](http://goreportcard.com/report/github.com/webhippie/redirects)
-[![](https://images.microbadger.com/badges/image/webhippie/redirects.svg)](http://microbadger.com/images/webhippie/redirects "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/tboerger/redirects.svg)](http://microbadger.com/images/tboerger/redirects "Get your own image badge on microbadger.com")
 [![Join the chat at https://gitter.im/webhippie/general](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/webhippie/general)
 [![Stories in Ready](https://badge.waffle.io/webhippie/redirects.svg?label=ready&title=Ready)](http://waffle.io/webhippie/redirects)
 
