@@ -35,8 +35,12 @@ func handler(c *gin.Context) {
 		model.RedirectsByPriority(redirects),
 	)
 
+	logrus.Debugf("Trying to match %s", s.String())
+
 	for _, redirect := range redirects {
 		if matched, _ := regexp.MatchString(redirect.Source, s.String()); matched {
+			logrus.Debugf("Matched %s with %s", s.String(), redirect.ID)
+
 			tmpl, err := template.New(
 				"_",
 			).Funcs(
