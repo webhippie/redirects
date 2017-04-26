@@ -66,8 +66,8 @@ func (s *source) resolveScheme(r *http.Request) string {
 // resolveDomain retrieves the requested domain.
 func (s *source) resolveDomain(r *http.Request) (host string) {
 	switch {
-	case r.Header.Get("X-Forwarded-For") != "":
-		return r.Header.Get("X-Forwarded-For")
+	case r.Header.Get("X-Forwarded-Host") != "":
+		return r.Header.Get("X-Forwarded-Host")
 	case r.Header.Get("X-Host") != "":
 		return r.Header.Get("X-Host")
 	case r.Host != "":
