@@ -112,7 +112,7 @@ func split(s1, s2 string) []string {
 	return strings.Split(s2, s1)
 }
 
-func join(s1, s2 string) []string {
+func join(s1 string, s2 []string) string {
 	return strings.Join(s2, s1)
 }
 
