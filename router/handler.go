@@ -75,6 +75,7 @@ func handler(c *gin.Context) {
 				return
 			}
 
+			logrus.Debugf("Redirecting %s to %s", s.String(), res.String())
 			c.Redirect(http.StatusMovedPermanently, res.String())
 			return
 		}
