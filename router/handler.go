@@ -10,9 +10,9 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
-	"github.com/webhippie/redirects/model"
-	"github.com/webhippie/redirects/router/middleware/source"
-	"github.com/webhippie/redirects/store"
+	"github.com/dsielert/redirector/model"
+	"github.com/dsielert/redirector/router/middleware/source"
+	"github.com/dsielert/redirector/store"
 )
 
 func handler(c *gin.Context) {

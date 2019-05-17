@@ -2,8 +2,8 @@ package toml
 
 import (
 	"github.com/satori/go.uuid"
-	"github.com/webhippie/redirects/model"
-	"github.com/webhippie/redirects/store"
+	"github.com/dsielert/redirector/model"
+	"github.com/dsielert/redirector/store"
 )
 
 // GetRedirects retrieves all redirects from the TOML store.

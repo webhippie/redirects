@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/webhippie/redirects/config"
-	"github.com/webhippie/redirects/router"
+	"github.com/dsielert/redirector/config"
+	"github.com/dsielert/redirector/router"
 	"gopkg.in/urfave/cli.v2"
 
 	// Import pprof for optional debugging

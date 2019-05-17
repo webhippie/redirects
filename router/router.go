@@ -4,13 +4,13 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/webhippie/redirects/config"
-	"github.com/webhippie/redirects/router/middleware/header"
-	"github.com/webhippie/redirects/router/middleware/logger"
-	"github.com/webhippie/redirects/router/middleware/recovery"
-	"github.com/webhippie/redirects/router/middleware/source"
-	"github.com/webhippie/redirects/router/middleware/store"
-	"github.com/webhippie/redirects/templates"
+	"github.com/dsielert/redirector/config"
+	"github.com/dsielert/redirector/router/middleware/header"
+	"github.com/dsielert/redirector/router/middleware/logger"
+	"github.com/dsielert/redirector/router/middleware/recovery"
+	"github.com/dsielert/redirector/router/middleware/source"
+	"github.com/dsielert/redirector/router/middleware/store"
+	"github.com/dsielert/redirector/templates"
 )
 
 // Load initializes the routing of the application.

@@ -15,9 +15,9 @@ import (
 	libkvStore "github.com/docker/libkv/store"
 	"github.com/docker/libkv/store/etcd"
 	"github.com/jackspirou/syscerts"
-	"github.com/webhippie/redirects/config"
-	"github.com/webhippie/redirects/model"
-	"github.com/webhippie/redirects/store"
+	"github.com/dsielert/redirector/config"
+	"github.com/dsielert/redirector/model"
+	"github.com/dsielert/redirector/store"
 )
 
 // init simply registers Etcd on the libkv library.

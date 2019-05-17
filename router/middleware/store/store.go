@@ -6,14 +6,14 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
-	"github.com/webhippie/redirects/config"
-	"github.com/webhippie/redirects/store"
-	"github.com/webhippie/redirects/store/consul"
-	"github.com/webhippie/redirects/store/etcd"
-	"github.com/webhippie/redirects/store/json"
-	"github.com/webhippie/redirects/store/toml"
-	"github.com/webhippie/redirects/store/yaml"
-	"github.com/webhippie/redirects/store/zookeeper"
+	"github.com/dsielert/redirector/config"
+	"github.com/dsielert/redirector/store"
+	"github.com/dsielert/redirector/store/consul"
+	"github.com/dsielert/redirector/store/etcd"
+	"github.com/dsielert/redirector/store/json"
+	"github.com/dsielert/redirector/store/toml"
+	"github.com/dsielert/redirector/store/yaml"
+	"github.com/dsielert/redirector/store/zookeeper"
 )
 
 // SetStore injects the storage into the context.

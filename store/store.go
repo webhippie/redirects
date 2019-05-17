@@ -3,7 +3,7 @@ package store
 import (
 	"fmt"
 
-	"github.com/webhippie/redirects/model"
+	"github.com/dsielert/redirector/model"
 )
 
 var (

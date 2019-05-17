@@ -10,9 +10,9 @@ import (
 	"github.com/docker/libkv"
 	libkvStore "github.com/docker/libkv/store"
 	"github.com/docker/libkv/store/zookeeper"
-	"github.com/webhippie/redirects/config"
-	"github.com/webhippie/redirects/model"
-	"github.com/webhippie/redirects/store"
+	"github.com/dsielert/redirector/config"
+	"github.com/dsielert/redirector/model"
+	"github.com/dsielert/redirector/store"
 )
 
 // init simply registers Zookeeper on the libkv library.

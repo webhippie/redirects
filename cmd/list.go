@@ -6,7 +6,7 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/webhippie/redirects/store"
+	"github.com/dsielert/redirector/store"
 	"gopkg.in/urfave/cli.v2"
 )
 

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/webhippie/redirects/config"
-	"github.com/webhippie/redirects/model"
-	"github.com/webhippie/redirects/store"
+	"github.com/dsielert/redirector/config"
+	"github.com/dsielert/redirector/model"
+	"github.com/dsielert/redirector/store"
 	"gopkg.in/yaml.v2"
 )
 

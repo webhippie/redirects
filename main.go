@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/dsielert/redirector/cmd"
+	"github.com/dsielert/redirector/config"
 	"github.com/joho/godotenv"
-	"github.com/webhippie/redirects/cmd"
-	"github.com/webhippie/redirects/config"
 	"gopkg.in/urfave/cli.v2"
 )
 

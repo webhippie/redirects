@@ -7,7 +7,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/Unknwon/com"
-	"github.com/webhippie/redirects/config"
+	"github.com/dsielert/redirector/config"
 )
 
 //go:generate fileb0x ab0x.yaml
