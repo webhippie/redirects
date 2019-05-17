@@ -54,6 +54,6 @@ vendors:
 - path: gopkg.in/go-playground/validator.v8
   rev: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - path: gopkg.in/urfave/cli.v2
-  rev: 922e3e2ceaaa1831c859679af772dcd534095119
+  rev: d3ae77c26ac8db90639677e4831a728d33c36111
 - path: gopkg.in/yaml.v2
   rev: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
