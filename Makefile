@@ -1,46 +1,64 @@
+include .bingo/Variables.mk
+
+SHELL := bash
+NAME := redirects
+IMPORT := github.com/webhippie/$(NAME)
+BIN := bin
 DIST := dist
-IMPORT := github.com/webhippie/redirects
 
 ifeq ($(OS), Windows_NT)
-	EXECUTABLE := redirects.exe
+	EXECUTABLE := $(NAME).exe
+	UNAME := Windows
 else
-	EXECUTABLE := redirects
+	EXECUTABLE := $(NAME)
+	UNAME := $(shell uname -s)
 endif
 
-SHA := $(shell git rev-parse --short HEAD)
-DATE := $(shell date -u '+%Y%m%d')
-LDFLAGS += -s -w -extldflags "-static" -X "$(IMPORT)/config.VersionDev=$(SHA)" -X "$(IMPORT)/config.VersionDate=$(DATE)"
+GOBUILD ?= CGO_ENABLED=0 go build
+PACKAGES ?= $(shell go list ./...)
+SOURCES ?= $(shell find . -name "*.go" -type f)
+GENERATE ?= $(PACKAGES)
 
-TARGETS ?= linux/*,darwin/*,windows/*
-PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
-SOURCES ?= $(shell find . -name "*.go" -type f -not -path "./vendor/*")
+TAGS ?= netgo
 
-TAGS ?=
-
-ifneq ($(DRONE_TAG),)
-	VERSION ?= $(subst v,,$(DRONE_TAG))
-else
-	ifneq ($(DRONE_BRANCH),)
-		VERSION ?= $(subst release/v,,$(DRONE_BRANCH))
+ifndef OUTPUT
+	ifeq ($(GITHUB_REF_TYPE), tag)
+		OUTPUT ?= $(subst v,,$(GITHUB_REF_NAME))
 	else
-		VERSION ?= master
+		OUTPUT ?= testing
 	endif
 endif
+
+ifndef VERSION
+	ifeq ($(GITHUB_REF_TYPE), tag)
+		VERSION ?= $(subst v,,$(GITHUB_REF_NAME))
+	else
+		VERSION ?= $(shell git rev-parse --short HEAD)
+	endif
+endif
+
+ifndef DATE
+	DATE := $(shell date -u '+%Y%m%d')
+endif
+
+ifndef SHA
+	SHA := $(shell git rev-parse --short HEAD)
+endif
+
+LDFLAGS += -s -w -extldflags "-static" -X "$(IMPORT)/pkg/version.String=$(VERSION)" -X "$(IMPORT)/pkg/version.Revision=$(SHA)" -X "$(IMPORT)/pkg/version.Date=$(DATE)"
+GCFLAGS += all=-N -l
 
 .PHONY: all
 all: build
 
-.PHONY: update
-update:
-	@which govend > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/govend/govend; \
-	fi
-	govend -vtlu --prune
+.PHONY: sync
+sync:
+	go mod download
 
 .PHONY: clean
 clean:
 	go clean -i ./...
-	rm -rf $(EXECUTABLE) $(DIST)
+	rm -rf $(BIN) $(DIST)
 
 .PHONY: fmt
 fmt:
@@ -50,144 +68,125 @@ fmt:
 vet:
 	go vet $(PACKAGES)
 
-.PHONY: misspell
-misspell:
-	@which misspell > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/client9/misspell/cmd/misspell; \
-	fi
-	misspell $(SOURCES)
+.PHONY: staticcheck
+staticcheck: $(STATICCHECK)
+	$(STATICCHECK) -tags '$(TAGS)' $(PACKAGES)
+
+.PHONY: lint
+lint: $(GOLINT)
+	for PKG in $(PACKAGES); do $(GOLINT) -set_exit_status $$PKG || exit 1; done;
 
 .PHONY: generate
 generate:
-	@which fileb0x > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/UnnoTed/fileb0x; \
-	fi
-	go generate $(PACKAGES)
+	go generate $(GENERATE)
 
-.PHONY: staticcheck
-staticcheck:
-	@which staticcheck > /dev/null; if [ $$? -ne 0 ]; then \
-		go get honnef.co/go/staticcheck/cmd/staticcheck; \
-	fi
-	staticcheck $(PACKAGES)
-
-.PHONY: errcheck
-errcheck:
-	@which errcheck > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/kisielk/errcheck; \
-	fi
-	errcheck $(PACKAGES)
-
-.PHONY: varcheck
-varcheck:
-	@which varcheck > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/opennota/check/cmd/varcheck; \
-	fi
-	varcheck $(PACKAGES)
-
-.PHONY: structcheck
-structcheck:
-	@which structcheck > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/opennota/check/cmd/structcheck; \
-	fi
-	structcheck $(PACKAGES)
-
-.PHONY: unconvert
-unconvert:
-	@which unconvert > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/mdempsky/unconvert; \
-	fi
-	unconvert $(PACKAGES)
-
-.PHONY: interfacer
-interfacer:
-	@which interfacer > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/mvdan/interfacer/cmd/interfacer; \
-	fi
-	interfacer $(PACKAGES)
-
-.PHONY: ineffassign
-ineffassign:
-	@which ineffassign > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/gordonklaus/ineffassign; \
-	fi
-	ineffassign .
-
-.PHONY: dupl
-dupl:
-	@which dupl > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/mibk/dupl; \
-	fi
-	dupl .
-
-.PHONY: lint
-lint:
-	@which golint > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/golang/lint/golint; \
-	fi
-	for PKG in $(PACKAGES); do golint -set_exit_status $$PKG || exit 1; done;
+.PHONY: changelog
+changelog: $(CALENS)
+	$(CALENS) >| CHANGELOG.md
 
 .PHONY: test
 test:
-	for PKG in $(PACKAGES); do go test -cover -coverprofile $$GOPATH/src/$$PKG/coverage.out $$PKG || exit 1; done;
-
-.PHONY: test-yaml
-test-yaml:
-	@echo "Not integrated yet!"
-
-.PHONY: test-json
-test-json:
-	@echo "Not integrated yet!"
-
-.PHONY: test-etcd
-test-etcd:
-	@echo "Not integrated yet!"
-
-.PHONY: test-consul
-test-consul:
-	@echo "Not integrated yet!"
-
-.PHONY: test-zookeeper
-test-zookeeper:
-	@echo "Not integrated yet!"
-
-.PHONY: check
-check: test
+	go test -coverprofile coverage.out $(PACKAGES)
 
 .PHONY: install
 install: $(SOURCES)
-	go install -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)'
+	go install -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' ./cmd/$(NAME)
 
 .PHONY: build
-build: $(EXECUTABLE)
+build: $(BIN)/$(EXECUTABLE)
 
-$(EXECUTABLE): $(SOURCES)
-	go build -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@
+$(BIN)/$(EXECUTABLE): $(SOURCES)
+	$(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(BIN)/$(EXECUTABLE)-debug: $(SOURCES)
+	$(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -gcflags '$(GCFLAGS)' -o $@ ./cmd/$(NAME)
 
 .PHONY: release
-release: release-dirs release-build release-copy release-check
+release: $(DIST) release-linux release-darwin release-windows release-checksum
 
-.PHONY: release-dirs
-release-dirs:
-	mkdir -p $(DIST)/binaries $(DIST)/release
+$(DIST):
+	mkdir -p $(DIST)
 
-.PHONY: release-build
-release-build:
-	@which xgo > /dev/null; if [ $$? -ne 0 ]; then \
-		go get -u github.com/karalabe/xgo; \
-	fi
-	xgo -dest $(DIST)/binaries -tags '$(TAGS)' -ldflags '-s -w $(LDFLAGS)' -targets '$(TARGETS)' -out $(EXECUTABLE)-$(VERSION) $(IMPORT)
-ifeq ($(CI),drone)
-	mv /build/* $(DIST)/binaries
-endif
+.PHONY: release-linux
+release-linux: $(DIST) \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-386 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-amd64 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm-5 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm-6 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm-7 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm64 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mips \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mips64 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mipsle \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mips64le
 
-.PHONY: release-copy
-release-copy:
-	$(foreach file,$(wildcard $(DIST)/binaries/$(EXECUTABLE)-*),cp $(file) $(DIST)/release/$(notdir $(file));)
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-386:
+	GOOS=linux GOARCH=386 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
 
-.PHONY: release-check
-release-check:
-	cd $(DIST)/release; $(foreach file,$(wildcard $(DIST)/release/$(EXECUTABLE)-*),sha256sum $(notdir $(file)) > $(notdir $(file)).sha256;)
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-amd64:
+	GOOS=linux GOARCH=amd64 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
 
-.PHONY: publish
-publish: release
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm-5:
+	GOOS=linux GOARCH=arm GOARM=5 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm-6:
+	GOOS=linux GOARCH=arm GOARM=6 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm-7:
+	GOOS=linux GOARCH=arm GOARM=7 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-arm64:
+	GOOS=linux GOARCH=arm64 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mips:
+	GOOS=linux GOARCH=mips $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mips64:
+	GOOS=linux GOARCH=mips64 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mipsle:
+	GOOS=linux GOARCH=mipsle $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-linux-mips64le:
+	GOOS=linux GOARCH=mips64le $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+.PHONY: release-darwin
+release-darwin: $(DIST) \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-darwin-amd64 \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-darwin-arm64
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-darwin-amd64:
+	GOOS=darwin GOARCH=amd64 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-darwin-arm64:
+	GOOS=darwin GOARCH=arm64 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+.PHONY: release-windows
+release-windows: $(DIST) \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-windows-4.0-386.exe \
+	$(DIST)/$(EXECUTABLE)-$(OUTPUT)-windows-4.0-amd64.exe
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-windows-4.0-386.exe:
+	GOOS=windows GOARCH=386 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+$(DIST)/$(EXECUTABLE)-$(OUTPUT)-windows-4.0-amd64.exe:
+	GOOS=windows GOARCH=amd64 $(GOBUILD) -v -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $@ ./cmd/$(NAME)
+
+.PHONY: release-reduce
+release-reduce:
+	cd $(DIST); $(foreach file,$(wildcard $(DIST)/$(EXECUTABLE)-*),upx $(notdir $(file));)
+
+.PHONY: release-checksum
+release-checksum:
+	cd $(DIST); $(foreach file,$(wildcard $(DIST)/$(EXECUTABLE)-*),sha256sum $(notdir $(file)) > $(notdir $(file)).sha256;)
+
+.PHONY: release-finish
+release-finish: release-reduce release-checksum
+
+.PHONY: docs
+docs:
+	hugo -s docs/
+
+.PHONY: watch
+watch: $(REFLEX)
+	$(REFLEX) -c reflex.conf

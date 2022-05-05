@@ -1,5 +1,17 @@
-# Changelog
+# Changelog for unreleased
 
-## [0.1.0](https://github.com/webhippie/redirects/releases/tag/v0.1.0) - 2017-04-26
+The following sections list the changes for unreleased.
 
-* Initial release
+## Summary
+
+ * Chg #25: Initial release of basic version
+
+## Details
+
+ * Change #25: Initial release of basic version
+
+   Just prepared an initial basic version which could be released to the public.
+
+   https://github.com/webhippie/redirects/issues/25
+
+

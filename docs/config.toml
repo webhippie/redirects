@@ -1,0 +1,19 @@
+baseURL = "https://webhippie.github.io/redirects/"
+languageCode = "en-us"
+title = "Redirects"
+pygmentsUseClasses = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[blackfriday]
+  angledQuotes = true
+  fractions = false
+  plainIDAnchors = true
+  smartlists = true
+  extensions = ["hardLineBreak"]
+
+[params]
+  author = "Thomas Boerger"
+  description = "Simple pattern-based redirect server"
+  keywords = "redirects, server, pattern, webserver"

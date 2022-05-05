@@ -1,52 +1,59 @@
 # Redirects
 
-[![Build Status](http://github.dronehippie.de/api/badges/webhippie/redirects/status.svg)](http://github.dronehippie.de/webhippie/redirects)
-[![Go Doc](https://godoc.org/github.com/webhippie/redirects?status.svg)](http://godoc.org/github.com/webhippie/redirects)
-[![Go Report](http://goreportcard.com/badge/github.com/webhippie/redirects)](http://goreportcard.com/report/github.com/webhippie/redirects)
-[![](https://images.microbadger.com/badges/image/tboerger/redirects.svg)](http://microbadger.com/images/tboerger/redirects "Get your own image badge on microbadger.com")
-[![Join the chat at https://gitter.im/webhippie/general](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/webhippie/general)
-[![Stories in Ready](https://badge.waffle.io/webhippie/redirects.svg?label=ready&title=Ready)](http://waffle.io/webhippie/redirects)
+[![Current Tag](https://img.shields.io/github/v/tag/webhippie/redirects?sort=semver)](https://github.com/webhippie/redirects) [![Build Status](https://github.com/webhippie/redirects/actions/workflows/general.yml/badge.svg)](https://github.com/webhippie/redirects/actions) [![Join the Matrix chat at https://matrix.to/#/#webhippie:matrix.org](https://img.shields.io/badge/matrix-%23webhippie-7bc9a4.svg)](https://matrix.to/#/#webhippie:matrix.org) [![Docker Size](https://img.shields.io/docker/image-size/webhippie/redirects/latest)](https://hub.docker.com/r/webhippie/redirects) [![Docker Pulls](https://img.shields.io/docker/pulls/webhippie/redirects)](https://hub.docker.com/r/webhippie/redirects) [![Go Reference](https://pkg.go.dev/badge/github.com/webhippie/redirects.svg)](https://pkg.go.dev/github.com/webhippie/redirects) [![Go Report Card](https://goreportcard.com/badge/github.com/webhippie/redirects)](https://goreportcard.com/report/github.com/webhippie/redirects) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c33cdacbc6ed40beaf1f2a0a6d72718b)](https://www.codacy.com/gh/webhippie/redirects/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=webhippie/redirects&amp;utm_campaign=Badge_Grade)
 
-**This project is under heavy development, it's not in a working state yet!**
-
-Redirects is a pretty simple pattern-based redirect server. It supports different kinds of backends to store the patterns like JSON, YAML, TOML, Etcd, Consul and Zookeeper. We are using it mostly as a default route for our reverse proxy like [Træfɪk](https://traefik.io/).
-
+Redirects is a pretty simple pattern-based redirect server. It supports
+different kinds of backends to store the patterns like JSON, YAML, TOML, Etcd,
+Consul and Zookeeper. We are using it mostly as a default route for our reverse
+proxy like [Træfɪk](https://traefik.io/).
 
 ## Install
 
-You can download prebuilt binaries from the GitHub releases or from our [download site](http://dl.webhippie.de/misc/redirects). You are a Mac user? Just take a look at our [homebrew formula](https://github.com/webhippie/homebrew-webhippie). If you are missing an architecture just write us on our nice [Gitter](https://gitter.im/webhippie/general) chat. If you find a security issue please contact thomas@webhippie.de first.
-
+You can download prebuilt binaries from our [GitHub releases][releases], or you
+can use our Docker images published on [Docker Hub][dockerhub] or [Quay][quay].
+If you need further guidance how to install this take a look at our
+[documentation][docs].
 
 ## Development
 
-Make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](http://golang.org/doc/install.html). As this project relies on vendoring of the dependencies and we are not exporting `GO15VENDOREXPERIMENT=1` within our makefile you have to use a Go version `>= 1.6`. It is also possible to just simply execute the `go get github.com/webhippie/redirects` command, but we prefer to use our `Makefile`:
+Make sure you have a working Go environment, for further reference or a guide
+take a look at the [install instructions][golang]. This project requires
+Go >= v1.17, at least that's the version we are using.
 
-```bash
-go get -d github.com/webhippie/redirects
-cd $GOPATH/src/github.com/webhippie/redirects
-make clean build
+```console
+git clone https://github.com/webhippie/redirects.git
+cd redirects
 
-./redirects -h
+make generate build
+
+./bin/redirects -h
 ```
 
+## Security
+
+If you find a security issue please contact
+[thomas@webhippie.de](mailto:thomas@webhippie.de) first.
 
 ## Contributing
 
 Fork -> Patch -> Push -> Pull Request
 
-
 ## Authors
 
-* [Thomas Boerger](https://github.com/tboerger)
-
+-   [Thomas Boerger](https://github.com/tboerger)
 
 ## License
 
 Apache-2.0
 
-
 ## Copyright
 
-```
+```console
 Copyright (c) 2017 Thomas Boerger <thomas@webhippie.de>
 ```
+
+[releases]: https://github.com/webhippie/redirects/releases
+[dockerhub]: https://hub.docker.com/r/webhippie/redirects/tags/
+[quay]: https://quay.io/repository/webhippie/redirects?tab=tags
+[docs]: https://webhippie.github.io/redirects/#getting-started
+[golang]: http://golang.org/doc/install.html
