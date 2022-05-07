@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://webhippie.github.io/redirects/about/</loc>
+    <lastmod>2022-05-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://webhippie.github.io/redirects/getting-started/</loc>
+    <lastmod>2022-05-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://webhippie.github.io/redirects/building/</loc>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://webhippie.github.io/redirects/license/</loc>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://webhippie.github.io/redirects/categories/</loc>
+  </url><url>
+    <loc>https://webhippie.github.io/redirects/</loc>
+  </url><url>
+    <loc>https://webhippie.github.io/redirects/tags/</loc>
+  </url>
+</urlset>
