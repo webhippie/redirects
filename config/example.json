@@ -1,0 +1,68 @@
+{
+    "server": {
+        "addr": "0.0.0.0:8080",
+        "host": "http://localhost:8080",
+        "pprof": false,
+        "root": "/",
+        "cert": "",
+        "key": "",
+        "strict_curves": false,
+        "strict_ciphers": false,
+        "templates": ""
+    },
+    "metrics": {
+        "addr": "0.0.0.0:8081",
+        "token": ""
+    },
+    "log": {
+        "level": "info",
+        "pretty": true,
+        "color": true
+    },
+    "yaml": {
+        "enabled": false,
+        "file": "file://storage/redirects.yaml"
+    },
+    "json": {
+        "enabled": false,
+        "file": "file://storage/redirects.json"
+    },
+    "toml": {
+        "enabled": false,
+        "file": "file://storage/redirects.toml"
+    },
+    "zk": {
+        "enabled": false,
+        "endpoints": [
+            "127.0.0.1:2181"
+        ],
+        "timeout": "10s",
+        "prefix": "/redirects",
+    },
+    "etcd": {
+        "enabled": false,
+        "endpoints": [
+            "127.0.0.1:2379"
+        ],
+        "timeout": "10s",
+        "prefix": "/redirects",
+        "username": "",
+        "password": "",
+        "ca": "",
+        "cert": "",
+        "key": "",
+        "skip_verify": false
+    },
+    "consul": {
+        "enabled": false,
+        "endpoints": [
+            "127.0.0.1:8500"
+        ],
+        "timeout": "10s",
+        "prefix": "/redirects",
+        "ca": "",
+        "cert": "",
+        "key": "",
+        "skip_verify": false
+    }
+}
