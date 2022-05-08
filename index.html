@@ -426,10 +426,13 @@ can choose between <a href="https://www.docker.com/">Docker</a> or pre-built bin
 our download mirror and GitHub releases. Maybe we will also provide system
 packages for the major distributions later if we see the need for it.</p>
 <h3 id="docker">Docker</h3>
-<p>TBD</p>
+<p>Generally we are offering the images through
+<a href="https://quay.io/repository/webhippie/redirects">quay.io/webhippie/redirects</a> and <a href="https://hub.docker.com/r/webhippie/redirects">webhippie/redirects</a>, so
+feel free to choose one of the providers. Maybe we will come up with Kustomize
+manifests or some Helm chart.</p>
 <h3 id="binaries">Binaries</h3>
 <p>Simply download a binary matching your operating system and your architecture
-from our <a href="https://dl.webhippie.de/">downloads</a> or the GitHub releases and place it within your
+from our <a href="https://dl.webhippie.de/#redirects/">downloads</a> or the GitHub releases and place it within your
 path like <code>/usr/local/bin</code> if you are using macOS or Linux.</p>
 <h2 id="configuration">Configuration</h2>
 <p>We provide overall three different variants of configuration. The variant based
@@ -440,24 +443,200 @@ and command-specific values.</p>
 the available variables below.</p>
 <h4 id="global">Global</h4>
 <dl>
+<dt>REDIRECTS_CONFIG_FILE</dt>
+<dd>Path to optional config file</dd>
 <dt>REDIRECTS_LOG_LEVEL</dt>
 <dd>Set logging level, defaults to <code>info</code></dd>
 <dt>REDIRECTS_LOG_COLOR</dt>
 <dd>Enable colored logging, defaults to <code>true</code></dd>
 <dt>REDIRECTS_LOG_PRETTY</dt>
 <dd>Enable pretty logging, defaults to <code>true</code></dd>
+<dt>REDIRECTS_YAML_ENABLED</dt>
+<dd>Enable YAML storage, defaults to <code>false</code></dd>
+<dt>REDIRECTS_YAML_FILE</dt>
+<dd>Define YAML storage file, defaults to <code>file://storage/redirects.yaml</code></dd>
+<dt>REDIRECTS_JSON_ENABLED</dt>
+<dd>Enable JSON storage, defaults to <code>false</code></dd>
+<dt>REDIRECTS_JSON_FILE</dt>
+<dd>Define JSON storage file, defaults to <code>file://storage/redirects.json</code></dd>
+<dt>REDIRECTS_TOML_ENABLED</dt>
+<dd>Enable TOML storage, defaults to <code>false</code></dd>
+<dt>REDIRECTS_TOML_FILE</dt>
+<dd>Define TOML storage file, defaults to <code>file://storage/redirects.toml</code></dd>
+<dt>REDIRECTS_ZK_ENABLED</dt>
+<dd>Enable Zookeeper storage, defaults to <code>false</code></dd>
+<dt>REDIRECTS_ZK_ENDPOINT</dt>
+<dd>Used Zookeeper endpoints, defaults to <code>127.0.0.1:2181</code>, comma-separated for multiple endpoints</dd>
+<dt>REDIRECTS_ZK_TIMEOUT</dt>
+<dd>Connection timeout for Zookeeper storage, defaults to <code>10s</code></dd>
+<dt>REDIRECTS_ZK_PREFIX</dt>
+<dd>Define Zookeeper storage prefix, defaults to <code>/redirects</code></dd>
+<dt>REDIRECTS_ETCD_ENABLED</dt>
+<dd>Enable Etcd storage, defaults to <code>false</code></dd>
+<dt>REDIRECTS_ETCD_ENDPOINT</dt>
+<dd>Used Etcd endpoints, defaults to <code>127.0.0.1:2379</code>, comma-separated for multiple endpoints</dd>
+<dt>REDIRECTS_ETCD_TIMEOUT</dt>
+<dd>Connection timeout for Etcd storage, defaults to <code>10s</code></dd>
+<dt>REDIRECTS_ETCD_PREFIX</dt>
+<dd>Define Etcd storage prefix, defaults to <code>/redirects</code></dd>
+<dt>REDIRECTS_ETCD_USERNAME</dt>
+<dd>Username to access Etcd</dd>
+<dt>REDIRECTS_ETCD_PASSWORD</dt>
+<dd>Password to access Etcd</dd>
+<dt>REDIRECTS_ETCD_CA</dt>
+<dd>Path to CA cert to access Etcd</dd>
+<dt>REDIRECTS_ETCD_CERT</dt>
+<dd>Path to SSL certificate to access Etcd</dd>
+<dt>REDIRECTS_ETCD_KEY</dt>
+<dd>Path to SSL key to access Etcd</dd>
+<dt>REDIRECTS_ETCD_SKIP_VERIFY</dt>
+<dd>Skip SSL verification for Etcd, defaults to <code>false</code></dd>
+<dt>REDIRECTS_CONSUL_ENABLED</dt>
+<dd>Enable Consul storage, defaults to <code>false</code></dd>
+<dt>REDIRECTS_CONSUL_ENDPOINT</dt>
+<dd>Used Consul endpoints, defaults to <code>127.0.0.1:8500</code>, somma-separated for multiple endpoints</dd>
+<dt>REDIRECTS_CONSUL_TIMEOUT</dt>
+<dd>Connection timeout for Consul storage, defaults to <code>10s</code></dd>
+<dt>REDIRECTS_CONSUL_PREFIX</dt>
+<dd>Define Consul storage prefix, defaults to <code>/redirects</code></dd>
+<dt>REDIRECTS_CONSUL_CA</dt>
+<dd>Path to CA cert to access Consul</dd>
+<dt>REDIRECTS_CONSUL_CERT</dt>
+<dd>Path to SSL certificate to access Consul</dd>
+<dt>REDIRECTS_CONSUL_KEY</dt>
+<dd>Path to SSL key to access Consul</dd>
+<dt>REDIRECTS_CONSUL_SKIP_VERIFY</dt>
+<dd>Skip SSL verification for Consul, defaults to <code>false</code></dd>
+</dl>
+<h4 id="server">Server</h4>
+<dl>
+<dt>REDIRECTS_METRICS_ADDR</dt>
+<dd>Address to bind the metrics, defaults to <code>0.0.0.0:8081</code></dd>
+<dt>REDIRECTS_METRICS_TOKEN</dt>
+<dd>Token to make metrics secure</dd>
+<dt>REDIRECTS_SERVER_ADDR</dt>
+<dd>Address to bind the server, defaults to <code>0.0.0.0:8080</code></dd>
+<dt>REDIRECTS_SERVER_PPROF</dt>
+<dd>Enable pprof debugging, defaults to <code>false</code></dd>
+<dt>REDIRECTS_SERVER_ROOT</dt>
+<dd>Root path of the server, defaults to <code>/</code></dd>
+<dt>REDIRECTS_SERVER_HOST</dt>
+<dd>External access to server, defaults to <code>http://localhost:8080</code></dd>
+<dt>REDIRECTS_SERVER_CERT</dt>
+<dd>Path to cert for SSL encryption</dd>
+<dt>REDIRECTS_SERVER_KEY</dt>
+<dd>Path to key for SSL encryption</dd>
+<dt>REDIRECTS_SERVER_STRICT_CURVES</dt>
+<dd>Use strict SSL curves, defaults to <code>false</code></dd>
+<dt>REDIRECTS_SERVER_STRICT_CIPHERS</dt>
+<dd>Use strict SSL ciphers, defaults to <code>false</code></dd>
+<dt>REDIRECTS_SERVER_TEMPLATES</dt>
+<dd>Folder for custom templates</dd>
+</dl>
+<h4 id="health">Health</h4>
+<dl>
+<dt>REDIRECTS_METRICS_ADDR</dt>
+<dd>Address to bind the metrics, defaults to <code>0.0.0.0:8081</code></dd>
 </dl>
 <h3 id="commandline-flags">Commandline flags</h3>
 <p>If you prefer to configure the service with commandline flags you can see the
 available variables below.</p>
 <h4 id="global-1">Global</h4>
 <dl>
+<dt>&ndash;config-file</dt>
+<dd>Path to optional config file</dd>
 <dt>&ndash;log-level</dt>
 <dd>Set logging level, defaults to <code>info</code></dd>
 <dt>&ndash;log-color</dt>
 <dd>Enable colored logging, defaults to <code>true</code></dd>
 <dt>&ndash;log-pretty</dt>
 <dd>Enable pretty logging, defaults to <code>true</code></dd>
+<dt>&ndash;yaml-enabled</dt>
+<dd>Enable YAML storage, defaults to <code>false</code></dd>
+<dt>&ndash;yaml-file</dt>
+<dd>Define YAML storage file, defaults to <code>file://storage/redirects.yaml</code></dd>
+<dt>&ndash;json-enabled</dt>
+<dd>Enable JSON storage, defaults to <code>false</code></dd>
+<dt>&ndash;json-file</dt>
+<dd>Define JSON storage file, defaults to <code>file://storage/redirects.json</code></dd>
+<dt>&ndash;toml-enabled</dt>
+<dd>Enable TOML storage, defaults to <code>false</code></dd>
+<dt>&ndash;toml-file</dt>
+<dd>Define TOML storage file, defaults to <code>file://storage/redirects.toml</code></dd>
+<dt>&ndash;zk-enabled</dt>
+<dd>Enable Zookeeper storage, defaults to <code>false</code></dd>
+<dt>&ndash;zk-endpoint</dt>
+<dd>Used Zookeeper endpoints, defaults to <code>127.0.0.1:2181</code>, repeat for multiple endpoints</dd>
+<dt>&ndash;zk-timeout</dt>
+<dd>Connection timeout for Zookeeper storage, defaults to <code>10s</code></dd>
+<dt>&ndash;zk-prefix</dt>
+<dd>Define Zookeeper storage prefix, defaults to <code>/redirects</code></dd>
+<dt>&ndash;etcd-enabled</dt>
+<dd>Enable Etcd storage, defaults to <code>false</code></dd>
+<dt>&ndash;etcd-endpoint</dt>
+<dd>Used Etcd endpoints, defaults to <code>127.0.0.1:2379</code>, repeat for multiple endpoints</dd>
+<dt>&ndash;etcd-timeout</dt>
+<dd>Connection timeout for Etcd storage, defaults to <code>10s</code></dd>
+<dt>&ndash;etcd-prefix</dt>
+<dd>Define Etcd storage prefix, defaults to <code>/redirects</code></dd>
+<dt>&ndash;etcd-username</dt>
+<dd>Username to access Etcd</dd>
+<dt>&ndash;etcd-password</dt>
+<dd>Password to access Etcd</dd>
+<dt>&ndash;etcd-ca</dt>
+<dd>Path to CA cert to access Etcd</dd>
+<dt>&ndash;etcd-cert</dt>
+<dd>Path to SSL certificate to access Etcd</dd>
+<dt>&ndash;etcd-key</dt>
+<dd>Path to SSL key to access Etcd</dd>
+<dt>&ndash;etcd-skip-verify</dt>
+<dd>Skip SSL verification for Etcd, defaults to <code>false</code></dd>
+<dt>&ndash;consul-enabled</dt>
+<dd>Enable Consul storage, defaults to <code>false</code></dd>
+<dt>&ndash;consul-endpoint</dt>
+<dd>Used Consul endpoints, defaults to <code>127.0.0.1:8500</code>, repeat for multiple endpoints</dd>
+<dt>&ndash;consul-timeout</dt>
+<dd>Connection timeout for Consul storage, defaults to <code>10s</code></dd>
+<dt>&ndash;consul-prefix</dt>
+<dd>Define Consul storage prefix, defaults to <code>/redirects</code></dd>
+<dt>&ndash;consul-ca</dt>
+<dd>Path to CA cert to access Consul</dd>
+<dt>&ndash;consul-cert</dt>
+<dd>Path to SSL certificate to access Consul</dd>
+<dt>&ndash;consul-key</dt>
+<dd>Path to SSL key to access Consul</dd>
+<dt>&ndash;consul-skip-verify</dt>
+<dd>Skip SSL verification for Consul, defaults to <code>false</code></dd>
+</dl>
+<h4 id="server-1">Server</h4>
+<dl>
+<dt>&ndash;metrics-addr</dt>
+<dd>Address to bind the metrics, defaults to <code>0.0.0.0:8081</code></dd>
+<dt>&ndash;metrics-token</dt>
+<dd>Token to make metrics secure</dd>
+<dt>&ndash;server-addr</dt>
+<dd>Address to bind the server, defaults to <code>0.0.0.0:8080</code></dd>
+<dt>&ndash;server-pprof</dt>
+<dd>Enable pprof debugging, defaults to <code>false</code></dd>
+<dt>&ndash;server-root</dt>
+<dd>Root path of the server, defaults to <code>/</code></dd>
+<dt>&ndash;server-host</dt>
+<dd>External access to server, defaults to <code>http://localhost:8080</code></dd>
+<dt>&ndash;server-cert</dt>
+<dd>Path to cert for SSL encryption</dd>
+<dt>&ndash;server-key</dt>
+<dd>Path to key for SSL encryption</dd>
+<dt>&ndash;strict-curves</dt>
+<dd>Use strict SSL curves, defaults to <code>false</code></dd>
+<dt>&ndash;strict-ciphers</dt>
+<dd>Use strict SSL ciphers, defaults to <code>false</code></dd>
+<dt>&ndash;templates-path</dt>
+<dd>Folder for custom templates</dd>
+</dl>
+<h4 id="health-1">Health</h4>
+<dl>
+<dt>&ndash;metrics-addr</dt>
+<dd>Address to bind the metrics, defaults to <code>0.0.0.0:8081</code></dd>
 </dl>
 <h3 id="configuration-file">Configuration file</h3>
 <p>So far we support multiple file formats like <code>json</code> or <code>yaml</code>, if you want to
