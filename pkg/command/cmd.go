@@ -111,8 +111,8 @@ func init() {
 	viper.BindPFlag("zk.enabled", rootCmd.PersistentFlags().Lookup("zk-enabled"))
 
 	rootCmd.PersistentFlags().StringSlice("zk-endpoint", defaultZkEndpoints, "Used Zookeeper endpoints")
-	viper.SetDefault("zk.endpoint", defaultZkEndpoints)
-	viper.BindPFlag("zk.endpoint", rootCmd.PersistentFlags().Lookup("zk-endpoint"))
+	viper.SetDefault("zk.endpoints", defaultZkEndpoints)
+	viper.BindPFlag("zk.endpoints", rootCmd.PersistentFlags().Lookup("zk-endpoint"))
 
 	rootCmd.PersistentFlags().Duration("zk-timeout", defaultZkTimeout, "Connection timeout for Zookeeper storage")
 	viper.SetDefault("zk.timeout", defaultZkTimeout)
@@ -127,8 +127,8 @@ func init() {
 	viper.BindPFlag("etcd.enabled", rootCmd.PersistentFlags().Lookup("etcd-enabled"))
 
 	rootCmd.PersistentFlags().StringSlice("etcd-endpoint", defaultEtcdEndpoints, "Used Etcd endpoints")
-	viper.SetDefault("etcd.endpoint", defaultEtcdEndpoints)
-	viper.BindPFlag("etcd.endpoint", rootCmd.PersistentFlags().Lookup("etcd-endpoint"))
+	viper.SetDefault("etcd.endpoints", defaultEtcdEndpoints)
+	viper.BindPFlag("etcd.endpoints", rootCmd.PersistentFlags().Lookup("etcd-endpoint"))
 
 	rootCmd.PersistentFlags().Duration("etcd-timeout", defaultEtcdTimeout, "Connection timeout for Etcd storage")
 	viper.SetDefault("etcd.timeout", defaultEtcdTimeout)
@@ -167,8 +167,8 @@ func init() {
 	viper.BindPFlag("consul.enabled", rootCmd.PersistentFlags().Lookup("consul-enabled"))
 
 	rootCmd.PersistentFlags().StringSlice("consul-endpoint", defaultConsulEndpoints, "Used Consul endpoints")
-	viper.SetDefault("consul.endpoint", defaultConsulEndpoints)
-	viper.BindPFlag("consul.endpoint", rootCmd.PersistentFlags().Lookup("consul-endpoint"))
+	viper.SetDefault("consul.endpoints", defaultConsulEndpoints)
+	viper.BindPFlag("consul.endpoints", rootCmd.PersistentFlags().Lookup("consul-endpoint"))
 
 	rootCmd.PersistentFlags().Duration("consul-timeout", defaultConsulTimeout, "Connection timeout for Consul storage")
 	viper.SetDefault("consul.timeout", defaultConsulTimeout)
