@@ -3,7 +3,7 @@ RUN apk add --no-cache ca-certificates mailcap
 
 FROM scratch
 
-EXPOSE 8080
+EXPOSE 8080 8081
 VOLUME ["/var/lib/redirects"]
 ENTRYPOINT ["/usr/bin/redirects"]
 CMD ["server"]
