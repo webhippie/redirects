@@ -5,6 +5,7 @@ The following sections list the changes for unreleased.
 ## Summary
 
  * Chg #67: Use Alpine base image and define healthcheck
+ * Chg #76: Replace libkv by valkeyrie
 
 ## Details
 
@@ -15,6 +16,13 @@ The following sections list the changes for unreleased.
    healthcheck command to the Dockerfile for having a proper handling by default.
 
    https://github.com/webhippie/redirects/pull/67
+
+ * Change #76: Replace libkv by valkeyrie
+
+   We switched the library powering the support for etcd, zookeper and consul by a better
+   maintained alternative named valkeyrie.
+
+   https://github.com/webhippie/redirects/issues/76
 
 
 # Changelog for 1.0.1
