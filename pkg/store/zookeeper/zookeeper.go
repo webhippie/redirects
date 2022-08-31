@@ -7,22 +7,22 @@ import (
 	"strings"
 	"time"
 
-	"github.com/docker/libkv"
-	libkvStore "github.com/docker/libkv/store"
-	"github.com/docker/libkv/store/zookeeper"
+	"github.com/kvtools/valkeyrie"
+	valkeyrieStore "github.com/kvtools/valkeyrie/store"
+	"github.com/kvtools/valkeyrie/store/zookeeper"
 	"github.com/webhippie/redirects/pkg/config"
 	"github.com/webhippie/redirects/pkg/model"
 	"github.com/webhippie/redirects/pkg/store"
 )
 
-// init simply registers Zookeeper on the libkv library.
+// init simply registers Zookeeper on the valkeyrie library.
 func init() {
 	zookeeper.Register()
 }
 
 // data is a basic struct that iplements the Store interface.
 type data struct {
-	store     libkvStore.Store
+	store     valkeyrieStore.Store
 	prefix    string
 	endpoints []string
 }
@@ -45,7 +45,7 @@ func (db *data) key(id string) string {
 // load parses all available records from the storage.
 func (db *data) load() ([]*model.Redirect, error) {
 	res := make([]*model.Redirect, 0)
-	records, err := db.store.List(db.prefix)
+	records, err := db.store.List(db.prefix, &valkeyrieStore.ReadOptions{})
 
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ func (db *data) load() ([]*model.Redirect, error) {
 }
 
 // New initializes a new Zookeeper store.
-func New(s libkvStore.Store, prefix string, endpoints []string) store.Store {
+func New(s valkeyrieStore.Store, prefix string, endpoints []string) store.Store {
 	return &data{
 		store:     s,
 		prefix:    prefix,
@@ -77,25 +77,25 @@ func New(s libkvStore.Store, prefix string, endpoints []string) store.Store {
 func Load(cfg *config.Zookeeper) (store.Store, error) {
 	prefix := cfg.Prefix
 
-	libkvConfig := &libkvStore.Config{
+	valkeyrieConfig := &valkeyrieStore.Config{
 		ConnectionTimeout: cfg.Timeout * time.Second,
 	}
 
-	s, err := libkv.NewStore(
-		libkvStore.ZK,
+	s, err := valkeyrie.NewStore(
+		valkeyrieStore.ZK,
 		cfg.Endpoints,
-		libkvConfig,
+		valkeyrieConfig,
 	)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to init store: %w", err)
 	}
 
-	if ok, _ := s.Exists(prefix); !ok {
+	if ok, _ := s.Exists(prefix, &valkeyrieStore.ReadOptions{}); !ok {
 		err := s.Put(
 			prefix,
 			nil,
-			&libkvStore.WriteOptions{
+			&valkeyrieStore.WriteOptions{
 				IsDir: true,
 			},
 		)

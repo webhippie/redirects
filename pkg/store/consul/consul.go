@@ -10,23 +10,23 @@ import (
 	"path"
 	"strings"
 
-	"github.com/docker/libkv"
-	libkvStore "github.com/docker/libkv/store"
-	"github.com/docker/libkv/store/consul"
 	"github.com/jackspirou/syscerts"
+	"github.com/kvtools/valkeyrie"
+	valkeyrieStore "github.com/kvtools/valkeyrie/store"
+	"github.com/kvtools/valkeyrie/store/consul"
 	"github.com/webhippie/redirects/pkg/config"
 	"github.com/webhippie/redirects/pkg/model"
 	"github.com/webhippie/redirects/pkg/store"
 )
 
-// init simply registers Consul on the libkv library.
+// init simply registers Consul on the valkeyrie library.
 func init() {
 	consul.Register()
 }
 
 // data is a basic struct that iplements the Store interface.
 type data struct {
-	store     libkvStore.Store
+	store     valkeyrieStore.Store
 	prefix    string
 	endpoints []string
 }
@@ -49,7 +49,7 @@ func (db *data) key(id string) string {
 // load parses all available records from the storage.
 func (db *data) load() ([]*model.Redirect, error) {
 	res := make([]*model.Redirect, 0)
-	records, err := db.store.List(db.prefix)
+	records, err := db.store.List(db.prefix, &valkeyrieStore.ReadOptions{})
 
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (db *data) load() ([]*model.Redirect, error) {
 }
 
 // New initializes a new Consul store.
-func New(s libkvStore.Store, prefix string, endpoints []string) store.Store {
+func New(s valkeyrieStore.Store, prefix string, endpoints []string) store.Store {
 	return &data{
 		store:     s,
 		prefix:    prefix,
@@ -81,7 +81,7 @@ func New(s libkvStore.Store, prefix string, endpoints []string) store.Store {
 func Load(cfg *config.Consul) (store.Store, error) {
 	prefix := cfg.Prefix
 
-	libkvConfig := &libkvStore.Config{
+	valkeyrieConfig := &valkeyrieStore.Config{
 		ConnectionTimeout: cfg.Timeout,
 	}
 
@@ -110,28 +110,28 @@ func Load(cfg *config.Consul) (store.Store, error) {
 			return nil, fmt.Errorf("failed to parse keypair: %w", err)
 		}
 
-		libkvConfig.TLS = &tls.Config{
+		valkeyrieConfig.TLS = &tls.Config{
 			Certificates:       []tls.Certificate{keypair},
 			RootCAs:            pool,
 			InsecureSkipVerify: cfg.SkipVerify,
 		}
 	}
 
-	s, err := libkv.NewStore(
-		libkvStore.CONSUL,
+	s, err := valkeyrie.NewStore(
+		valkeyrieStore.CONSUL,
 		cfg.Endpoints,
-		libkvConfig,
+		valkeyrieConfig,
 	)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to init store: %w", err)
 	}
 
-	if ok, _ := s.Exists(prefix); !ok {
+	if ok, _ := s.Exists(prefix, &valkeyrieStore.ReadOptions{}); !ok {
 		err := s.Put(
 			prefix,
 			nil,
-			&libkvStore.WriteOptions{
+			&valkeyrieStore.WriteOptions{
 				IsDir: true,
 			},
 		)

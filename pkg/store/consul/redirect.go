@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	valkeyrieStore "github.com/kvtools/valkeyrie/store"
 	uuid "github.com/satori/go.uuid"
 	"github.com/webhippie/redirects/pkg/model"
 	"github.com/webhippie/redirects/pkg/store"
@@ -35,7 +36,7 @@ func (db *data) GetRedirect(id string) (*model.Redirect, error) {
 func (db *data) DeleteRedirect(id string) error {
 	// TODO: Add distributed locking
 
-	if ok, _ := db.store.Exists(db.key(id)); !ok {
+	if ok, _ := db.store.Exists(db.key(id), &valkeyrieStore.ReadOptions{}); !ok {
 		return store.ErrRedirectNotFound
 	}
 
@@ -46,7 +47,7 @@ func (db *data) DeleteRedirect(id string) error {
 func (db *data) UpdateRedirect(update *model.Redirect) error {
 	// TODO: Add distributed locking
 
-	if ok, _ := db.store.Exists(db.key(update.ID)); !ok {
+	if ok, _ := db.store.Exists(db.key(update.ID), &valkeyrieStore.ReadOptions{}); !ok {
 		return store.ErrRedirectNotFound
 	}
 
