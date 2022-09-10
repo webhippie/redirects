@@ -1,6 +1,7 @@
 package command
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -26,7 +27,10 @@ func init() {
 }
 
 func removeAction(ccmd *cobra.Command, args []string) {
+	ctx := context.Background()
+
 	record, err := storage.GetRedirect(
+		ctx,
 		args[0],
 	)
 
@@ -34,7 +38,7 @@ func removeAction(ccmd *cobra.Command, args []string) {
 		cobra.CheckErr(fmt.Errorf("failed to find pattern: %w", err))
 	}
 
-	if err := storage.DeleteRedirect(record.ID); err != nil {
+	if err := storage.DeleteRedirect(ctx, record.ID); err != nil {
 		cobra.CheckErr(fmt.Errorf("failed to remove pattern: %w", err))
 	}
 }

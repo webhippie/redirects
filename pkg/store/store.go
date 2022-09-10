@@ -1,6 +1,7 @@
 package store
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/webhippie/redirects/pkg/model"
@@ -23,17 +24,17 @@ type Store interface {
 	Config() string
 
 	// GetRedirects retrieves all redirects from the store.
-	GetRedirects() ([]*model.Redirect, error)
+	GetRedirects(context.Context) ([]*model.Redirect, error)
 
 	// GetRedirect retrieves a specific redirect from the store.
-	GetRedirect(string) (*model.Redirect, error)
+	GetRedirect(context.Context, string) (*model.Redirect, error)
 
 	// DeleteRedirect deletes a redirect from the store.
-	DeleteRedirect(string) error
+	DeleteRedirect(context.Context, string) error
 
 	// CreateRedirect creates a redirect on the store.
-	CreateRedirect(*model.Redirect) error
+	CreateRedirect(context.Context, *model.Redirect) error
 
 	// UpdateRedirect updates a redirect on the store.
-	UpdateRedirect(*model.Redirect) error
+	UpdateRedirect(context.Context, *model.Redirect) error
 }

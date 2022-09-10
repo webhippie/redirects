@@ -1,6 +1,7 @@
 package command
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -43,7 +44,10 @@ func init() {
 }
 
 func showAction(ccmd *cobra.Command, args []string) {
+	ctx := context.Background()
+
 	record, err := storage.GetRedirect(
+		ctx,
 		args[0],
 	)
 

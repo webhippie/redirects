@@ -2,8 +2,8 @@ package toml
 
 import (
 	"bytes"
+	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -37,12 +37,12 @@ func (db *data) Config() string {
 }
 
 // load parses all available records from the storage.
-func (db *data) load() (*collection, error) {
+func (db *data) load(_ context.Context) (*collection, error) {
 	res := &collection{
 		Redirects: make([]*model.Redirect, 0),
 	}
 
-	content, err := ioutil.ReadFile(db.file)
+	content, err := os.ReadFile(db.file)
 
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (db *data) write(content *collection) error {
 		return err
 	}
 
-	if err := ioutil.WriteFile(db.file, buf.Bytes(), 0640); err != nil {
+	if err := os.WriteFile(db.file, buf.Bytes(), 0640); err != nil {
 		return err
 	}
 
@@ -96,7 +96,7 @@ func Load(cfg *config.TOML) (store.Store, error) {
 			}
 		}
 
-		if err := ioutil.WriteFile(f, []byte(""), 0640); err != nil {
+		if err := os.WriteFile(f, []byte(""), 0640); err != nil {
 			return nil, fmt.Errorf("failed to create storage file: %w", err)
 		}
 	}

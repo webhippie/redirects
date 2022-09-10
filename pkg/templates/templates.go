@@ -4,7 +4,6 @@ import (
 	"embed"
 	"html/template"
 	"io/fs"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -89,7 +88,7 @@ func Load(cfg *config.Config) *template.Template {
 				return nil
 			}
 
-			content, err := ioutil.ReadFile(
+			content, err := os.ReadFile(
 				p,
 			)
 

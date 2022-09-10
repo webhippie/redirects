@@ -1,6 +1,7 @@
 package command
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -31,6 +32,7 @@ func init() {
 }
 
 func createAction(ccmd *cobra.Command, args []string) {
+	ctx := context.Background()
 	record := &model.Redirect{}
 
 	if val := viper.GetString("create.source"); viper.IsSet("create.source") && val != "" {
@@ -49,7 +51,7 @@ func createAction(ccmd *cobra.Command, args []string) {
 		record.Priority = val
 	}
 
-	if err := storage.CreateRedirect(record); err != nil {
+	if err := storage.CreateRedirect(ctx, record); err != nil {
 		cobra.CheckErr(fmt.Errorf("failed to create pattern: %w", err))
 	}
 }

@@ -35,9 +35,9 @@ $(REFLEX): $(BINGO_DIR)/reflex.mod
 	@echo "(re)installing $(GOBIN)/reflex-v0.3.1"
 	@cd $(BINGO_DIR) && $(GO) build -mod=mod -modfile=reflex.mod -o=$(GOBIN)/reflex-v0.3.1 "github.com/cespare/reflex"
 
-STATICCHECK := $(GOBIN)/staticcheck-v0.3.1
+STATICCHECK := $(GOBIN)/staticcheck-v0.3.3
 $(STATICCHECK): $(BINGO_DIR)/staticcheck.mod
 	@# Install binary/ries using Go 1.14+ build command. This is using bwplotka/bingo-controlled, separate go module with pinned dependencies.
-	@echo "(re)installing $(GOBIN)/staticcheck-v0.3.1"
-	@cd $(BINGO_DIR) && $(GO) build -mod=mod -modfile=staticcheck.mod -o=$(GOBIN)/staticcheck-v0.3.1 "honnef.co/go/tools/cmd/staticcheck"
+	@echo "(re)installing $(GOBIN)/staticcheck-v0.3.3"
+	@cd $(BINGO_DIR) && $(GO) build -mod=mod -modfile=staticcheck.mod -o=$(GOBIN)/staticcheck-v0.3.3 "honnef.co/go/tools/cmd/staticcheck"
 
