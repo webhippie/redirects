@@ -1,6 +1,7 @@
 package command
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -39,7 +40,8 @@ func init() {
 }
 
 func listAction(ccmd *cobra.Command, args []string) {
-	records, err := storage.GetRedirects()
+	ctx := context.Background()
+	records, err := storage.GetRedirects(ctx)
 
 	if err != nil {
 		cobra.CheckErr(fmt.Errorf("failed to find patterns: %w", err))

@@ -1,6 +1,7 @@
 package command
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -36,7 +37,10 @@ func init() {
 }
 
 func updateAction(ccmd *cobra.Command, args []string) {
+	ctx := context.Background()
+
 	record, err := storage.GetRedirect(
+		ctx,
 		args[0],
 	)
 
@@ -62,7 +66,7 @@ func updateAction(ccmd *cobra.Command, args []string) {
 	}
 
 	if changed {
-		if err := storage.UpdateRedirect(record); err != nil {
+		if err := storage.UpdateRedirect(ctx, record); err != nil {
 			cobra.CheckErr(fmt.Errorf("failed to update pattern: %w", err))
 		}
 	}

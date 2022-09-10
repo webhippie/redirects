@@ -1,28 +1,23 @@
 package consul
 
 import (
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
 
 	"github.com/jackspirou/syscerts"
+	"github.com/kvtools/consul"
 	"github.com/kvtools/valkeyrie"
 	valkeyrieStore "github.com/kvtools/valkeyrie/store"
-	"github.com/kvtools/valkeyrie/store/consul"
 	"github.com/webhippie/redirects/pkg/config"
 	"github.com/webhippie/redirects/pkg/model"
 	"github.com/webhippie/redirects/pkg/store"
 )
-
-// init simply registers Consul on the valkeyrie library.
-func init() {
-	consul.Register()
-}
 
 // data is a basic struct that iplements the Store interface.
 type data struct {
@@ -47,9 +42,9 @@ func (db *data) key(id string) string {
 }
 
 // load parses all available records from the storage.
-func (db *data) load() ([]*model.Redirect, error) {
+func (db *data) load(ctx context.Context) ([]*model.Redirect, error) {
 	res := make([]*model.Redirect, 0)
-	records, err := db.store.List(db.prefix, &valkeyrieStore.ReadOptions{})
+	records, err := db.store.List(ctx, db.prefix, &valkeyrieStore.ReadOptions{})
 
 	if err != nil {
 		return nil, err
@@ -79,9 +74,10 @@ func New(s valkeyrieStore.Store, prefix string, endpoints []string) store.Store 
 
 // Load initializes the Consul storage.
 func Load(cfg *config.Consul) (store.Store, error) {
+	ctx := context.Background()
 	prefix := cfg.Prefix
 
-	valkeyrieConfig := &valkeyrieStore.Config{
+	valkeyrieConfig := &consul.Config{
 		ConnectionTimeout: cfg.Timeout,
 	}
 
@@ -118,7 +114,8 @@ func Load(cfg *config.Consul) (store.Store, error) {
 	}
 
 	s, err := valkeyrie.NewStore(
-		valkeyrieStore.CONSUL,
+		ctx,
+		consul.StoreName,
 		cfg.Endpoints,
 		valkeyrieConfig,
 	)
@@ -127,8 +124,13 @@ func Load(cfg *config.Consul) (store.Store, error) {
 		return nil, fmt.Errorf("failed to init store: %w", err)
 	}
 
-	if ok, _ := s.Exists(prefix, &valkeyrieStore.ReadOptions{}); !ok {
+	if ok, _ := s.Exists(
+		ctx,
+		prefix,
+		&valkeyrieStore.ReadOptions{},
+	); !ok {
 		err := s.Put(
+			ctx,
 			prefix,
 			nil,
 			&valkeyrieStore.WriteOptions{
@@ -156,7 +158,7 @@ func pool(cfg *config.Consul) (*x509.CertPool, error) {
 		var ca []byte
 
 		if _, err := os.Stat(cfg.CA); err == nil {
-			ca, err = ioutil.ReadFile(cfg.CA)
+			ca, err = os.ReadFile(cfg.CA)
 
 			if err != nil {
 				return nil, fmt.Errorf("failed to read CA certificate: %w", err)
@@ -174,7 +176,7 @@ func pool(cfg *config.Consul) (*x509.CertPool, error) {
 // key loads the SSL key from file or flag.
 func key(cfg *config.Consul) ([]byte, error) {
 	if _, err := os.Stat(cfg.Key); err == nil {
-		return ioutil.ReadFile(cfg.Key)
+		return os.ReadFile(cfg.Key)
 	}
 
 	return []byte(cfg.Key), nil
@@ -183,7 +185,7 @@ func key(cfg *config.Consul) ([]byte, error) {
 // cert loads the SSL certificate from file or flag.
 func cert(cfg *config.Consul) ([]byte, error) {
 	if _, err := os.Stat(cfg.Cert); err == nil {
-		return ioutil.ReadFile(cfg.Cert)
+		return os.ReadFile(cfg.Cert)
 	}
 
 	return []byte(cfg.Cert), nil

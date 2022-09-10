@@ -1,14 +1,16 @@
 package yaml
 
 import (
+	"context"
+
 	uuid "github.com/satori/go.uuid"
 	"github.com/webhippie/redirects/pkg/model"
 	"github.com/webhippie/redirects/pkg/store"
 )
 
 // GetRedirects retrieves all redirects from the YAML store.
-func (db *data) GetRedirects() ([]*model.Redirect, error) {
-	root, err := db.load()
+func (db *data) GetRedirects(ctx context.Context) ([]*model.Redirect, error) {
+	root, err := db.load(ctx)
 
 	if err != nil {
 		return nil, err
@@ -18,8 +20,8 @@ func (db *data) GetRedirects() ([]*model.Redirect, error) {
 }
 
 // GetRedirect retrieves a specific redirect from the YAML store.
-func (db *data) GetRedirect(id string) (*model.Redirect, error) {
-	root, err := db.load()
+func (db *data) GetRedirect(ctx context.Context, id string) (*model.Redirect, error) {
+	root, err := db.load(ctx)
 
 	if err != nil {
 		return nil, err
@@ -35,11 +37,11 @@ func (db *data) GetRedirect(id string) (*model.Redirect, error) {
 }
 
 // DeleteRedirect deletes a redirect from the YAML store.
-func (db *data) DeleteRedirect(id string) error {
+func (db *data) DeleteRedirect(ctx context.Context, id string) error {
 	db.mutex.Lock()
 	defer db.mutex.Unlock()
 
-	root, err := db.load()
+	root, err := db.load(ctx)
 
 	if err != nil {
 		return err
@@ -60,11 +62,11 @@ func (db *data) DeleteRedirect(id string) error {
 }
 
 // UpdateRedirect updates a redirect on the YAML store.
-func (db *data) UpdateRedirect(update *model.Redirect) error {
+func (db *data) UpdateRedirect(ctx context.Context, update *model.Redirect) error {
 	db.mutex.Lock()
 	defer db.mutex.Unlock()
 
-	root, err := db.load()
+	root, err := db.load(ctx)
 
 	if err != nil {
 		return err
@@ -81,11 +83,11 @@ func (db *data) UpdateRedirect(update *model.Redirect) error {
 }
 
 // CreateRedirect creates a redirect on the YAML store.
-func (db *data) CreateRedirect(create *model.Redirect) error {
+func (db *data) CreateRedirect(ctx context.Context, create *model.Redirect) error {
 	db.mutex.Lock()
 	defer db.mutex.Unlock()
 
-	root, err := db.load()
+	root, err := db.load(ctx)
 
 	if err != nil {
 		return err

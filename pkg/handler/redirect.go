@@ -18,7 +18,7 @@ import (
 // Redirect is used to handle all the redirects.
 func Redirect(cfg *config.Config, storage store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		redirects, err := storage.GetRedirects()
+		redirects, err := storage.GetRedirects(req.Context())
 
 		if err != nil {
 			log.Error().

@@ -1,6 +1,7 @@
 package consul
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -11,13 +12,13 @@ import (
 )
 
 // GetRedirects retrieves all redirects from the Consul store.
-func (db *data) GetRedirects() ([]*model.Redirect, error) {
-	return db.load()
+func (db *data) GetRedirects(ctx context.Context) ([]*model.Redirect, error) {
+	return db.load(ctx)
 }
 
 // GetRedirect retrieves a specific redirect from the Consul store.
-func (db *data) GetRedirect(id string) (*model.Redirect, error) {
-	redirects, err := db.load()
+func (db *data) GetRedirect(ctx context.Context, id string) (*model.Redirect, error) {
+	redirects, err := db.load(ctx)
 
 	if err != nil {
 		return nil, err
@@ -33,25 +34,25 @@ func (db *data) GetRedirect(id string) (*model.Redirect, error) {
 }
 
 // DeleteRedirect deletes a redirect from the Consul store.
-func (db *data) DeleteRedirect(id string) error {
+func (db *data) DeleteRedirect(ctx context.Context, id string) error {
 	// TODO: Add distributed locking
 
-	if ok, _ := db.store.Exists(db.key(id), &valkeyrieStore.ReadOptions{}); !ok {
+	if ok, _ := db.store.Exists(ctx, db.key(id), &valkeyrieStore.ReadOptions{}); !ok {
 		return store.ErrRedirectNotFound
 	}
 
-	return db.store.Delete(db.key(id))
+	return db.store.Delete(ctx, db.key(id))
 }
 
 // UpdateRedirect updates a redirect on the Consul store.
-func (db *data) UpdateRedirect(update *model.Redirect) error {
+func (db *data) UpdateRedirect(ctx context.Context, update *model.Redirect) error {
 	// TODO: Add distributed locking
 
-	if ok, _ := db.store.Exists(db.key(update.ID), &valkeyrieStore.ReadOptions{}); !ok {
+	if ok, _ := db.store.Exists(ctx, db.key(update.ID), &valkeyrieStore.ReadOptions{}); !ok {
 		return store.ErrRedirectNotFound
 	}
 
-	redirects, err := db.load()
+	redirects, err := db.load(ctx)
 
 	if err != nil {
 		return err
@@ -70,6 +71,7 @@ func (db *data) UpdateRedirect(update *model.Redirect) error {
 	}
 
 	return db.store.Put(
+		ctx,
 		db.key(update.ID),
 		bytes,
 		nil,
@@ -77,9 +79,9 @@ func (db *data) UpdateRedirect(update *model.Redirect) error {
 }
 
 // CreateRedirect creates a redirect on the Consul store.
-func (db *data) CreateRedirect(create *model.Redirect) error {
+func (db *data) CreateRedirect(ctx context.Context, create *model.Redirect) error {
 	id := uuid.NewV4().String()
-	redirects, err := db.load()
+	redirects, err := db.load(ctx)
 
 	if err != nil {
 		return err
@@ -99,6 +101,7 @@ func (db *data) CreateRedirect(create *model.Redirect) error {
 	}
 
 	return db.store.Put(
+		ctx,
 		db.key(id),
 		bytes,
 		nil,
