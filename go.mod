@@ -10,7 +10,7 @@ require (
 	github.com/kvtools/consul v1.0.2
 	github.com/kvtools/etcdv3 v1.0.2
 	github.com/kvtools/valkeyrie v1.0.0
-	github.com/kvtools/zookeeper v1.0.1
+	github.com/kvtools/zookeeper v1.0.2
 	github.com/oklog/run v1.1.0
 	github.com/prometheus/client_golang v1.13.0
 	github.com/rs/zerolog v1.28.0
