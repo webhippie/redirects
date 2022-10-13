@@ -8,7 +8,7 @@ require (
 	github.com/jackspirou/syscerts v0.0.0-20160531025014-b68f5469dff1
 	github.com/joho/godotenv v1.4.0
 	github.com/kvtools/consul v1.0.2
-	github.com/kvtools/etcdv3 v1.0.1
+	github.com/kvtools/etcdv3 v1.0.2
 	github.com/kvtools/valkeyrie v1.0.0
 	github.com/kvtools/zookeeper v1.0.1
 	github.com/oklog/run v1.1.0
