@@ -11,7 +11,7 @@ import (
 	"github.com/webhippie/redirects/pkg/config"
 	"github.com/webhippie/redirects/pkg/model"
 	"github.com/webhippie/redirects/pkg/store"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 // collection represents the internal storage collection.
