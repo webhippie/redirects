@@ -31,7 +31,7 @@ func init() {
 	viper.BindPFlag("create.priority", createCmd.Flags().Lookup("priority"))
 }
 
-func createAction(ccmd *cobra.Command, args []string) {
+func createAction(_ *cobra.Command, _ []string) {
 	ctx := context.Background()
 	record := &model.Redirect{}
 

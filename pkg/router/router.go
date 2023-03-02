@@ -58,7 +58,7 @@ func Load(cfg *config.Config, storage store.Store) http.Handler {
 }
 
 // Metrics initializes the routing of metrics and health.
-func Metrics(cfg *config.Config, storage store.Store) http.Handler {
+func Metrics(cfg *config.Config, _ store.Store) http.Handler {
 	mux := chi.NewRouter()
 
 	mux.Use(hlog.NewHandler(log.Logger))

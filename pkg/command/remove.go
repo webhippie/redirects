@@ -26,7 +26,7 @@ func init() {
 	rootCmd.AddCommand(removeCmd)
 }
 
-func removeAction(ccmd *cobra.Command, args []string) {
+func removeAction(_ *cobra.Command, args []string) {
 	ctx := context.Background()
 
 	record, err := storage.GetRedirect(

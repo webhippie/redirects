@@ -63,11 +63,7 @@ func (db *data) write(content *collection) error {
 		return err
 	}
 
-	if err := os.WriteFile(db.file, buf.Bytes(), 0640); err != nil {
-		return err
-	}
-
-	return nil
+	return os.WriteFile(db.file, buf.Bytes(), 0640)
 }
 
 // New initializes a new TOML store.
