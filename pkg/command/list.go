@@ -39,7 +39,7 @@ func init() {
 	viper.BindPFlag("list.json", listCmd.Flags().Lookup("json"))
 }
 
-func listAction(ccmd *cobra.Command, args []string) {
+func listAction(_ *cobra.Command, _ []string) {
 	ctx := context.Background()
 	records, err := storage.GetRedirects(ctx)
 

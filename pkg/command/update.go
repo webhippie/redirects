@@ -36,7 +36,7 @@ func init() {
 	viper.BindPFlag("update.priority", updateCmd.Flags().Lookup("priority"))
 }
 
-func updateAction(ccmd *cobra.Command, args []string) {
+func updateAction(_ *cobra.Command, args []string) {
 	ctx := context.Background()
 
 	record, err := storage.GetRedirect(
