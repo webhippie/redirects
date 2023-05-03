@@ -12,7 +12,7 @@ require (
 	github.com/kvtools/valkeyrie v1.0.0
 	github.com/kvtools/zookeeper v1.0.2
 	github.com/oklog/run v1.1.0
-	github.com/prometheus/client_golang v1.15.0
+	github.com/prometheus/client_golang v1.15.1
 	github.com/rs/zerolog v1.29.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/cobra v1.7.0
