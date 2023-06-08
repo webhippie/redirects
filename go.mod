@@ -3,7 +3,7 @@ module github.com/webhippie/redirects
 go 1.19
 
 require (
-	github.com/BurntSushi/toml v1.3.1
+	github.com/BurntSushi/toml v1.3.2
 	github.com/go-chi/chi/v5 v5.0.8
 	github.com/jackspirou/syscerts v0.0.0-20160531025014-b68f5469dff1
 	github.com/joho/godotenv v1.5.1
