@@ -2,8 +2,6 @@ module github.com/webhippie/redirects
 
 go 1.23.0
 
-toolchain go1.23.0
-
 require (
 	github.com/BurntSushi/toml v1.4.0
 	github.com/go-chi/chi/v5 v5.1.0
