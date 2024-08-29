@@ -12,7 +12,7 @@ var (
 		Use:   "remove <pattern>",
 		Short: "Remove redirect pattern",
 		Run:   removeAction,
-		Args: func(cmd *cobra.Command, args []string) error {
+		Args: func(_ *cobra.Command, args []string) error {
 			if len(args) != 1 {
 				return fmt.Errorf("missing pattern argument")
 			}
