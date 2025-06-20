@@ -4,7 +4,7 @@ go 1.23.0
 
 require (
 	github.com/BurntSushi/toml v1.5.0
-	github.com/go-chi/chi/v5 v5.2.1
+	github.com/go-chi/chi/v5 v5.2.2
 	github.com/jackspirou/syscerts v0.0.0-20160531025014-b68f5469dff1
 	github.com/joho/godotenv v1.5.1
 	github.com/kvtools/consul v1.0.2
