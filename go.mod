@@ -1,6 +1,6 @@
 module github.com/webhippie/redirects
 
-go 1.23.0
+go 1.24.0
 
 require (
 	github.com/BurntSushi/toml v1.5.0
