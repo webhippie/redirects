@@ -1,0 +1,125 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
+
+builds:
+  - id: exec
+    main: ./cmd/redirects
+    binary: redirects
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -extldflags "-static" -X "github.com/webhippie/redirects/pkg/version.String={{.Version}}" -X "github.com/webhippie/redirects/pkg/version.Revision={{.Commit}}" -X "github.com/webhippie/redirects/pkg/version.Date={{.Date}}"
+    tags:
+      - netgo
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - "386"
+      - arm64
+      - arm
+    ignore:
+      - goos: darwin
+        goarch: "386"
+      - goos: windows
+        goarch: arm
+
+archives:
+  - id: exec
+    ids:
+      - exec
+    name_template: "redirects-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}-{{ . }}{{ end }}"
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    files:
+      - LICENSE
+      - CHANGELOG.md
+      - src: cmd/redirects/README.md
+        dst: README.md
+
+nfpms:
+  - id: exec
+    ids:
+      - exec
+    package_name: redirects
+    file_name_template: "redirects-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}-{{ . }}{{ end }}"
+    vendor: Webhippie
+    homepage: https://webhippie.github.io/redirects/
+    maintainer: Thomas Boerger <thomas@webhippie.de>
+    description: |-
+      Simple pattern-based redirect server
+    license: Apache 2.0
+    formats:
+      - deb
+      - rpm
+    contents:
+      - src: packaging/systemd/server.service
+        dst: /usr/lib/systemd/system/redirects.service
+      - src: packaging/systemd/server.env
+        dst: /etc/sysconfig/redirects
+        packager: rpm
+      - src: packaging/systemd/server.env
+        dst: /etc/default/redirects
+        packager: deb
+      - src: packaging/config/server.yaml
+        dst: /etc/kleister/server.yaml
+        type: config|noreplace
+      - dst: /var/lib/redirects
+        type: dir
+      - dst: /usr/share/redirects/templates
+        type: dir
+      - src: pkg/templates/dist/404.tmpl
+        dst: /usr/share/redirects/templates/404.tmpl
+      - src: pkg/templates/dist/500.tmpl
+        dst: /usr/share/redirects/templates/500.tmpl
+      - src: pkg/templates/dist/headers.tmpl
+        dst: /usr/share/redirects/templates/headers.tmpl
+      - src: pkg/templates/dist/styles.tmpl
+        dst: /usr/share/redirects/templates/styles.tmpl
+    scripts:
+      preinstall: packaging/scripts/preinstall.sh
+      postinstall: packaging/scripts/postinstall.sh
+      preremove: packaging/scripts/preremove.sh
+      postremove: packaging/scripts/postremove.sh
+
+signs:
+  - id: archives
+    signature: "${artifact}.asc"
+    cmd: gpg2
+    artifacts: archive
+    args:
+      - --batch
+      - --armor
+      - --local-user
+      - 552D1DF54CBEA471C570C816EA4B5799921648E8
+      - --output
+      - ${signature}
+      - --detach-sign
+      - ${artifact}
+  - id: packages
+    signature: "${artifact}.asc"
+    cmd: gpg2
+    artifacts: package
+    args:
+      - --batch
+      - --armor
+      - --local-user
+      - 552D1DF54CBEA471C570C816EA4B5799921648E8
+      - --output
+      - ${signature}
+      - --detach-sign
+      - ${artifact}
+
+snapshot:
+  version_template: testing
+
+changelog:
+  disable: true
+
+checksum:
+  disable: false
+  split: true

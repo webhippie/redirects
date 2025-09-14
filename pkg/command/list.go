@@ -30,13 +30,13 @@ func init() {
 	rootCmd.AddCommand(listCmd)
 
 	listCmd.Flags().String("filter", "", "Filter output by needle")
-	viper.BindPFlag("list.filter", listCmd.Flags().Lookup("filter"))
+	_ = viper.BindPFlag("list.filter", listCmd.Flags().Lookup("filter"))
 
 	listCmd.Flags().String("format", tmplList, "Custom output format")
-	viper.BindPFlag("list.format", listCmd.Flags().Lookup("format"))
+	_ = viper.BindPFlag("list.format", listCmd.Flags().Lookup("format"))
 
 	listCmd.Flags().Bool("json", false, "Print in JSON format")
-	viper.BindPFlag("list.json", listCmd.Flags().Lookup("json"))
+	_ = viper.BindPFlag("list.json", listCmd.Flags().Lookup("json"))
 }
 
 func listAction(_ *cobra.Command, _ []string) {
@@ -49,7 +49,7 @@ func listAction(_ *cobra.Command, _ []string) {
 
 	if viper.GetBool("list.json") {
 		if viper.GetString("list.filter") != "" {
-			os.Stderr.WriteString("Filters are ignored while printing JSON!\n")
+			_, _ = os.Stderr.WriteString("Filters are ignored while printing JSON!\n")
 		}
 
 		res, err := json.MarshalIndent(records, "", "  ")
@@ -63,7 +63,7 @@ func listAction(_ *cobra.Command, _ []string) {
 	}
 
 	if len(records) == 0 {
-		os.Stderr.WriteString("No patterns found\n")
+		_, _ = os.Stderr.WriteString("No patterns found\n")
 		return
 	}
 

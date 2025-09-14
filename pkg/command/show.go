@@ -37,10 +37,10 @@ func init() {
 	rootCmd.AddCommand(showCmd)
 
 	showCmd.Flags().String("format", tmplShow, "Custom output format")
-	viper.BindPFlag("show.format", showCmd.Flags().Lookup("format"))
+	_ = viper.BindPFlag("show.format", showCmd.Flags().Lookup("format"))
 
 	showCmd.Flags().Bool("json", false, "Print in JSON format")
-	viper.BindPFlag("show.json", showCmd.Flags().Lookup("json"))
+	_ = viper.BindPFlag("show.json", showCmd.Flags().Lookup("json"))
 }
 
 func showAction(_ *cobra.Command, args []string) {

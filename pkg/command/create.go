@@ -22,13 +22,13 @@ func init() {
 	rootCmd.AddCommand(createCmd)
 
 	createCmd.Flags().String("source", "", "Source for the redirect")
-	viper.BindPFlag("create.source", createCmd.Flags().Lookup("source"))
+	_ = viper.BindPFlag("create.source", createCmd.Flags().Lookup("source"))
 
 	createCmd.Flags().String("destination", "", "Destination for the redirect")
-	viper.BindPFlag("create.destination", createCmd.Flags().Lookup("destination"))
+	_ = viper.BindPFlag("create.destination", createCmd.Flags().Lookup("destination"))
 
 	createCmd.Flags().Int("priority", 0, "Priority for the redirect")
-	viper.BindPFlag("create.priority", createCmd.Flags().Lookup("priority"))
+	_ = viper.BindPFlag("create.priority", createCmd.Flags().Lookup("priority"))
 }
 
 func createAction(_ *cobra.Command, _ []string) {

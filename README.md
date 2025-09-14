@@ -1,6 +1,6 @@
 # Redirects
 
-[![Current Tag](https://img.shields.io/github/v/tag/webhippie/redirects?sort=semver)](https://github.com/webhippie/redirects) [![Build Status](https://github.com/webhippie/redirects/actions/workflows/general.yml/badge.svg)](https://github.com/webhippie/redirects/actions) [![Join the Matrix chat at https://matrix.to/#/#webhippie:matrix.org](https://img.shields.io/badge/matrix-%23webhippie-7bc9a4.svg)](https://matrix.to/#/#webhippie:matrix.org) [![Go Reference](https://pkg.go.dev/badge/github.com/webhippie/redirects.svg)](https://pkg.go.dev/github.com/webhippie/redirects) [![Go Report Card](https://goreportcard.com/badge/github.com/webhippie/redirects)](https://goreportcard.com/report/github.com/webhippie/redirects) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c33cdacbc6ed40beaf1f2a0a6d72718b)](https://www.codacy.com/gh/webhippie/redirects/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=webhippie/redirects&amp;utm_campaign=Badge_Grade)
+[![General Workflow](https://github.com/webhippie/redirects/actions/workflows/general.yml/badge.svg)](https://github.com/webhippie/redirects/actions/workflows/general.yml) [![Join the Matrix chat at https://matrix.to/#/#webhippie:matrix.org](https://img.shields.io/badge/matrix-%23webhippie-7bc9a4.svg)](https://matrix.to/#/#webhippie:matrix.org) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c33cdacbc6ed40beaf1f2a0a6d72718b)](https://app.codacy.com/gh/webhippie/redirects/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Go Reference](https://pkg.go.dev/badge/github.com/webhippie/redirects.svg)](https://pkg.go.dev/github.com/webhippie/redirects) [![Go Report Card](https://goreportcard.com/badge/github.com/webhippie/redirects)](https://goreportcard.com/report/github.com/webhippie/redirects) [![GitHub Repo](https://img.shields.io/badge/github-repo-yellowgreen)](https://github.com/webhippie/redirects) [![Hosted By: Cloudsmith](https://img.shields.io/badge/OSS%20hosting%20by-cloudsmith-blue?logo=cloudsmith&style=flat-square)](https://cloudsmith.com)
 
 Redirects is a pretty simple pattern-based redirect server. It supports
 different kinds of backends to store the patterns like JSON, YAML, TOML, Etcd,
@@ -9,10 +9,17 @@ proxy like [Træfɪk](https://traefik.io/).
 
 ## Install
 
-You can download prebuilt binaries from our [GitHub releases][releases], or you
-can use our Docker images published on [Docker Hub][dockerhub] or [Quay][quay].
-If you need further guidance how to install this take a look at our
-[documentation][docs].
+You can download prebuilt binaries from the [GitHub releases][releases] or from
+our [download site][downloads]. Besides that we also prepared repositories for
+DEB and RPM packages which can be found at [Cloudsmith][pkgrepo]. If you prefer
+to use containers you could use our images published on [GHCR][ghcr],
+[Docker Hub][dockerhub] or [Quay][quay]. If you need further guidance how to
+install this take a look at our [documentation][docs].
+
+Package repository hosting is graciously provided by [Cloudsmith][cloudsmith].
+Cloudsmith is the only fully hosted, cloud-native, universal package management
+solution, that enables your organization to create, store and share packages in
+any format, to any place, with total confidence.
 
 ## Development
 
@@ -53,7 +60,11 @@ Copyright (c) 2017 Thomas Boerger <thomas@webhippie.de>
 ```
 
 [releases]: https://github.com/webhippie/redirects/releases
+[downloads]: https://dl.webhippie.de/#redirects/
+[ghcr]: https://github.com/webhippie/redirects/pkgs/container/redirects
 [dockerhub]: https://hub.docker.com/r/webhippie/redirects/tags/
 [quay]: https://quay.io/repository/webhippie/redirects?tab=tags
 [docs]: https://webhippie.github.io/redirects/#getting-started
 [golang]: http://golang.org/doc/install.html
+[pkgrepo]: https://cloudsmith.io/~webhippie/repos/general/groups/
+[cloudsmith]: https://cloudsmith.com/

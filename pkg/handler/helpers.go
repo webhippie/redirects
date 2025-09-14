@@ -19,7 +19,7 @@ func helpers() template.FuncMap {
 }
 
 func replace(s1, s2, s3 string) string {
-	return strings.Replace(s3, s1, s2, -1)
+	return strings.ReplaceAll(s3, s1, s2)
 }
 
 func contains(s1, s2 string) bool {

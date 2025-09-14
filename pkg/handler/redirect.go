@@ -28,11 +28,17 @@ func Redirect(cfg *config.Config, storage store.Store) http.HandlerFunc {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-			templates.Load(cfg).ExecuteTemplate(
+			if err := templates.Load(cfg).ExecuteTemplate(
 				w,
 				"500.tmpl",
 				nil,
-			)
+			); err != nil {
+				http.Error(
+					w,
+					http.StatusText(http.StatusInternalServerError),
+					http.StatusInternalServerError,
+				)
+			}
 
 			return
 		}
@@ -73,11 +79,17 @@ func Redirect(cfg *config.Config, storage store.Store) http.HandlerFunc {
 					w.WriteHeader(http.StatusInternalServerError)
 					w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-					templates.Load(cfg).ExecuteTemplate(
+					if err := templates.Load(cfg).ExecuteTemplate(
 						w,
 						"500.tmpl",
 						nil,
-					)
+					); err != nil {
+						http.Error(
+							w,
+							http.StatusText(http.StatusInternalServerError),
+							http.StatusInternalServerError,
+						)
+					}
 
 					return
 				}
@@ -95,11 +107,17 @@ func Redirect(cfg *config.Config, storage store.Store) http.HandlerFunc {
 					w.WriteHeader(http.StatusInternalServerError)
 					w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-					templates.Load(cfg).ExecuteTemplate(
+					if err := templates.Load(cfg).ExecuteTemplate(
 						w,
 						"500.tmpl",
 						nil,
-					)
+					); err != nil {
+						http.Error(
+							w,
+							http.StatusText(http.StatusInternalServerError),
+							http.StatusInternalServerError,
+						)
+					}
 
 					return
 				}
@@ -129,10 +147,16 @@ func Redirect(cfg *config.Config, storage store.Store) http.HandlerFunc {
 		w.WriteHeader(http.StatusNotFound)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-		templates.Load(cfg).ExecuteTemplate(
+		if err := templates.Load(cfg).ExecuteTemplate(
 			w,
 			"404.tmpl",
 			nil,
-		)
+		); err != nil {
+			http.Error(
+				w,
+				http.StatusText(http.StatusNotFound),
+				http.StatusNotFound,
+			)
+		}
 	}
 }

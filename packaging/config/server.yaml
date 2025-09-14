@@ -1,0 +1,65 @@
+---
+server:
+  addr: 0.0.0.0:8080
+  host: http://localhost:8080
+  pprof: false
+  root: /
+  cert: ~
+  key: ~
+  strict_curves: false
+  strict_ciphers: false
+  templates: /usr/share/redirects/templates
+
+metrics:
+  addr: 0.0.0.0:8081
+  token: ~
+
+log:
+  level: info
+  pretty: true
+  color: true
+
+yaml:
+  enabled: false
+  file: file:///var/lib/redirects/storage.yaml
+
+json:
+  enabled: false
+  file: file:///var/lib/redirects/storage.json
+
+toml:
+  enabled: false
+  file: file:///var/lib/redirects/storage.toml
+
+zk:
+  enabled: false
+  endpoints:
+    - 127.0.0.1:2181
+  timeput: 10s
+  prefix: /redirects
+
+etcd:
+  enabled: false
+  endpoints:
+    - 127.0.0.1:2379
+  timeput: 10s
+  prefix: /redirects
+  username: ~
+  password: ~
+  ca: ~
+  cert: ~
+  key: ~
+  skip_verify: false
+
+consul:
+  enabled: false
+  endpoints:
+    - 127.0.0.1:8500
+  timeput: 10s
+  prefix: /redirects
+  ca: ~
+  cert: ~
+  key: ~
+  skip_verify: false
+
+...
