@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/webhippie/redirects/compare/v2.0.0...v2.1.0) (2025-09-22)
+
+
+### Features
+
+* **minor:** update module github.com/golangci/golangci-lint/v2 to v2.5.0 ([#248](https://github.com/webhippie/redirects/issues/248)) ([fbb9415](https://github.com/webhippie/redirects/commit/fbb9415ee0b334ed7cfd13faf1c63beb96f6fa14))
+
+
+### Bugfixes
+
+* **patch:** update module github.com/kvtools/etcdv3 to v1.0.3 ([#246](https://github.com/webhippie/redirects/issues/246)) ([3f4c279](https://github.com/webhippie/redirects/commit/3f4c279f4f78f540ed61058f11b5f0295be14ab8))
+
 ## [2.0.0](https://github.com/webhippie/redirects/compare/v1.0.1...v2.0.0) (2025-09-14)
 
 
