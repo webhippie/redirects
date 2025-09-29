@@ -56,14 +56,14 @@ jobs:
         uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3
 
       - name: Hub login
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         if: github.event_name != 'pull_request'
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Quay login
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         if: github.event_name != 'pull_request'
         with:
           registry: quay.io
@@ -71,7 +71,7 @@ jobs:
           password: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Ghcr login
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         if: github.event_name != 'pull_request'
         with:
           registry: ghcr.io
@@ -111,7 +111,7 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Hub readme
-        uses: actionhippie/pushrm@d4137e5e7261e06ddc57e0efece0fb4f589abb0a # v1
+        uses: actionhippie/pushrm@89af5970cfc08721dc8d6304929bb51ab9e2f8e5 # v1
         with:
           provider: dockerhub
           target: webhippie/redirects
@@ -121,7 +121,7 @@ jobs:
           readme: README.md
 
       - name: Quay readme
-        uses: actionhippie/pushrm@d4137e5e7261e06ddc57e0efece0fb4f589abb0a # v1
+        uses: actionhippie/pushrm@89af5970cfc08721dc8d6304929bb51ab9e2f8e5 # v1
         with:
           provider: quay
           target: quay.io/webhippie/redirects
