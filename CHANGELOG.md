@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.1](https://github.com/webhippie/redirects/compare/v2.1.0...v2.1.1) (2025-10-13)
+
+
+### Bugfixes
+
+* **deps:** update docker digests ([#254](https://github.com/webhippie/redirects/issues/254)) ([fdb9fa2](https://github.com/webhippie/redirects/commit/fdb9fa22dd42bdc17e3442e5be576ae8ab483c7b))
+* **deps:** update golang:1.25.2-alpine3.21 docker digest to 0134653 ([#256](https://github.com/webhippie/redirects/issues/256)) ([8d98746](https://github.com/webhippie/redirects/commit/8d98746ca501fcb34c9b6d4e580f5960d12d7444))
+* **deps:** update golang:1.25.2-alpine3.21 docker digest to 0ae17b3 ([#258](https://github.com/webhippie/redirects/issues/258)) ([581134b](https://github.com/webhippie/redirects/commit/581134bf1980344a72b3f86e08085e4ab984ef4c))
+* **deps:** update golang:1.25.2-alpine3.21 docker digest to 7300a8d ([#255](https://github.com/webhippie/redirects/issues/255)) ([bb540ba](https://github.com/webhippie/redirects/commit/bb540baf70d2509fd083940b9e9a93f5fb8564af))
+* **deps:** update golang:1.25.2-alpine3.21 docker digest to b34e174 ([#253](https://github.com/webhippie/redirects/issues/253)) ([8c1b8e9](https://github.com/webhippie/redirects/commit/8c1b8e92c8854728ea171c99329ee9e320b64eb3))
+* **patch:** update golang docker tag to v1.25.2 ([#252](https://github.com/webhippie/redirects/issues/252)) ([2245fa1](https://github.com/webhippie/redirects/commit/2245fa1e767779759ec3eb03c78f14acfd085364))
+
 ## [2.1.0](https://github.com/webhippie/redirects/compare/v2.0.0...v2.1.0) (2025-09-22)
 
 
