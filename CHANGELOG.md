@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.1](https://github.com/webhippie/redirects/compare/v2.2.0...v2.2.1) (2025-11-10)
+
+
+### Bugfixes
+
+* **deps:** update golang:1.25.4-alpine3.21 docker digest to 3289aac ([#273](https://github.com/webhippie/redirects/issues/273)) ([a35f590](https://github.com/webhippie/redirects/commit/a35f59032652dfc984e4e2b0da8cf1f56b1b30ce))
+* **patch:** update golang docker tag to v1.25.4 ([#272](https://github.com/webhippie/redirects/issues/272)) ([072bc42](https://github.com/webhippie/redirects/commit/072bc422b9c2585941d8757995dfebd3d02ffb5d))
+* **patch:** update module github.com/golangci/golangci-lint/v2 to v2.6.1 ([#269](https://github.com/webhippie/redirects/issues/269)) ([dc91a7d](https://github.com/webhippie/redirects/commit/dc91a7d08353a5897e24883e49d96aa11255895c))
+
 ## [2.2.0](https://github.com/webhippie/redirects/compare/v2.1.2...v2.2.0) (2025-11-03)
 
 
