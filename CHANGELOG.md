@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/webhippie/redirects/compare/v2.2.1...v2.2.2) (2025-11-17)
+
+
+### Bugfixes
+
+* **patch:** update module github.com/golangci/golangci-lint/v2 to v2.6.2 ([#275](https://github.com/webhippie/redirects/issues/275)) ([c2d7009](https://github.com/webhippie/redirects/commit/c2d700986d7b8867d365cdec4386a8445e5ec699))
+
 ## [2.2.1](https://github.com/webhippie/redirects/compare/v2.2.0...v2.2.1) (2025-11-10)
 
 
