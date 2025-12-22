@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/webhippie/redirects/compare/v2.3.0...v2.4.0) (2025-12-22)
+
+
+### Features
+
+* **minor:** update module github.com/burntsushi/toml to v1.6.0 ([#297](https://github.com/webhippie/redirects/issues/297)) ([8c5c2ea](https://github.com/webhippie/redirects/commit/8c5c2ea94138be89938385c59ce09581dc7f51b1))
+
+
+### Bugfixes
+
+* **deps:** update alpine:3.23 docker digest to 865b95f ([#296](https://github.com/webhippie/redirects/issues/296)) ([97a0b01](https://github.com/webhippie/redirects/commit/97a0b0151ac611d449fdf5e500ec82f17a69744c))
+
 ## [2.3.0](https://github.com/webhippie/redirects/compare/v2.2.2...v2.3.0) (2025-12-08)
 
 
