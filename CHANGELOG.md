@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.4.3](https://github.com/webhippie/redirects/compare/v2.4.2...v2.4.3) (2026-02-09)
+
+### Dependencies
+
+* **patch:** update module github.com/go-chi/chi/v5 to v5.2.5 ([#310](https://github.com/webhippie/redirects/issues/310)) ([58ff6bb](https://github.com/webhippie/redirects/commit/58ff6bb2d81a6c969575708ac368187c12143050))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([999ceca](https://github.com/webhippie/redirects/commit/999cecad31483a208c16fa527ea0ce98044038ae))
+
 ## [2.4.2](https://github.com/webhippie/redirects/compare/v2.4.1...v2.4.2) (2026-02-02)
 
 ### Bugfixes
