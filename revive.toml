@@ -28,7 +28,7 @@ warningCode = 0
 [rule.redefines-builtin-id]
 
 [rule.var-naming]
-  arguments = [[], [], [{ skipPackageNameCollisionWithGoStd = true }]]
+  arguments = [[], [], [{ skip-package-name-collision-with-go-std = true }]]
 
 [rule.package-comments]
   Disabled = true
