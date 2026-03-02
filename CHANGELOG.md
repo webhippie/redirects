@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.5.0](https://github.com/webhippie/redirects/compare/v2.4.3...v2.5.0) (2026-03-02)
+
+### Features
+
+* upgrade build process to go 1.25 ([517c36e](https://github.com/webhippie/redirects/commit/517c36e6872c7661b40dd81c89dfc1e23f9ae2b5))
+
+### Bugfixes
+
+* **deps:** pin golang docker tag to ac09a5f ([#312](https://github.com/webhippie/redirects/issues/312)) ([7abe436](https://github.com/webhippie/redirects/commit/7abe436edcd1a05847a90b686ed208a20c9c0aab))
+
+### Dependencies
+
+* **minor:** update golang docker tag to v1.26.0 ([#313](https://github.com/webhippie/redirects/issues/313)) ([fec856d](https://github.com/webhippie/redirects/commit/fec856dd4cf8d45508532e998496f8fb855211c1))
+
+### Miscellaneous
+
+* enable skip-package-name-collision-with-go-std for revive ([bcbb15b](https://github.com/webhippie/redirects/commit/bcbb15ba20e4962936179e64f6bee08c219d9d4d))
+* **flake:** updated lockfile [skip ci] ([30aa0f4](https://github.com/webhippie/redirects/commit/30aa0f41867de2764772ac77ab94172a4d3745cd))
+* **flake:** updated lockfile [skip ci] ([91edbf5](https://github.com/webhippie/redirects/commit/91edbf5b3b8352fef953773d529291bf949b56b4))
+* **flake:** updated lockfile [skip ci] ([8f3dc6f](https://github.com/webhippie/redirects/commit/8f3dc6fb638a9629e57aac9186cd2a194bc0e626))
+* replace nixfmt package ([ab49ae3](https://github.com/webhippie/redirects/commit/ab49ae3194e3148689e35844e006c770a2daab0e))
+
 ## [2.4.3](https://github.com/webhippie/redirects/compare/v2.4.2...v2.4.3) (2026-02-09)
 
 ### Dependencies
