@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.6.0](https://github.com/webhippie/redirects/compare/v2.5.1...v2.6.0) (2026-03-30)
+
+### Dependencies
+
+* **minor:** update module github.com/rs/zerolog to v1.35.0 ([#327](https://github.com/webhippie/redirects/issues/327)) ([b6c4a14](https://github.com/webhippie/redirects/commit/b6c4a143570fc60af187bd7219e23e32af508dae))
+
+### Miscellaneous
+
+* **deps:** bump google.golang.org/grpc from 1.75.0 to 1.79.3 ([ca97206](https://github.com/webhippie/redirects/commit/ca97206dc74498f89734c998d94a1f3064948570))
+* **flake:** updated lockfile [skip ci] ([8990b14](https://github.com/webhippie/redirects/commit/8990b14a3fcbc54b92ff0215897b91b4ec81b4e6))
+* **flake:** updated lockfile [skip ci] ([ba7753e](https://github.com/webhippie/redirects/commit/ba7753e5bc557eb0a1dfb4d57f35c9e9626b44ab))
+* **flake:** updated lockfile [skip ci] ([18a11e6](https://github.com/webhippie/redirects/commit/18a11e613677e2cbfb05237cb2c235720e58b6d1))
+
 ## [2.5.1](https://github.com/webhippie/redirects/compare/v2.5.0...v2.5.1) (2026-03-09)
 
 ### Dependencies
