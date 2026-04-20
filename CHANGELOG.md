@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.6.2](https://github.com/webhippie/redirects/compare/v2.6.1...v2.6.2) (2026-04-20)
+
+### Bugfixes
+
+* **deps:** update docker digests ([#330](https://github.com/webhippie/redirects/issues/330)) ([835c718](https://github.com/webhippie/redirects/commit/835c718129fece35e2c2538e3aadc284d03af725))
+* **deps:** update golang:1.26.2-alpine docker digest to f853308 ([#332](https://github.com/webhippie/redirects/issues/332)) ([7dae977](https://github.com/webhippie/redirects/commit/7dae977ffe15beab124fc07179c085f025c51fc1))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([07e2c27](https://github.com/webhippie/redirects/commit/07e2c27ec303a7e74253f288ce0d3b29c958d755))
+
 ## [2.6.1](https://github.com/webhippie/redirects/compare/v2.6.0...v2.6.1) (2026-04-13)
 
 ### Dependencies
