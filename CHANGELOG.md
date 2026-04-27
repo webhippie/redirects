@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.3](https://github.com/webhippie/redirects/compare/v2.6.2...v2.6.3) (2026-04-27)
+
+### Dependencies
+
+* **patch:** update module github.com/rs/zerolog to v1.35.1 ([#333](https://github.com/webhippie/redirects/issues/333)) ([d76ac45](https://github.com/webhippie/redirects/commit/d76ac45723e0c59ffababa60fc00c26929db291d))
+
 ## [2.6.2](https://github.com/webhippie/redirects/compare/v2.6.1...v2.6.2) (2026-04-20)
 
 ### Bugfixes
