@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.7.0](https://github.com/webhippie/redirects/compare/v2.6.4...v2.7.0) (2026-05-25)
+
+### Features
+
+* upgrade required go version to 1.26 ([0b057fd](https://github.com/webhippie/redirects/commit/0b057fdce30052384c13d1ab980aa4ef617ee6fe))
+
+### Dependencies
+
+* **minor:** update module github.com/go-chi/chi/v5 to v5.3.0 ([#339](https://github.com/webhippie/redirects/issues/339)) ([22b9fd3](https://github.com/webhippie/redirects/commit/22b9fd3e89501f972b84a2b8e7889cd0ab8d740f))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([09936bb](https://github.com/webhippie/redirects/commit/09936bb27ed736c9f5a57813a00645d8705a9df2))
+* **flake:** updated lockfile [skip ci] ([f4df762](https://github.com/webhippie/redirects/commit/f4df76252e29af215170c0c639ec1e58557ce612))
+
 ## [2.6.4](https://github.com/webhippie/redirects/compare/v2.6.3...v2.6.4) (2026-05-11)
 
 ### Dependencies
