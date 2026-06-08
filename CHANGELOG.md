@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.7.1](https://github.com/webhippie/redirects/compare/v2.7.0...v2.7.1) (2026-06-08)
+
+### Dependencies
+
+* **patch:** update golang docker tag to v1.26.4 ([#340](https://github.com/webhippie/redirects/issues/340)) ([589a7fc](https://github.com/webhippie/redirects/commit/589a7fca752c1e5a500b336327615963a1d61ca2))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([7975909](https://github.com/webhippie/redirects/commit/7975909956372ccdc67fb59ba0f95dc2091593a3))
+* **flake:** updated lockfile [skip ci] ([408cb2c](https://github.com/webhippie/redirects/commit/408cb2c95c6488fb3421477ad196447a51a8afed))
+
 ## [2.7.0](https://github.com/webhippie/redirects/compare/v2.6.4...v2.7.0) (2026-05-25)
 
 ### Features
