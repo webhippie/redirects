@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.8.1](https://github.com/webhippie/redirects/compare/v2.8.0...v2.8.1) (2026-06-22)
+
+### Bugfixes
+
+* **deps:** update docker digests ([#345](https://github.com/webhippie/redirects/issues/345)) ([2d3593e](https://github.com/webhippie/redirects/commit/2d3593ed89a68452a153bdc5b2ea43ec6ada601b))
+* **deps:** update docker digests ([#346](https://github.com/webhippie/redirects/issues/346)) ([cef1a88](https://github.com/webhippie/redirects/commit/cef1a88881b86a4b6a14960e6313c368108e7ca5))
+* **deps:** update docker digests ([#347](https://github.com/webhippie/redirects/issues/347)) ([727a91e](https://github.com/webhippie/redirects/commit/727a91e9c159d609441194bc0481bcbdc1846bdf))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([9f0fee5](https://github.com/webhippie/redirects/commit/9f0fee5387854b53c538863d9f4206732853bcc6))
+
 ## [2.8.0](https://github.com/webhippie/redirects/compare/v2.7.1...v2.8.0) (2026-06-15)
 
 ### Bugfixes
