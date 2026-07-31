@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	//go:embed dist/*
+	//go:embed all:dist
 	embeddedTemplates embed.FS
 
 	allowedExtensions = []string{
