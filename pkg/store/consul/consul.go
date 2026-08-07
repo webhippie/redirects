@@ -10,7 +10,6 @@ import (
 	"path"
 	"strings"
 
-	"github.com/jackspirou/syscerts"
 	"github.com/kvtools/consul"
 	"github.com/kvtools/valkeyrie"
 	valkeyrieStore "github.com/kvtools/valkeyrie/store"
@@ -152,7 +151,11 @@ func Load(cfg *config.Consul) (store.Store, error) {
 
 // pool initializes the CA cert pool from system and custom CA file or flag.
 func pool(cfg *config.Consul) (*x509.CertPool, error) {
-	pool := syscerts.SystemRootsPool()
+	pool, err := x509.SystemCertPool()
+
+	if err != nil || pool == nil {
+		pool = x509.NewCertPool()
+	}
 
 	if cfg.CA != "" {
 		var ca []byte

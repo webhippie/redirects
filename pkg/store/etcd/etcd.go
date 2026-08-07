@@ -11,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jackspirou/syscerts"
 	etcd "github.com/kvtools/etcdv3"
 	"github.com/kvtools/valkeyrie"
 	valkeyrieStore "github.com/kvtools/valkeyrie/store"
@@ -155,7 +154,11 @@ func Load(cfg *config.Etcd) (store.Store, error) {
 
 // pool initializes the CA cert pool from system and custom CA file or flag.
 func pool(cfg *config.Etcd) (*x509.CertPool, error) {
-	pool := syscerts.SystemRootsPool()
+	pool, err := x509.SystemCertPool()
+
+	if err != nil || pool == nil {
+		pool = x509.NewCertPool()
+	}
 
 	if cfg.CA != "" {
 		var ca []byte
