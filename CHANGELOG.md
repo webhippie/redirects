@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.10.1](https://github.com/webhippie/redirects/compare/v2.10.0...v2.10.1) (2026-08-17)
+
 ## [2.10.0](https://github.com/webhippie/redirects/compare/v2.9.0...v2.10.0) (2026-08-03)
 
 ## [2.9.0](https://github.com/webhippie/redirects/compare/v2.8.2...v2.9.0) (2026-07-27)
