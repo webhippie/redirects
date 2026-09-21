@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.11.1](https://github.com/webhippie/redirects/compare/v2.11.0...v2.11.1) (2026-09-21)
+
+### Bugfixes
+
+* **deps:** update alpine:3.24 docker digest to 294b683 ([#382](https://github.com/webhippie/redirects/issues/382)) ([e9b51b2](https://github.com/webhippie/redirects/commit/e9b51b254f0742e9d8374577260c5e5bf6775c10))
+* **deps:** update alpine:3.24 docker digest to e7c4abb ([#380](https://github.com/webhippie/redirects/issues/380)) ([caf4375](https://github.com/webhippie/redirects/commit/caf43753e691f7be459429b43aac6bd583e709cf))
+* **deps:** update docker digests ([#381](https://github.com/webhippie/redirects/issues/381)) ([664e0bb](https://github.com/webhippie/redirects/commit/664e0bbb6353724a2b774cdf48754a3b9af8c610))
+
+### Dependencies
+
+* **mise:** update dependency goreleaser to v2.18.2 ([#379](https://github.com/webhippie/redirects/issues/379)) ([8c45c9c](https://github.com/webhippie/redirects/commit/8c45c9cc6e1e562db9b52a690b1057316f6758d1))
+
 ## [2.11.0](https://github.com/webhippie/redirects/compare/v2.10.1...v2.11.0) (2026-09-14)
 
 ### Features
