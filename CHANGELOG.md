@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.12.0](https://github.com/webhippie/redirects/compare/v2.11.2...v2.12.0) (2026-10-12)
+
+### Bugfixes
+
+* **deps:** update golang:1.27.2-alpine docker digest to f92b6ef ([#396](https://github.com/webhippie/redirects/issues/396)) ([3c1fcb4](https://github.com/webhippie/redirects/commit/3c1fcb496d603c072fc13fa4c558a3c3124cbadf))
+
+### Dependencies
+
+* **minor:** update module github.com/go-chi/chi/v5 to v5.4.0 ([#397](https://github.com/webhippie/redirects/issues/397)) ([d1dd22e](https://github.com/webhippie/redirects/commit/d1dd22e519a2fedb74b935d284cf760064bd0da1))
+* **minor:** update module github.com/prometheus/client_golang to v1.25.0 ([#392](https://github.com/webhippie/redirects/issues/392)) ([1e90cf5](https://github.com/webhippie/redirects/commit/1e90cf586575c989771faa8a31d180ce9ce68d18))
+* **mise:** update dependency github:cloudsmith-io/cloudsmith-cli to v1.28.0 ([#391](https://github.com/webhippie/redirects/issues/391)) ([4118152](https://github.com/webhippie/redirects/commit/4118152f357b0624c721fc7e7fd7f90aacd66664))
+* **mise:** update dependency go to v1.27.2 ([#393](https://github.com/webhippie/redirects/issues/393)) ([6ba83c3](https://github.com/webhippie/redirects/commit/6ba83c3d7c6f24196a774fead0cc92fdb31d9ae3))
+* **mise:** update dependency goreleaser to v2.18.3 ([#395](https://github.com/webhippie/redirects/issues/395)) ([7e867c9](https://github.com/webhippie/redirects/commit/7e867c93c066e4347ae16f00757846412f0cab47))
+* **mise:** update dependency hugo-extended to v0.167.0 ([#387](https://github.com/webhippie/redirects/issues/387)) ([919f828](https://github.com/webhippie/redirects/commit/919f8289722871879b4195c7d85e4579f764bd29))
+* **mise:** update dependency prek to v0.5.4 ([#386](https://github.com/webhippie/redirects/issues/386)) ([4cd449e](https://github.com/webhippie/redirects/commit/4cd449e9550bee88c8a44c3c3e9c306644c923d3))
+* **mise:** update dependency prek to v0.5.5 ([#390](https://github.com/webhippie/redirects/issues/390)) ([f7f5dc0](https://github.com/webhippie/redirects/commit/f7f5dc0333434452a8ca9c599132f904259e0b61))
+* **mise:** update dependency task to v3.54.0 ([#389](https://github.com/webhippie/redirects/issues/389)) ([d6e6750](https://github.com/webhippie/redirects/commit/d6e6750eebeaaecd9cf9aa351518854c54f05c8d))
+* **patch:** update golang docker tag to v1.27.2 ([#394](https://github.com/webhippie/redirects/issues/394)) ([e64e2ff](https://github.com/webhippie/redirects/commit/e64e2ffcddcd1c42df6292eb2afa0eadef51e2b8))
+
 ## [2.11.2](https://github.com/webhippie/redirects/compare/v2.11.1...v2.11.2) (2026-09-28)
 
 ### Bugfixes
