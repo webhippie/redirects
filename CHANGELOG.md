@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.13.0](https://github.com/webhippie/redirects/compare/v2.12.0...v2.13.0) (2026-10-19)
+
+### Dependencies
+
+* **minor:** update module github.com/go-chi/chi/v5 to v5.5.0 ([#400](https://github.com/webhippie/redirects/issues/400)) ([0cd2af4](https://github.com/webhippie/redirects/commit/0cd2af4a5abd15ebca070f5300fe5455f7340625))
+* **mise:** update dependency github:cloudsmith-io/cloudsmith-cli to v1.29.0 ([#401](https://github.com/webhippie/redirects/issues/401)) ([c51fbaa](https://github.com/webhippie/redirects/commit/c51fbaaa340b4ce4720867cefc28d57965ac789c))
+* **mise:** update dependency golangci-lint to v2.15.0 ([#402](https://github.com/webhippie/redirects/issues/402)) ([b2d77ff](https://github.com/webhippie/redirects/commit/b2d77ff3eb70449a0c0733d230269f2212a1d3ba))
+* **mise:** update dependency hugo-extended to v0.168.0 ([#399](https://github.com/webhippie/redirects/issues/399)) ([0ca883a](https://github.com/webhippie/redirects/commit/0ca883a3e5d9b4948bca22e9c3561fc2ba2211b8))
+* **mise:** update dependency prek to v0.5.6 ([#403](https://github.com/webhippie/redirects/issues/403)) ([9ec097e](https://github.com/webhippie/redirects/commit/9ec097ec57eec55fbf8ad326f08535fde869939d))
+
 ## [2.12.0](https://github.com/webhippie/redirects/compare/v2.11.2...v2.12.0) (2026-10-12)
 
 ### Bugfixes
