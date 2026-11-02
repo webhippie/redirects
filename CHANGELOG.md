@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.13.2](https://github.com/webhippie/redirects/compare/v2.13.1...v2.13.2) (2026-11-02)
+
+### Bugfixes
+
+* **deps:** update golang:1.27.3-alpine docker digest to d200d2d ([#415](https://github.com/webhippie/redirects/issues/415)) ([b9e4331](https://github.com/webhippie/redirects/commit/b9e43313fb1a82bcbfd98c12849544ca538396ef))
+
+### Dependencies
+
+* **mise:** update dependency github:cloudsmith-io/cloudsmith-cli to v1.30.1 ([#417](https://github.com/webhippie/redirects/issues/417)) ([d871956](https://github.com/webhippie/redirects/commit/d8719563e740ed3c695f98e98901551dc47e0eb4))
+* **mise:** update dependency hugo-extended to v0.169.0 ([#416](https://github.com/webhippie/redirects/issues/416)) ([c513b87](https://github.com/webhippie/redirects/commit/c513b871fbeb457c62f27b3c3698cd3e185cf371))
+* **mise:** update dependency prek to v0.5.9 ([#419](https://github.com/webhippie/redirects/issues/419)) ([17d951d](https://github.com/webhippie/redirects/commit/17d951dcdc270999a21ebacf212493712ec6cca0))
+* **mise:** update node.js to v26 ([#418](https://github.com/webhippie/redirects/issues/418)) ([7f19dd3](https://github.com/webhippie/redirects/commit/7f19dd32d1949e9710c1702764cc990f22c97c52))
+
 ## [2.13.1](https://github.com/webhippie/redirects/compare/v2.13.0...v2.13.1) (2026-10-26)
 
 ### Bugfixes
