@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.13.4](https://github.com/webhippie/redirects/compare/v2.13.3...v2.13.4) (2026-11-16)
+
+* automated release update [skip ci] ([432373b](https://github.com/webhippie/redirects/commit/432373bf5e6cd0af6fca12006dc99a2420a02891))
+
+### Dependencies
+
+* **mise:** update dependency github:cloudsmith-io/cloudsmith-cli to v1.31.0 ([#427](https://github.com/webhippie/redirects/issues/427)) ([f36f37f](https://github.com/webhippie/redirects/commit/f36f37fd474adbfc82b61eb96b836d635542c7d5))
+* **mise:** update dependency github:cloudsmith-io/cloudsmith-cli to v1.31.1 ([#428](https://github.com/webhippie/redirects/issues/428)) ([b5f93d2](https://github.com/webhippie/redirects/commit/b5f93d26a8dda8008769f8aad75e1664cc0437c0))
+* **mise:** update dependency go to v1.27.4 ([#424](https://github.com/webhippie/redirects/issues/424)) ([24f788e](https://github.com/webhippie/redirects/commit/24f788e898d2b1e3ec041758a05fc2a80e0410fe))
+* **mise:** update dependency goreleaser to v2.20.1 ([#426](https://github.com/webhippie/redirects/issues/426)) ([4e46810](https://github.com/webhippie/redirects/commit/4e46810c8d4b606658564b6eb9f74a00d534eb0b))
+* **mise:** update dependency goreleaser to v2.20.2 ([#429](https://github.com/webhippie/redirects/issues/429)) ([2ffab87](https://github.com/webhippie/redirects/commit/2ffab874f75cd8d19943765095e92a5c408b6295))
+* **mise:** update dependency hugo-extended to v0.170.0 ([#430](https://github.com/webhippie/redirects/issues/430)) ([bbdd08f](https://github.com/webhippie/redirects/commit/bbdd08f7c4758dc428b66690616fa0941a6e8a81))
+* **mise:** update dependency prek to v0.5.11 ([#432](https://github.com/webhippie/redirects/issues/432)) ([6521583](https://github.com/webhippie/redirects/commit/6521583828944c8ed525a6eb06b95a63293875ac))
+* **patch:** update golang docker tag to v1.27.4 ([#425](https://github.com/webhippie/redirects/issues/425)) ([6bcb987](https://github.com/webhippie/redirects/commit/6bcb987e18b443b0b71cbedcde82b9f240a2fb4f))
+
 ## [2.13.3](https://github.com/webhippie/redirects/compare/v2.13.2...v2.13.3) (2026-11-09)
 
 ### Bugfixes
