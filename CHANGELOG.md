@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.14.0](https://github.com/webhippie/redirects/compare/v2.13.4...v2.14.0) (2026-11-23)
+
+* automated release update [skip ci] ([8c2c7e8](https://github.com/webhippie/redirects/commit/8c2c7e8af5b07b58811f1c7dc8fe9c635bbd45e8))
+
+### Features
+
+* switch to plain hugo and resolve deprecations ([9af5b09](https://github.com/webhippie/redirects/commit/9af5b09af0d45c384a9109b0b9c728e6c9cefb75))
+
+### Bugfixes
+
+* **deps:** update golang:1.27.4-alpine docker digest to 70bd7dd ([#431](https://github.com/webhippie/redirects/issues/431)) ([7d5e80d](https://github.com/webhippie/redirects/commit/7d5e80de2adf319dde5687031f232dfc8208787f))
+
+### Dependencies
+
+* **mise:** update dependency github:cloudsmith-io/cloudsmith-cli to v1.31.3 ([#433](https://github.com/webhippie/redirects/issues/433)) ([fa53b24](https://github.com/webhippie/redirects/commit/fa53b2462d83d33a9c3131c7f1b75b2343fc049c))
+* **mise:** update dependency goreleaser to v2.20.3 ([#435](https://github.com/webhippie/redirects/issues/435)) ([b802d46](https://github.com/webhippie/redirects/commit/b802d46b41c922cda466360ff2c5dd2ec1102b92))
+* **mise:** update dependency hugo-extended to v0.170.1 ([#434](https://github.com/webhippie/redirects/issues/434)) ([6239b95](https://github.com/webhippie/redirects/commit/6239b95f54885ab82719ad597255bb9922c6219f))
+
 ## [2.13.4](https://github.com/webhippie/redirects/compare/v2.13.3...v2.13.4) (2026-11-16)
 
 * automated release update [skip ci] ([432373b](https://github.com/webhippie/redirects/commit/432373bf5e6cd0af6fca12006dc99a2420a02891))
